@@ -1,0 +1,82 @@
+\babel@toc {french}{}\relax 
+\contentsline {part}{I\hspace {1em}Mathématiques}{5}{part.1}%
+\contentsline {chapter}{\numberline {1} Analyse et Algébre}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Identité du hockey-stick}{7}{section.1.1}%
+\contentsline {paragraph}{Identité de Pascal.}{7}{section.1.1}%
+\contentsline {paragraph}{Somme télescopique.}{7}{AMS.1}%
+\contentsline {section}{\numberline {1.2}Comparaison de $\pi ^e$ et $e^\pi $}{8}{section.1.2}%
+\contentsline {paragraph}{Domaine de définition.}{8}{section.1.2}%
+\contentsline {paragraph}{Limites aux bornes de l'intervalle.}{8}{section.1.2}%
+\contentsline {paragraph}{Dérivée et signe.}{8}{section.1.2}%
+\contentsline {paragraph}{Tableau de variations.}{8}{section.1.2}%
+\contentsline {paragraph}{Graphe .}{9}{section.1.2}%
+\contentsline {paragraph}{Application à la comparaison de $\pi ^{e}$ et $e^{\pi }$.}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Somme de taches divisible par $11$}{10}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Probabilités}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Problème des deux enfants}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Deux lancers de dé}{12}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Pièce biaisée}{12}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Parité du nombre de piles}{13}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Élément choisi au hasard}{14}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Premier As}{14}{section.2.6}%
+\contentsline {paragraph}{Espérance de chaque $X_i$.}{15}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Minimum de $k$ positions}{16}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Labyrinthe du rat}{17}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Trois points sur un cercle}{19}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Variable à variance maximale dans [-1,1]}{19}{section.2.10}%
+\contentsline {section}{\numberline {2.11}Somme de variables uniformes}{20}{section.2.11}%
+\contentsline {section}{\numberline {2.12}Indépendance entre \(|X|\) et \(\mathrm {sign}(X)\) pour une loi normale}{22}{section.2.12}%
+\contentsline {section}{\numberline {2.13}Durée moyenne d’attente à un arrêt avec deux bus}{24}{section.2.13}%
+\contentsline {section}{\numberline {2.14}Gambler's Ruin}{25}{section.2.14}%
+\contentsline {section}{\numberline {2.15}Météo à Grenoble}{26}{section.2.15}%
+\contentsline {section}{\numberline {2.16}Expecting HTH}{28}{section.2.16}%
+\contentsline {chapter}{\numberline {3}Calcul Stochastique}{31}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Temps d'arrêt}{31}{section.3.1}%
+\contentsline {paragraph}{Preuve que $\tau < \infty $ p.s.}{32}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Loi de l'intégrale du mouvement brownien}{33}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Espérance conditionnelle d'un mouvement brownien}{34}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Espérance conditionnelle d'une intégrale stochastique}{35}{section.3.4}%
+\contentsline {section}{\numberline {3.5}MBG}{37}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Processus d'Ornstein-Uhlenbeck}{38}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Probabilité de sortie à gauche d’un intervalle – O.U.}{39}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Hitting time of brownian motion}{40}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Density of the Hitting Time of Brownian Motion}{42}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Reflection Principle for Brownian Motion}{44}{section.3.10}%
+\contentsline {part}{II\hspace {1em}Quant Finance}{47}{part.2}%
+\contentsline {chapter}{\numberline {1}Option pricing}{49}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Prix du Call européen dans le modèle de Black-Scholes}{49}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Option Chooser}{52}{section.1.2}%
+\contentsline {paragraph}{Question :}{52}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Option d'échange avec devise}{53}{section.1.3}%
+\contentsline {paragraph}{Changement de numéraire $Z$.}{53}{Item.9}%
+\contentsline {paragraph}{Changement de numéraire $XY$.}{54}{Item.9}%
+\contentsline {section}{\numberline {1.4}Butterfly call}{55}{section.1.4}%
+\contentsline {paragraph}{Convexité de $C(K,t)$ par rapport à $K$.}{55}{section.1.4}%
+\contentsline {paragraph}{Vérification numérique.}{56}{section.1.4}%
+\contentsline {paragraph}{3) Stratégie d'arbitrage.}{56}{section.1.4}%
+\contentsline {paragraph}{Représentation graphique.}{56}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Put Spread}{57}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Parité call--put}{58}{section.1.6}%
+\contentsline {paragraph}{Remarque :}{59}{section.1.6}%
+\contentsline {section}{\numberline {1.7}contrat forward}{59}{section.1.7}%
+\contentsline {part}{III\hspace {1em}Algo}{61}{part.3}%
+\contentsline {part}{IV\hspace {1em}Brain Teasers}{65}{part.4}%
+\contentsline {chapter}{\numberline {1}Brain Teasers}{67}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Carré magique $3\times 3$}{67}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Le problème des 5 pirates}{69}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Tigres et mouton}{70}{section.1.3}%
+\contentsline {paragraph}{Cas de base.}{70}{section.1.3}%
+\contentsline {paragraph}{Hérédité.}{70}{section.1.3}%
+\contentsline {paragraph}{Conclusion.}{70}{section.1.3}%
+\contentsline {section}{\numberline {1.4}River crossing}{71}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Problème d’anniversaire}{72}{section.1.5}%
+\contentsline {paragraph}{Données filtrées par le premier énoncé.}{72}{section.1.5}%
+\contentsline {paragraph}{Après ton annonce, C sait maintenant.}{72}{section.1.5}%
+\contentsline {paragraph}{Tu sais maintenant toi aussi.}{73}{section.1.5}%
+\contentsline {paragraph}{Réponse.}{73}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Jeu de cartes}{73}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Deux cordes}{74}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Jeu en 2D}{74}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Say 50}{75}{section.1.9}%
+\contentsline {paragraph}{Justification formelle.}{76}{Item.13}%
+\contentsline {section}{\numberline {1.10}100 Ampoules}{76}{section.1.10}%
