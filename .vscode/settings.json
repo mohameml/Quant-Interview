@@ -1,0 +1,36 @@
+{
+	"latex-workshop.latex.tools": [
+		{
+			"name": "pdflatex",
+			"command": "pdflatex",
+			"args": ["-interaction=nonstopmode", "-synctex=1", "%DOC%"]
+		},
+		{
+			"name": "xelatex",
+			"command": "xelatex",
+			"args": ["-interaction=nonstopmode", "-synctex=1", "%DOC%"]
+		},
+		{
+			"name": "lualatex",
+			"command": "lualatex",
+			"args": ["-interaction=nonstopmode", "-synctex=1", "%DOC%"]
+		}
+	],
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "pdflatex -> bibtex -> pdflatex x2",
+			"tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+		},
+		{
+			"name": "xelatex",
+			"tools": ["xelatex"]
+		},
+		{
+			"name": "lualatex",
+			"tools": ["lualatex"]
+		}
+	],
+	"latex-workshop.latex.autoBuild.run": "onSave",
+	"latex-workshop.view.pdf.viewer": "tab",
+	"latex-workshop.latex.recipe.default": "xelatex"
+}
