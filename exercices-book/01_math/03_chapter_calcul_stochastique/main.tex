@@ -1010,5 +1010,69 @@ is mirrored into a path ending above \(2a - b\).
 % }
 % \]
 
+\section{Mouvement Brownien et temps d'arrêt}
 
+\subsection*{Exercice :}
+
+\begin{exerciseBox}[Mouvement Brownien et temps d'arrêt]
+Soit $(W_t)_{t \ge 0}$ un mouvement brownien standard. Pour $y \in \mathbb{R}$, on définit
+\[
+\tau_y = \inf \{ t \ge 0 : W_t = y \}.
+\]
+
+Soient $a < 0 < b$ et
+\[
+T = \tau_a \wedge \tau_b = \min(\tau_a, \tau_b).
+\]
+
+\begin{enumerate}
+    \item Calculer $\mathbb{P}(T = \tau_a)$ et $\mathbb{P}(T = \tau_b)$.
+    \item Calculer $\mathbb{E}[T]$.
+\end{enumerate}
+  
+\end{exerciseBox}
+
+\textbf{Rappel :} Pour un MB standard,
+\[
+\mathbb{P}(\tau_b < \tau_a) = \frac{|a|}{b-a}, \quad 
+\mathbb{P}(\tau_a < \tau_b) = \frac{b}{b-a}, \quad
+\mathbb{E}[T] = -a b.
+\]
+
+
+\subsection*{Solution : }
+
+
+
+\textbf{Q1 :}  
+On applique le \textit{théorème d'arrêt} sur $W_t$. Comme $T$ est un temps d'arrêt (pas fini, avec $T \wedge t$ borné et en utilisant le théorème de convergence dominée) :
+\[
+\mathbb{E}[W_T] = 0.
+\]  
+Or, par définition de $T$ :
+\[
+\mathbb{E}[W_T] = a \, \mathbb{P}(\tau_a < \tau_b) + b \, \mathbb{P}(\tau_b < \tau_a).
+\]  
+Donc :
+\[
+a \, \mathbb{P}(\tau_a < \tau_b) + b \, \mathbb{P}(\tau_b < \tau_a) = 0
+\quad \Rightarrow \quad
+\mathbb{P}(T = \tau_a) = \frac{b}{b-a}, \quad 
+\mathbb{P}(T = \tau_b) = \frac{|a|}{b-a}.
+\]
+
+\textbf{Question 2 :} Calculer $\mathbb{E}[T]$.  
+
+On considère le processus
+\[
+M_t = W_t^2 - t,
+\]  
+qui est une martingale. Par le théorème d'arrêt appliqué à $M_t$ :
+\[
+\mathbb{E}[M_T] = \mathbb{E}[W_T^2 - T] = 0 \quad \Rightarrow \quad \mathbb{E}[T] = \mathbb{E}[W_T^2].
+\]  
+Or $W_T$ prend seulement les valeurs $a$ ou $b$, donc :
+\[
+\mathbb{E}[T] = a^2 \, \mathbb{P}(\tau_a < \tau_b) + b^2 \, \mathbb{P}(\tau_b < \tau_a) = a^2 \frac{b}{b-a} + b^2 \frac{|a|}{b-a} = -ab.
+\]
 

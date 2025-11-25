@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  16 OCT 2025 17:37
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  13 NOV 2025 22:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1038,9 +1038,12 @@ File: 01_math/03_chapter_calcul_stochastique/reflexion_bm.png Graphic file (type
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[44]) [45] [46
+[44]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [47] [48] (./02_finance/01_chapter_option_pricing/main.tex
+ [45]) [46] [47
+
+] [48] (./02_finance/01_chapter_option_pricing/main.tex
 Chapitre 1.
 [49
 
@@ -1095,10 +1098,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 40674 strings out of 476191
- 972616 string characters out of 5812072
- 1846621 words of memory out of 5000000
- 60751 multiletter control sequences out of 15000+600000
+ 40676 strings out of 476191
+ 972638 string characters out of 5812072
+ 1847621 words of memory out of 5000000
+ 60753 multiletter control sequences out of 15000+600000
  483935 words of font info for 117 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,15n,104p,797b,2058s stack positions out of 5000i,500n,10000p,200000b,80000s
