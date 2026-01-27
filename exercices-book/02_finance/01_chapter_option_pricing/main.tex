@@ -30,7 +30,7 @@ d_2 = d_1 - \sigma \sqrt{T}
 \end{exerciseBox}
 
 
-\section*{Solution :}
+\subsection*{Solution :}
 
 Sous la mesure risque-neutre \( \mathbb{Q} \), l’actif sous-jacent suit :
 
@@ -936,4 +936,1004 @@ $\tfrac{dS_t}{S_t}=(r-q)\,dt+\sigma\,dW_t$, d'où
 \quad\Longrightarrow\quad
 F_{t,T} \;=\; S_t\,e^{(r-q)(T-t)}.
 \end{align*}
+
+
+\section{Digtial Option : Dual Delta - Breeden-Litzenberger (1978)}
+
+\subsection*{Exercice :}
+
+\begin{exerciseBox}[Digtial Option :Dual Delta - Breeden-Litzenberger (1978)]
+  On considère un actif risqué $(S_t)_{t \ge 0}$ sous la mesure risque-neutre $\mathbb{Q}$,
+  évoluant selon le modèle de Black--Scholes avec taux sans risque constant $r$ et
+  volatilité constante $\sigma > 0$ :
+  \[
+  dS_t = r S_t \, dt + \sigma S_t \, dW_t^{\mathbb{Q}}.
+  \]
+  
+  On s'intéresse à une option digitale de type call, de maturité $T$ et de strike $K > 0$,
+  de payoff
+  \[
+  \Phi(S_T) = \mathbf{1}_{\{S_T \ge K\}}.
+  \]
+  On note $D_t$ le prix à la date $t \le T$ de cette option.
+  
+  \begin{enumerate}
+    \item[\textbf{Q1.}] Sous le modèle de Black--Scholes avec $r$ constant, donner une formule
+    fermée pour $D_t$.
+  
+    \item[\textbf{Q2.}] On suppose maintenant que le taux court $(r_u)_{u\ge 0}$ est stochastique.
+    Donner la formule de valorisation de $D_t$ sous la mesure risque-neutre ?
+    % (b) Expliquer comment utiliser la mesure $T$-forward pour pricer $D_t$.
+  
+    \item[\textbf{Q3.}] On se place de nouveau dans le cas où $r$ est déterministe 
+    \begin{enumerate}
+      \item[(a)] Notons $C_t(K)$ le prix à la date $t$ d'une option call européenne de maturité $T$
+      et de strike $K$. Exprimer $D_t(K)$ en fonction de $C_t(K)$ et du strike $K$.
+  
+      \item[(b)] On suppose que la volatilité implicite dépend du strike, i.e. $\sigma = \sigma(K)$,
+      et que
+      \[
+        C_t(K) = f\big(K, \sigma(K)\big)
+      \]
+      pour une certaine fonction régulière $f$. Donner l'expression de $D_t(K)$ en fonction
+      de $C_t$, de ses dérivées partielles, de $\sigma(K)$ et de la dérivée $\sigma'(K)$.
+    \end{enumerate}
+  \end{enumerate}
+\end{exerciseBox}
+
+
+\subsection*{Solution :}
+
+\textbf{Q1. Formule fermée sous Black--Scholes avec $r$ constant.}
+
+Sous la mesure risque-neutre $\mathbb{Q}$, le prix d'une option est donné par la formule
+de valorisation par espérance actualisée :
+\[
+D_t = \mathbb{E}^{\mathbb{Q}}\!\left[ e^{-r (T-t)} \Phi(S_T) \mid \mathcal{F}_t \right]
+     = e^{-r (T-t)} \, \mathbb{Q}\!\left( S_T \ge K \mid \mathcal{F}_t \right).
+\]
+
+Sous Black--Scholes, on sait que
+\[
+\ln S_T \mid \mathcal{F}_t \sim \mathcal{N}\Big(
+\ln S_t + \big(r - \tfrac{1}{2}\sigma^2\big)(T-t), \; \sigma^2 (T-t)
+\Big),
+\]
+ce qui conduit à
+\[
+\mathbb{Q}(S_T \ge K \mid \mathcal{F}_t)
+= \mathbb{Q}\!\left( \ln S_T \ge \ln K \mid \mathcal{F}_t \right)
+= N(d_2),
+\]
+où
+\[
+d_2 = \frac{\ln\big(\frac{S_t}{K}\big) + \big(r - \tfrac{1}{2}\sigma^2\big)(T-t)}
+           {\sigma \sqrt{T-t}},
+\]
+et $N(\cdot)$ désigne la fonction de répartition d'une loi normale centrée réduite.
+
+On obtient donc la formule fermée classique :
+\[
+\boxed{
+D_t = e^{-r (T-t)} N(d_2).
+}
+\]
+
+\bigskip
+
+\textbf{Q2. Cas d'un taux court stochastique.}
+
+On suppose maintenant que le taux court $(r_u)_{u \ge 0}$ est un processus stochastique
+adapté à $(\mathcal{F}_u)_u$ et que l'on travaille sous la mesure risque-neutre $\mathbb{Q}$.
+
+\medskip
+
+\textbf{Formule sous la mesure risque-neutre.}
+
+Le prix de l'option digitale est alors donné par
+\[
+D_t = \mathbb{E}^{\mathbb{Q}}\!\left[
+\exp\!\left(-\int_t^T r_u \, du\right) \mathbf{1}_{\{S_T \ge K\}}
+\;\Big|\; \mathcal{F}_t
+\right].
+\]
+
+Cette formule est en général \emph{la} définition du prix, et l'obtention d'une forme
+fermée dépend du choix de modèle conjoint pour $(S_t, r_t)$.
+
+\medskip
+
+\textbf{Utilisation de la mesure $T$-forward.}
+
+On note $B(t,T)$ le prix à la date $t$ de la zero-coupon de maturité $T$ :
+\[
+B(t,T) =
+\mathbb{E}^{\mathbb{Q}}\!\left[
+\exp\!\left(-\int_t^T r_u \, du\right)
+\;\Big|\; \mathcal{F}_t
+\right].
+\]
+
+On introduit la mesure $T$-forward $\mathbb{Q}^T$ associée au numéraire $B(\cdot, T)$.
+Par définition,
+\[
+\frac{d\mathbb{Q}^T}{d\mathbb{Q}}\Big|_{\mathcal{F}_T}
+= \frac{\exp\!\left(-\int_0^T r_u \,du\right) B(t,T)}{B(0,T)},
+\]
+
+D'aprés le thoréme de Changement de numéraire on obtient alors la représentation suivante :
+\[
+D_t
+= B(t,T)\, \mathbb{E}^{\mathbb{Q}^T}\!\left[
+\mathbf{1}_{\{S_T \ge K\}} \mid \mathcal{F}_t
+\right]
+= B(t,T)\, \mathbb{Q}^T(S_T \ge K \mid \mathcal{F}_t).
+\]
+
+Autrement dit, sous la mesure $T$-forward, le prix de l'option digitale s'écrit
+comme le produit du prix du zéro-coupon $B(t,T)$ par la probabilité (sous
+$\mathbb{Q}^T$) que $S_T$ dépasse le strike $K$.
+
+\bigskip
+
+\textbf{Q3. Lien avec le prix de l'option call.}
+
+On suppose de nouveau que le taux sans risque est déterministe (éventuellement non constant) :
+\[
+B_t = \exp\!\left(\int_0^t r_u \, du\right), \quad
+B(t,T) = \exp\!\left(-\int_t^T r_u \, du\right).
+\]
+
+\medskip
+
+\textbf{(a) Expression de $D_t(K)$ en fonction de $C_t(K)$.}
+
+Le prix du call de strike $K$ et de maturité $T$ à la date $t$ s'écrit
+\[
+C_t(K) = \mathbb{E}^{\mathbb{Q}}\!\left[
+B(t,T)\,(S_T - K)^+ \mid \mathcal{F}_t
+\right]
+= B(t,T)\, \mathbb{E}^{\mathbb{Q}}\!\left[(S_T - K)^+ \mid \mathcal{F}_t \right].
+\]
+
+En termes de densité de $S_T$,
+
+\[
+C_t(K) = B(t,T)\int_0^{+\infty} (s-K)_+ f_{S_T\mid\mathcal{F}_t}(s)\, ds.
+\]
+
+On différentie formellement $C_t(K)$ par rapport à $K$ (en supposant les régularités
+adéquates) :
+\[
+\frac{\partial C_t}{\partial K}(K)
+= B(t,T)\, \frac{\partial}{\partial K}
+\left( \int_0^{+\infty} (s-K)_+ f_{S_T\mid\mathcal{F}_t}(s)\, ds \right).
+\]
+
+or 
+\[
+\frac{\partial (s - K)_+}{\partial K} = - \mathbf{1}_{s \ge K}
+\]
+
+En dérivant sous le signe intégral, on obtient
+\[
+\frac{\partial C_t}{\partial K}(K)
+= B(t,T)\left(
+- \int_0^{+\infty} \mathbf{1}_{s \ge K} f_{S_T\mid\mathcal{F}_t}(s)\, ds
+\right)
+= -B(t,T)\, \mathbb{Q}(S_T \ge K \mid \mathcal{F}_t).
+\]
+
+Or, on a exactement
+\[
+D_t(K) = B(t,T)\, \mathbb{Q}(S_T \ge K \mid \mathcal{F}_t).
+\]
+
+On en déduit la relation fondamentale :
+\[
+\boxed{
+D_t(K) = - \frac{\partial C_t}{\partial K}(K).
+}
+\]
+
+\medskip
+
+\textbf{(b) Cas d'une volatilité implicite dépendant du strike.}
+
+On suppose maintenant que le prix du call est donné par
+\[
+C_t(K) = f\big(K, \sigma(K)\big),
+\]
+où $\sigma(K)$ est la volatilité implicite associée au strike $K$ et $f$ une fonction
+régulière en ses arguments .
+
+Le prix $C_t(K)$ est maintenant une fonction composée de $K$ via deux canaux :
+le strike lui-même et la volatilité implicite $\sigma(K)$. La dérivée totale de $C_t$
+par rapport à $K$ s'écrit alors
+\[
+\frac{d C_t}{d K}(K)
+= \frac{\partial f}{\partial K}\big(K, \sigma(K)\big)
+  + \frac{\partial f}{\partial \sigma}\big(K, \sigma(K)\big)\, \sigma'(K).
+\]
+
+En utilisant la relation de la question (a),
+\[
+D_t(K) = - \frac{d C_t}{d K}(K),
+\]
+on obtient
+\[
+\boxed{
+D_t(K)
+= -\left[
+\frac{\partial f}{\partial K}\big(K, \sigma(K)\big)
++ \frac{\partial f}{\partial \sigma}\big(K, \sigma(K)\big)\, \sigma'(K)
+\right].
+}
+\]
+
+Dans le cas où $f$ est la formule de Black--Scholes,
+\[
+\frac{\partial f}{\partial \sigma} = \text{Vega}(K,\sigma) ,
+\]
+et la dernière expression peut se réécrire en termes de dérivée partielle par rapport
+au strike (avec $\sigma$ fixée) et de la Vega, corrigée par la pente de la surface
+de volatilité implicite $\sigma'(K)$ :
+\[
+D_t(K) = -\left[ C_K^{\text{BS}}(K,\sigma(K)) + \text{Vega}(K,\sigma(K))\, \sigma'(K) \right].
+\]
+
+
+\section{Call européen avec sous-jacent gaussien}
+
+\subsection*{Exercice :}
+
+\begin{exerciseBox}[Call européen avec sous-jacent gaussien]
+Suppose that the stock price at maturity \(T\) is normally distributed:
+\[
+S_T \sim \mathcal{N}(S_0,\delta^2).
+\]
+What is the expected value (present value under the pricing measure) of an \emph{at-the-money} European call option expiring at time \(T\), i.e. with strike \(K=S_0\)?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+Le prix (sous la mesure de pricing) d’un call européen est
+\[
+c_0 \;=\; e^{-rT}\,\mathbb{E}\!\left[(S_T-K)_+\right].
+\]
+Comme \(S_T \sim \mathcal{N}(S_0,\delta^2)\), on peut écrire
+\[
+S_T = S_0 + \delta Z,
+\qquad Z \sim \mathcal{N}(0,1).
+\]
+À la monnaie, \(K=S_0\), donc
+\[
+(S_T-K)_+ = (S_0+\delta Z - S_0)_+ = (\delta Z)_+ = \delta\, Z\,\mathbf{1}_{\{Z\ge 0\}}.
+\]
+Ainsi
+\[
+c_0
+= e^{-rT}\,\delta\,\mathbb{E}\!\left[ Z\,\mathbf{1}_{\{Z\ge 0\}}\right].
+\]
+Calculons \(\mathbb{E}[ Z\,\mathbf{1}_{\{Z\ge 0\}}]\) pour \(Z\sim\mathcal{N}(0,1)\) :
+\[
+\mathbb{E}\!\left[ Z\,\mathbf{1}_{\{Z\ge 0\}}\right]
+= \int_0^{+\infty} x \frac{1}{\sqrt{2\pi}} e^{-x^2/2}\,dx.
+\]
+Par le changement \(u = x^2/2\) (donc \(du = x\,dx\)),
+\[
+\int_0^{+\infty} x \frac{1}{\sqrt{2\pi}} e^{-x^2/2}\,dx
+= \frac{1}{\sqrt{2\pi}}\int_0^{+\infty} e^{-u}\,du
+= \frac{1}{\sqrt{2\pi}}.
+\]
+Donc
+\[
+\boxed{\;\mathbb{E}\!\left[(S_T-S_0)_+\right] = \frac{\delta}{\sqrt{2\pi}}\;}
+\qquad\text{et}\qquad
+\boxed{\;c_0 = e^{-rT}\,\frac{\delta}{\sqrt{2\pi}}\;}.
+\]
+
+\section{Call option at-the-money}
+
+\subsection*{Exercice :}
+
+\begin{exerciseBox}[Call option at-the-money]
+Approximately how much would a one-month at-the-money European call option be worth if:
+\begin{itemize}
+  \item the spot price is \(S_t = 1\),
+  \item the notional is \$1{,}000{,}000,
+  \item the maturity is one month (\(\tau = T-t = \tfrac{1}{12}\)),
+  \item the volatility is \(\sigma = 10\%\),
+  \item the interest rate is \(r=0\).
+\end{itemize}
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+Under the Black--Scholes model, the price of a European call option is
+\[
+C_t = S_t \Phi(d_1) - K e^{-r\tau}\Phi(d_2),
+\]
+where
+\[
+d_1 = \frac{\ln(S_t/K) + \left(r + \tfrac12\sigma^2\right)\tau}{\sigma\sqrt{\tau}},
+\qquad
+d_2 = d_1 - \sigma\sqrt{\tau}.
+\]
+
+At-the-money, \(S_t = K\), so \(\ln(S_t/K)=0\). With \(r=0\), this gives
+\[
+d_1 = \frac{\tfrac12\sigma^2\tau}{\sigma\sqrt{\tau}}
+= \frac12\sigma\sqrt{\tau},
+\qquad
+d_2 = -\frac12\sigma\sqrt{\tau}.
+\]
+
+Hence,
+\[
+C_t = S_t\Big(\Phi(\tfrac12\sigma\sqrt{\tau}) - \Phi(-\tfrac12\sigma\sqrt{\tau})\Big).
+\]
+Using the symmetry property \(\Phi(-x)=1-\Phi(x)\),
+\[
+C_t = S_t\Big(2\Phi(\tfrac12\sigma\sqrt{\tau}) - 1\Big).
+\]
+
+For small \(x\), the standard normal CDF can be approximated by
+\[
+\Phi(x) \approx \frac12 + \frac{x}{\sqrt{2\pi}}.
+\]
+Therefore,
+\[
+\Phi\!\left(\tfrac12\sigma\sqrt{\tau}\right)
+\approx \frac12 + \frac{\sigma\sqrt{\tau}}{2\sqrt{2\pi}}.
+\]
+
+Substituting into the call price,
+\[
+C_t \approx S_t \left(2\left(\frac12 + \frac{\sigma\sqrt{\tau}}{2\sqrt{2\pi}}\right) - 1\right)
+= \frac{\sigma}{\sqrt{2\pi}} S_t \sqrt{\tau}.
+\]
+
+Numerically,
+\[
+\frac{1}{\sqrt{2\pi}} \approx 0.40,
+\]
+so
+\[
+\boxed{
+C_t \approx 0.4\, S_t\, \sigma \sqrt{\tau}.
+}
+\]
+
+With \(S_t=1\), \(\sigma=0.1\), and \(\tau=\tfrac{1}{12}\),
+\[
+C_t \approx 0.4 \times 0.1 \times \sqrt{\tfrac{1}{12}}
+\approx 0.0115.
+\]
+
+For a notional of \$1{,}000{,}000, the option value is therefore
+\[
+\boxed{C_t \approx \$11{,}500.}
+\]
+
+\section{FX Forward}
+
+\subsection*{Exercice :}
+
+\begin{exerciseBox}[FX Forward et parité des taux]
+On considère le taux de change \emph{spot} à la date $t=0$ noté $S_0$, défini par
+\[
+S_0 = \text{prix de } 1~\mathrm{USD} \text{ exprimé en EUR}
+\qquad\Longleftrightarrow\qquad
+1~\mathrm{USD} = S_0~\mathrm{EUR}.
+\]
+On note $r_{\$}$ le taux sans risque (sur $[0,T]$) en USD et $r_{\euro}$ le taux sans risque (sur $[0,T]$) en EUR.
+On suppose qu'il n'y a pas d'opportunité d'arbitrage.
+
+\medskip
+\noindent\textbf{Q1.} Qu'est-ce qu'un \emph{FX forward} ?
+
+\smallskip
+\noindent\textbf{Q2.} En utilisant une stratégie d'arbitrage (réplication), démontrer la formule de pricing du taux forward $F_{0,T}$.
+
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\subsection*{Réponse Q1 : définition d'un FX forward}
+Un \emph{FX forward} est un contrat qui fixe à la date $t=0$ un taux $F_{0,T}$ auquel deux contreparties
+s'engagent à échanger, à la date future $T$, un montant notionnel d'une devise contre un montant équivalent
+dans l'autre devise.
+Ici, avec la convention $S_0$ en \emph{EUR par USD}, le contrat peut s'écrire :
+\[
+\text{à } T,\ \text{échanger } 1~\mathrm{USD} \ \text{contre } F_{0,T}~\mathrm{EUR}.
+\]
+
+\subsection*{Réponse Q2 : démonstration (absence d'arbitrage)}
+On cherche le \emph{fair forward} $F_{0,T}$ compatible avec l'absence d'arbitrage.
+
+\medskip
+\noindent\textbf{Stratégie (cash-and-carry) à $t=0$:}
+\begin{itemize}
+  \item Emprunter $S_0$ EUR au taux $r_{\euro}$.
+  \item Convertir $S_0$ EUR en $1$ USD au spot (car $1~\mathrm{USD}=S_0~\mathrm{EUR}$).
+  \item Placer $1$ USD au taux $r_{\$}$ jusqu'à $T$.
+\end{itemize}
+La valeur initiale du portefeuille est nulle (on emprunte exactement ce qu'on convertit) :
+\[
+V_0 = +1~\mathrm{USD} - S_0~\mathrm{EUR} = 0.
+\]
+
+\medskip
+\noindent\textbf{Valeur à l'échéance $T$:}
+\begin{itemize}
+  \item Le placement USD devient $(1+r_{\$})$ USD.
+  \item La dette EUR devient $S_0(1+r_{\euro})$ EUR.
+\end{itemize}
+
+Pour éliminer le risque de change, on convertit les USD en EUR \emph{au taux forward} $F_{0,T}$ (EUR par USD).
+La valeur certaine en EUR à $T$ vaut alors :
+\[
+V_T^{(\mathrm{EUR})} = (1+r_{\$})\,F_{0,T} - S_0(1+r_{\euro}).
+\]
+
+\medskip
+\noindent\textbf{Absence d'arbitrage :} un portefeuille de coût initial nul ne peut pas générer un gain certain,
+donc il faut imposer
+\[
+V_T^{(\mathrm{EUR})}=0.
+\]
+Ainsi,
+\[
+(1+r_{\$})\,F_{0,T} - S_0(1+r_{\euro}) = 0
+\qquad\Longrightarrow\qquad
+\boxed{
+F_{0,T} = S_0\,\frac{1+r_{\euro}}{1+r_{\$}} }.
+\]
+
+\subsection*{Conclusion :}
+On définit le taux de change $X_t^{(\text{USD/EUR})}$ par
+\[
+1~\text{USD} = X_t^{(\text{USD/EUR})}~\text{EUR}.
+\]
+Le taux forward à maturité $T$ est donné par
+\[
+\boxed{
+X_T^{(\text{USD/EUR})}
+=
+X_0^{(\text{USD/EUR})}
+\frac{1+r_{\text{EUR}}}{1+r_{\text{USD}}}
+}
+\]
+
+\[
+\boxed{
+X_T^{(\text{USD/EUR})}
+=
+X_0^{(\text{USD/EUR})}
+\exp\!\left(
+\bigl(r_{\text{EUR}} - r_{\text{USD}}\bigr)T
+\right)
+}
+\]
+
+
+\section{option digitale multi-actifs}
+
+
+
+\subsection*{Exercice : }
+
+\begin{exerciseBox}[option digitale multi-actifs]
+On considère deux actifs financiers $S_1$ et $S_2$ évoluant sous la mesure risque-neutre $\mathbb{Q}$ selon des dynamiques de type Black--Scholes :
+\[
+\frac{dS_i(t)}{S_i(t)} = (r - q_i)\,dt + \sigma_i\,dW_i(t),
+\qquad i = 1,2,
+\]
+où :
+\begin{itemize}
+  \item $r$ est le taux sans risque constant,
+  \item $q_i$ est le taux de dividende de l’actif $S_i$,
+  \item $\sigma_i > 0$ est la volatilité de $S_i$,
+  \item $(W_1, W_2)$ est un mouvement brownien bidimensionnel tel que
+  \[
+  \langle W_1, W_2 \rangle_t = \rho t, \qquad \rho \in (-1,1).
+  \]
+\end{itemize}
+
+On considère une option digitale de maturité $T$ dont le payoff est donné par :
+\[
+\mathbf{1}_{\{ S_1(T) \ge S_2(T) \}}.
+\]
+
+\medskip
+
+\noindent
+\textbf{Question :} Déterminer la formule fermée du prix de cette option à la date $t=0$.
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+Sous la mesure risque-neutre, le prix de l’option à la date $0$ est donné par :
+\[
+V_0 = e^{-rT} \mathbb{E}^{\mathbb{Q}}\!\left[ \mathbf{1}_{\{ S_1(T) \ge S_2(T) \}} \right]
+= e^{-rT} \mathbb{P}^{\mathbb{Q}}\!\left( S_1(T) \ge S_2(T) \right).
+\]
+
+\subsection*{Étude du ratio $\boldsymbol{S_1(T)/S_2(T)}$}
+
+On introduit la variable aléatoire :
+\[
+X := \ln\!\left( \frac{S_1(T)}{S_2(T)} \right).
+\]
+
+À partir des dynamiques de $S_1$ et $S_2$, on obtient :
+\begin{align*}
+X
+&= \ln\!\left( \frac{S_1(0)}{S_2(0)} \right)
++ \left[(r - q_1 - \tfrac12 \sigma_1^2) - (r - q_2 - \tfrac12 \sigma_2^2)\right] T \\
+&\quad + \sigma_1 W_1(T) - \sigma_2 W_2(T).
+\end{align*}
+
+La variable $X$ suit donc une loi normale :
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2),
+\]
+avec :
+\[
+\mu_X
+= \ln\!\left( \frac{S_1(0)}{S_2(0)} \right)
++ \left(q_2 - q_1 - \tfrac12 \sigma_1^2 + \tfrac12 \sigma_2^2 \right) T,
+\]
+
+\paragraph{Calcul de la variance de $\sigma_1 W_1(T)-\sigma_2 W_2(T)$.}
+Posons
+\[
+Z := \sigma_1 W_1(T)-\sigma_2 W_2(T).
+\]
+En utilisant la formule $\mathrm{Var}(X+Y)=\mathrm{Var}(X)+\mathrm{Var}(Y)+2\,\mathrm{Cov}(X,Y)$ (et $\mathrm{Var}(-Y)=\mathrm{Var}(Y)$), on obtient
+\begin{align*}
+\mathrm{Var}(Z)
+&= \sigma_1^2\,\mathrm{Var}(W_1(T))+\sigma_2^2\,\mathrm{Var}(W_2(T))
+-2\sigma_1\sigma_2\,\mathrm{Cov}\!\big(W_1(T),W_2(T)\big).
+\end{align*}
+Comme $W_1$ et $W_2$ sont des browniens, $\mathbb{E}[W_i(T)]=0$ et $\mathrm{Var}(W_i(T))=\mathbb{E}[W_i(T)^2]=T$.
+
+Il reste à calculer $\mathbb{E}[W_1(T)W_2(T)]$.
+On utilise la propriété suivante : si $M$ et $N$ sont deux martingales (càdlàg) nulles en $0$ et de carré intégrable, alors
+\[
+MN-\langle M,N\rangle
+\quad \text{est une martingale.}
+\]
+En particulier, avec $M=W_1$ et $N=W_2$,
+\[
+W_1(t)W_2(t)-\langle W_1,W_2\rangle_t
+\quad \text{est une martingale.}
+\]
+En prenant l'espérance à l'instant $T$ et en utilisant $W_1(0)W_2(0)-\langle W_1,W_2\rangle_0=0$, on obtient
+\[
+\mathbb{E}\!\left[W_1(T)W_2(T)-\langle W_1,W_2\rangle_T\right]=0
+\quad\Longrightarrow\quad
+\mathbb{E}[W_1(T)W_2(T)]=\mathbb{E}\!\left[\langle W_1,W_2\rangle_T\right].
+\]
+Or, par hypothèse $\langle W_1,W_2\rangle_t=\rho t$, donc
+\[
+\mathbb{E}[W_1(T)W_2(T)]=\rho T,
+\qquad
+\mathrm{Cov}(W_1(T),W_2(T))=\rho T.
+\]
+Finalement,
+\[
+\mathrm{Var}(Z)
+=\sigma_1^2 T+\sigma_2^2 T-2\sigma_1\sigma_2\,\rho T
+= T\big(\sigma_1^2+\sigma_2^2-2\rho\sigma_1\sigma_2\big).
+\]
+
+Donc :
+
+\[
+\boxed{
+\sigma_X^2
+= T \left( \sigma_1^2 + \sigma_2^2 - 2 \rho \sigma_1 \sigma_2 \right).
+}
+\]
+
+
+
+\subsection*{Calcul de la probabilité}
+
+On a :
+\[
+\mathbb{P}^{\mathbb{Q}}\!\left( S_1(T) \ge S_2(T) \right)
+= \mathbb{P}(X \ge 0)
+= \Phi\!\left( \frac{\mu_X}{\sigma_X} \right),
+\]
+où $\Phi$ désigne la fonction de répartition de la loi normale centrée réduite.
+
+\subsection*{Prix de l’option}
+
+Finalement, le prix de l’option digitale est donné par :
+\[
+\boxed{
+V_0
+= e^{-rT}
+\Phi\!\left(
+\frac{
+\ln\!\left( \frac{S_1(0)}{S_2(0)} \right)
++ \left(q_2 - q_1 - \tfrac12 \sigma_1^2 + \tfrac12 \sigma_2^2 \right) T
+}{
+\sqrt{
+T \left( \sigma_1^2 + \sigma_2^2 - 2 \rho \sigma_1 \sigma_2 \right)
+}
+}
+\right)
+}
+\]
+
+\medskip
+
+\noindent
+Dans le cas particulier sans dividendes ($q_1 = q_2 = 0$), la formule se simplifie en :
+\[
+V_0
+= e^{-rT}
+\Phi\!\left(
+\frac{
+\ln\!\left( \frac{S_1(0)}{S_2(0)} \right)
++ \tfrac12 (\sigma_2^2 - \sigma_1^2) T
+}{
+\sqrt{
+T \left( \sigma_1^2 + \sigma_2^2 - 2 \rho \sigma_1 \sigma_2 \right)
+}
+}
+\right).
+\]
+
+
+
+\section{Option Margrabe}
+
+
+\subsection*{Exercice :}
+
+\begin{exerciseBox}[Option Margrabe]
+
+On considére deux actifs $S_1$ et $S_2$ définis sur un espace probabilise
+$(\Omega,\mathcal{F},(\mathcal{F}_t)_{t\ge 0},\mathbb{Q})$.
+Sous la mesure risque-neutre $\mathbb{Q}$ associ\'ee au num\'eraire mon\'etaire
+$B_t=e^{rt}$, les dynamiques sont de type Black--Scholes :
+\[
+\frac{dS_i(t)}{S_i(t)}=(r-q_i)\,dt+\sigma_i\,dW_i(t),\qquad i=1,2,
+\]
+o\`u $r$ est constant, $q_i$ est le taux de dividende continu de $S_i$,
+$\sigma_i>0$, et $(W_1,W_2)$ est un brownien bidimensionnel tel que
+\[
+\langle W_1,W_2\rangle_t=\rho t,\qquad \rho\in(-1,1).
+\]
+
+On \'{e}tudie l'option d'\'echange (option de Margrabe) de maturit\'e $T$ et de payoff
+\[
+\big(S_1(T)-S_2(T)\big)^+.
+\]
+
+\medskip
+\noindent
+\textbf{Question :} Donner une formule fermée pour le prix $V_0$ de cette option à la date $0$ ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+
+
+\subsection*{a. Modèle}
+
+On considère deux actifs risqués $(S_t^1)_{t \ge 0}$ et $(S_t^2)_{t \ge 0}$ évoluant sous la mesure risque-neutre $\mathbb Q$ selon les dynamiques de Black--Scholes avec dividendes continus :
+\[
+\begin{cases}
+\dfrac{dS_t^1}{S_t^1} = (r - q_1)\,dt + \sigma_1\, dW_t^1, \\
+\dfrac{dS_t^2}{S_t^2} = (r - q_2)\,dt + \sigma_2\, dW_t^2,
+\end{cases}
+\]
+où
+\[
+d\langle W^1, W^2 \rangle_t = \rho\,dt,
+\]
+$r$ est le taux sans risque, $q_1, q_2$ les taux de dividendes, $\sigma_1, \sigma_2$ les volatilités et $\rho \in [-1,1]$ le coefficient de corrélation.
+
+Le numéraire de référence est le compte bancaire
+\[
+B_t = e^{rt}.
+\]
+
+\subsection*{b. Payoff}
+
+On considère une option d’échange (option de Margrabe) de maturité $T$, de payoff
+\[
+\Phi_T = (S_T^1 - S_T^2)_+.
+\]
+
+Son prix à la date $0$ est
+\[
+C_0 = \mathbb E^{\mathbb Q}\left[ e^{-rT}\,(S_T^1 - S_T^2)_+ \right].
+\]
+
+\subsection*{c. Changement de numéraire}
+
+On introduit le numéraire associé au second actif avec dividendes réinvestis :
+\[
+N_t := e^{q_2 t} S_t^2.
+\]
+Le processus $\left( \frac{N_t}{B_t} \right)_{t \ge 0}$ est une $\mathbb Q$-martingale.
+
+On définit alors la mesure $\mathbb Q^{(2)}$ associée au numéraire $N_t$ par
+\[
+\left.\frac{d\mathbb Q^{(2)}}{d\mathbb Q}\right|_{\mathcal F_t}
+= \frac{N_t / B_t}{N_0 / B_0}.
+\]
+
+Par le théorème du changement de numéraire, pour toute variable aléatoire intégrable $H_T$,
+\[
+\mathbb E^{\mathbb Q}\left[ \frac{B_0}{B_T} H_T \right]
+= \mathbb E^{\mathbb Q^{(2)}}\left[ \frac{N_0}{N_T} H_T \right].
+\]
+
+En particulier,
+\[
+C_0
+= \mathbb E^{\mathbb Q^{(2)}}\left[ \frac{N_0}{N_T} (S_T^1 - S_T^2)_+ \right]
+= S_2(0)\,\mathbb E^{\mathbb Q^{(2)}}\left[ \left( \frac{S_T^1}{S_T^2} - 1 \right)_+ \right].
+\]
+
+
+\subsection*{d. Dynamique du ratio sous la mesure $\mathbb Q^{(2)}$}
+
+On rappelle que la mesure $\mathbb Q^{(2)}$ est définie par le changement de numéraire
+\[
+N_t = e^{q_2 t} S_t^2.
+\]
+La densité de Radon--Nikodym associée est donnée par
+\[
+\left.\frac{d\mathbb Q^{(2)}}{d\mathbb Q}\right|_{\mathcal F_t}
+= \frac{N_t / B_t}{N_0 / B_0}
+= \frac{e^{q_2 t} S_t^2}{e^{rt}} \cdot \frac{1}{S_2(0)}.
+\]
+
+Sous la mesure $\mathbb Q$, le processus $S_t^2$ s’écrit explicitement :
+\[
+S_t^2 = S_2(0)\,
+\exp\!\left(
+\left(r - q_2 - \tfrac{1}{2}\sigma_2^2\right)t
++ \sigma_2 W_t^2
+\right).
+\]
+En injectant cette expression dans la densité, on obtient :
+\[
+\left.\frac{d\mathbb Q^{(2)}}{d\mathbb Q}\right|_{\mathcal F_t}
+=
+\exp\!\left(
+\sigma_2 W_t^2 - \tfrac{1}{2}\sigma_2^2 t
+\right).
+\]
+
+Cette densité est l’exponentielle de Doléans-Dade associée au processus
+\[
+\int_0^t \sigma_2\, dW_s^2.
+\]
+Par le théorème de Girsanov, il existe alors un mouvement brownien
+$(W_t^{2,\mathbb Q^{(2)}})_{t \ge 0}$ sous la mesure $\mathbb Q^{(2)}$ tel que
+\[
+\boxed{
+dW_t^{2,\mathbb Q^{(2)}} = dW_t^2 - \sigma_2\,dt.
+}
+\]
+
+\medskip
+
+Les mouvements browniens $W^1$ et $W^2$ étant corrélés sous $\mathbb Q$ avec
+\[
+d\langle W^1, W^2 \rangle_t = \rho\,dt,
+\]
+on introduit la décomposition orthogonale
+\[
+W_t^1 = \rho W_t^2 + \sqrt{1-\rho^2}\, Z_t,
+\]
+où $(Z_t)_{t \ge 0}$ est un mouvement brownien indépendant de $W^2$ sous $\mathbb Q$.
+
+Comme la densité du changement de mesure dépend uniquement de $W^2$, le processus
+$Z_t$ reste un mouvement brownien sous $\mathbb Q^{(2)}$. On en déduit que
+\[
+\begin{aligned}
+dW_t^{1,\mathbb Q^{(2)}}
+&= \rho\, dW_t^{2,\mathbb Q^{(2)}} + \sqrt{1-\rho^2}\, dZ_t \\
+&= \rho(dW_t^2 - \sigma_2 dt) + \sqrt{1-\rho^2}\, dZ_t \\
+&= dW_t^1 - \rho\sigma_2\,dt.
+\end{aligned}
+\]
+
+On obtient ainsi la relation entre les browniens sous les deux mesures :
+\[
+\boxed{
+\begin{aligned}
+dW_t^{2,\mathbb Q^{(2)}} &= dW_t^2 - \sigma_2\,dt, \\
+dW_t^{1,\mathbb Q^{(2)}} &= dW_t^1 - \rho\sigma_2\,dt,
+\end{aligned}
+}
+\]
+avec
+\[
+d\langle W^{1,\mathbb Q^{(2)}}, W^{2,\mathbb Q^{(2)}} \rangle_t = \rho\,dt.
+\]
+
+Donc :
+\[
+\boxed{
+\begin{cases}
+\dfrac{dS_t^1}{S_t^1} = (r - q_1 + \rho \sigma_1 \sigma_2)\,dt + \sigma_1\,dW^{1,\mathbb Q^{(2)}}, \\
+\dfrac{dS_t^2}{S_t^2} = (r - q_2 + \sigma_2^2)\,dt + \sigma_2\, dW^{2,\mathbb Q^{(2)}},  \\
+d\langle W^{1,\mathbb Q^{(2)}}, W^{2,\mathbb Q^{(2)}} \rangle_t = \rho\,dt,
+\end{cases}
+}
+\]
+
+
+\medskip
+
+En appliquant la formule d’Itô au processus
+\[
+R_t = \frac{S_t^1}{S_t^2},
+\]
+et en utilisant les dynamiques sous $\mathbb Q^{(2)}$, on obtient :
+\[
+\frac{dR_t}{R_t}
+= (q_2 - q_1)\,dt
++ \sigma_1\, dW_t^{1,\mathbb Q^{(2)}}
+- \sigma_2\, dW_t^{2,\mathbb Q^{(2)}}.
+\]
+
+Le terme de diffusion peut être regroupé en un unique brownien :
+\[
+\frac{dR_t}{R_t}
+= (q_2 - q_1)\,dt
++ \sigma_{\text{eff}}\, dW_t^{\mathbb Q^{(2)}},
+\]
+où
+\[
+\sigma_{\text{eff}}
+= \sqrt{\sigma_1^2 + \sigma_2^2 - 2\rho\sigma_1\sigma_2}.
+\]
+
+
+
+\subsection*{e. Pricing}
+
+Sous la mesure $\mathbb Q^{(2)}$, le processus $R_t$ suit une dynamique lognormale.
+L’option $(R_T - 1)_+$ est donc une option de type Call de strike $1$.
+
+En appliquant la formule de Black--Scholes, on obtient :
+\[
+\mathbb E^{\mathbb Q^{(2)}}\left[ (R_T - 1)_+ \right]
+= R_0 e^{- q_1T} N(d_1) - e^{- q_2T}N(d_2),
+\]
+avec
+\[
+d_1 = \frac{\ln(R_0) + (q_2 - q_1 + \tfrac{1}{2}\sigma_{\text{eff}}^2)T}
+{\sigma_{\text{eff}}\sqrt{T}},
+\qquad
+d_2 = d_1 - \sigma_{\text{eff}}\sqrt{T}.
+\]
+
+\subsection*{f. Formule finale de Margrabe}
+
+En utilisant $R_0 = \dfrac{S_1(0)}{S_2(0)}$, on obtient finalement :
+\[
+\boxed{
+C_0
+= S_1(0)e^{-q_1 T} N(d_1)
+- S_2(0)e^{-q_2 T} N(d_2)
+}
+\]
+avec
+\[
+\boxed{
+\begin{aligned}
+d_1 &= \frac{\ln\!\left( \dfrac{S_1(0)}{S_2(0)} \right)
++ \left(q_2 - q_1 + \tfrac{1}{2}\sigma_{\text{eff}}^2\right)T}
+{\sigma_{\text{eff}}\sqrt{T}},\\[6pt]
+d_2 &= d_1 - \sigma_{\text{eff}}\sqrt{T},\\[6pt]
+\sigma_{\text{eff}} &= \sqrt{\sigma_1^2 + \sigma_2^2 - 2\rho\sigma_1\sigma_2}.
+\end{aligned}
+}
+\]
+
+\medskip
+Cette formule est connue sous le nom de \emph{formule de Margrabe}.
+
+
+\section{Valeur intrinsèque et exercice anticipé d'un call américain}
+
+\begin{exerciseBox}[Valeur intrinsèque et exercice anticipé d'un call américain]
+
+\textbf{Énoncé.}
+\begin{enumerate}
+\item[(Q1)] Montrer que, pour tout $t \in [0,T]$, le prix d'un call européen de strike $K$ et maturité $T$ vérifie
+\[
+C_t \;\ge\; (S_t - K)_+.
+\]
+\item[(Q2)] Justifier que, pour un \emph{call américain} sur une action ne versant \emph{aucun dividende} ($q=0$), il n'est jamais optimal d'exercer avant l'échéance : l'exercice optimal a lieu à $T$.
+\end{enumerate}
+\end{exerciseBox}
+
+
+\subsection*{Solution :}
+
+On suppose que l'actif sous-jacent $(S_t)_{t\in[0,T]}$ est modélisé sous la mesure risque-neutre $\mathbb Q$ (numéraire $B_t=e^{rt}$), et que le taux sans risque $r$ est constant.
+
+%------------------------
+\subsection*{Q1. Le call est toujours supérieur à sa valeur intrinsèque}
+
+Considérons un call européen de payoff $(S_T-K)_+$.  
+Construisons le portefeuille suivant à la date $t$ :
+\[
+\Pi_t \;:=\; C_t \;+\; K\,B(t,T),
+\]
+où $B(t,T)=e^{-r(T-t)}$ désigne le prix à $t$ d'un zéro-coupon qui paie $1$ à $T$.
+
+À l'échéance, la valeur de ce portefeuille vaut :
+\[
+\Pi_T \;=\; C_T + K \;=\; (S_T-K)_+ + K \;=\; \max(S_T,K).
+\]
+Or, pour tout $x\ge 0$, on a $\max(x,K)\ge x$, donc
+\[
+\Pi_T \;=\; \max(S_T,K) \;\ge\; S_T.
+\]
+
+Le portefeuille $\Pi$ domine donc le payoff $S_T$ à l'échéance.  
+Par absence d'arbitrage, sa valeur à la date $t$ doit être au moins celle de $S_t$ :
+\[
+\Pi_t \;\ge\; S_t.
+\]
+Autrement dit,
+\[
+C_t + K\,B(t,T) \;\ge\; S_t
+\qquad\Longrightarrow\qquad
+C_t \;\ge\; S_t - K\,B(t,T).
+\]
+Comme $B(t,T)=e^{-r(T-t)}\le 1$, on a $K\,B(t,T)\le K$, donc
+\[
+S_t - K\,B(t,T) \;\ge\; S_t - K.
+\]
+Finalement,
+\[
+C_t \;\ge\; S_t - K \;\ge\; (S_t-K)_+,
+\]
+ce qui prouve bien que le call est toujours supérieur (ou égal) à sa valeur intrinsèque.
+
+%------------------------
+\subsection*{Q2. Pas d'exercice anticipé optimal pour un call américain sans dividendes}
+
+Soit $C_t^{A}$ le prix d'un call américain (même $K$, même $T$).  
+Par définition d'une option américaine (valeur de continuation + possibilité d'exercice immédiat),
+\[
+C_t^{A} \;\ge\; (S_t-K)_+.
+\]
+
+D'après la question (Q1), on a également pour le call européen :
+\[
+C_t \;\ge\; (S_t-K)_+.
+\]
+
+Lorsque l'action ne verse pas de dividendes ($q=0$), l'unique avantage de l'option américaine
+serait d'exercer plus tôt. Or exercer à $t<T$ revient à payer immédiatement $K$ pour recevoir $S_t$,
+ce qui fait perdre la valeur temps de l'argent : en reportant le paiement de $K$ à $T$,
+on conserve la possibilité de placer $K$ au taux sans risque.
+
+Ainsi, l'exercice anticipé d'un call sans dividendes n'apporte aucun gain : la valeur optimale
+est obtenue en conservant l'option jusqu'à l'échéance. On en déduit que
+\[
+C_t^{A} = C_t
+\quad\text{et}\quad
+\text{l'exercice optimal a lieu à }T.
+\]
 

@@ -1,0 +1,299 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==========================
+%      PACKAGES DE BASE
+% ==========================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+% \usepackage{amsfonts}
+\geometry{margin=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!50!black,
+    urlcolor=blue!70!black,
+    citecolor=blue!50!black
+}
+
+\usepackage{lmodern}
+
+% ==========================
+%        TCOLORBOX
+% ==========================
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Style global des boîtes
+\tcbset{
+    boxrule=0.8pt,
+    arc=3pt,
+    colback=white,
+    colframe=black,
+}
+
+% Boîte Question
+\newtcolorbox{questionbox}{
+    colback=blue!3,
+    colframe=blue!60!black,
+    title=Question,
+    fonttitle=\bfseries,
+    breakable,
+    left=6pt,right=6pt,top=6pt,bottom=6pt
+}
+
+% Boîte Réponse
+\newtcolorbox{answerbox}{
+    colback=green!3,
+    colframe=green!50!black,
+    title=Réponse,
+    fonttitle=\bfseries,
+    breakable,
+    left=6pt,right=6pt,top=6pt,bottom=6pt
+}
+
+% Environnement QA : \begin{QA}{Texte de la question} ... \end{QA}
+\newenvironment{QA}[1]{
+    \begin{questionbox}
+        \textbf{#1}
+    \end{questionbox}
+    \begin{answerbox}
+}{
+    \end{answerbox}
+}
+
+% ==========================
+%    TITRE / AUTEUR / DATE
+% ==========================
+\title{\textbf{Préparation aux entretiens Quant}\\[0.5em]
+\large Banque d'Investissement \,•\, Hedge Fund \,•\, Asset Management}
+\author{Ton Nom}
+\date{\today}
+
+\begin{document}
+
+% ==========================
+%        PAGE DE GARDE
+% ==========================
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    
+    {\Huge \textbf{Préparation aux entretiens Quant}\par}
+    \vspace{1cm}
+    {\large Banque d'Investissement • Hedge Fund • Asset Management\par}
+    
+    \vspace{3cm}
+    {\large Dossier de révision personnel}\par
+    \vspace{0.5cm}
+    {\large \textbf{Auteur :} Mohamed Lemine}\par
+    \vspace{0.3cm}
+    {\large \textbf{Dernière mise à jour :} \today}\par
+    
+    \vfill
+    
+    {\small
+    Ce document regroupe des questions de cours, de probabilités, de modèles stochastiques,\\
+    de produits dérivés et de brainteasers mathématiques, avec réponses détaillées.\\[0.5em]
+    Utilisation : révision active avant les entretiens Quant.
+    }
+    
+\end{titlepage}
+
+% ==========================
+%         SOMMAIRE
+% ==========================
+\tableofcontents
+\newpage
+
+
+
+\section{Monté Carlo}
+
+\subsection{Question 1 :}
+
+
+\[
+Y_{\inf\{ i \in \mathbb{N} : U_i < \tfrac{f_X(Y_i)}{k\, f_Y(Y_i)} \}}
+\sim X,
+\qquad
+\text{où } Y_i \sim Y,\ U_i \sim \mathcal{U}(0,1),\ k f_Y(x) \ge f_X(x).
+\]
+
+
+
+% ==========================
+%      CONTENU EXEMPLE
+% ==========================
+
+\section{Question 01 :}
+
+% \subsubsection*{Question :} Définir le mouvement brownien standard ? 
+\begin{questionbox}
+Définir le mouvement brownien standard ? 
+\end{questionbox}
+
+
+\subsubsection*{Reponse : }
+Un mouvement brownien standard $(W_t)_{t \ge 0}$ est un processus stochastique vérifiant :
+\begin{itemize}
+    \item $W_0 = 0$ presque sûrement,
+    \item accroissements indépendants,
+    \item pour $t > s$, l'accroissement $W_t - W_s \sim \mathcal{N}(0, t-s)$,
+    \item trajectoires continues presque sûrement.
+\end{itemize}
+C’est la brique de base de la modélisation continue en finance (Black–Scholes, EDS, formule d’Itô, etc.).
+\newpage 
+
+\section{Question 02 :}
+
+\begin{questionbox}
+Quelles sont les conditions pour qu'une variable aléatoire $Z$ soit une densité de changement de probabilité ?
+    
+\end{questionbox}
+
+\subsubsection*{Reponse : }
+Pour que $Z$ définisse un changement de probabilité de $\mathbb{P}$ vers une nouvelle mesure $\mathbb{Q}$ via :
+
+\[
+\frac{d\mathbb{Q}}{d\mathbb{P}} = Z,
+\]
+
+il faut que $Z$ vérifie les conditions suivantes :
+
+\begin{enumerate}
+    \item \textbf{$Z \ge 0$ presque sûrement}  
+    $Z$ doit être une densité, donc ne peut pas être négative.
+
+    \item \textbf{$\mathbb{E}_{\mathbb{P}}[Z] = 1$}  
+    Ceci garantit que $\mathbb{Q}$ est une probabilité (masse totale égale à 1).
+
+    \item \textbf{$Z$ est $\mathcal{F}$-mesurable}  
+    Pour que $\mathbb{Q}$ soit bien définie sur le même espace probabilisable.
+
+\end{enumerate}
+
+Ainsi, $Z$ est une densité de Radon–Nikodym si et seulement si :
+
+\[
+Z \ge 0, \qquad Z \in L^1(\mathbb{P}), \qquad \mathbb{E}_{\mathbb{P}}[Z] = 1.
+\]
+
+Ce sont les conditions classiques utilisées dans les changements de mesure (ex : Girsanov).
+\newpage
+
+\begin{QA}{Quelles sont les conditions pour qu'un processus $(Z_t)_{t\ge 0}$ définisse un changement de mesure ?}
+Pour que $(Z_t)$ définisse un changement de probabilité de $\mathbb{P}$ vers une mesure
+$\mathbb{Q}$ via :
+\[
+\left.\frac{d\mathbb{Q}}{d\mathbb{P}}\right|_{\mathcal{F}_t} = Z_t,
+\]
+il faut que $(Z_t)$ vérifie les conditions suivantes :
+
+\begin{enumerate}
+    \item \textbf{Positivité :}  
+    \[
+    Z_t \ge 0 \quad \text{p.s.}
+    \]
+    Une densité ne peut pas être négative.
+
+    \item \textbf{Intégrabilité :}  
+    \[
+    Z_t \in L^1(\mathbb{P}) \quad \forall t.
+    \]
+
+    \item \textbf{Normalisation :}  
+    \[
+    \mathbb{E}_{\mathbb{P}}[Z_t] = 1 \quad \forall t.
+    \]
+    Cela garantit que $\mathbb{Q}$ est bien une mesure de probabilité.
+
+    \item \textbf{Condition martingale (essentielle) :}  
+    \[
+    (Z_t) \text{ est une martingale positive sous } \mathbb{P}.
+    \]
+    Cela assure la cohérence temporelle du changement de mesure :
+    \[
+    Z_t = \mathbb{E}_{\mathbb{P}}[Z_T \mid \mathcal{F}_t].
+    \]
+
+    \item \textbf{(Optionnel) Strictement positif :}  
+    Si l’on veut que $\mathbb{P}$ et $\mathbb{Q}$ soient équivalentes :
+    \[
+    Z_t > 0 \quad \text{p.s.}
+    \]
+\end{enumerate}
+
+Ainsi, un processus $(Z_t)$ est une densité locale de Radon–Nikodym s'il est positif,
+intégrable, normalisé, et surtout une martingale. C'est le cadre classique du théorème
+de Girsanov.
+\end{QA}
+
+
+
+% \section{Processus stochastiques}
+
+% \begin{QA}{Définir le mouvement brownien standard.}
+% Un mouvement brownien standard $(W_t)_{t \ge 0}$ est un processus stochastique vérifiant :
+% \begin{itemize}
+%     \item $W_0 = 0$ presque sûrement,
+%     \item accroissements indépendants,
+%     \item pour $t > s$, l'accroissement $W_t - W_s \sim \mathcal{N}(0, t-s)$,
+%     \item trajectoires continues presque sûrement.
+% \end{itemize}
+% C’est la brique de base de la modélisation continue en finance (Black–Scholes, EDS, formule d’Itô, etc.).
+% \end{QA}
+
+% \begin{QA}{Que signifie « accroissements indépendants et stationnaires » ?}
+% \textbf{Accroissements indépendants} : pour tout $0 \le t_0 < t_1 < \dots < t_n$,
+% les variables $W_{t_1}-W_{t_0},\, W_{t_2}-W_{t_1},\, \dots,\, W_{t_n}-W_{t_{n-1}}$ sont indépendantes.\\[0.5em]
+% \textbf{Accroissements stationnaires} : la loi de $W_{t+h} - W_t$ ne dépend que de $h$ (la longueur de l’intervalle), pas de $t$.
+% \end{QA}
+
+% \section{Modèle de Black--Scholes}
+
+% \begin{QA}{Donner la formule du prix d’un call européen dans le modèle de Black--Scholes.}
+% Le prix d'un call européen de strike $K$ et maturité $T$ est :
+% \[
+% C_0 = S_0 N(d_1) - K e^{-rT} N(d_2),
+% \]
+% avec :
+% \[
+% d_1 = \frac{\ln(S_0/K) + (r + \tfrac{1}{2}\sigma^2)T}{\sigma\sqrt{T}},
+% \qquad
+% d_2 = d_1 - \sigma\sqrt{T},
+% \]
+% où :
+% \begin{itemize}
+%     \item $S_0$ : prix spot de l’actif sous-jacent,
+%     \item $K$ : strike,
+%     \item $r$ : taux sans risque,
+%     \item $\sigma$ : volatilité,
+%     \item $N(\cdot)$ : fonction de répartition de la loi normale standard.
+% \end{itemize}
+% \end{QA}
+
+% \section{Brainteasers / Probabilités}
+
+% \begin{QA}{On lance deux dés à six faces. Quelle est la probabilité que la somme soit égale à 7 ?}
+% Les couples $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$ donnent une somme de $7$, soit $6$ issues favorables.\\
+% Il y a $6 \times 6 = 36$ issues possibles au total.\\[0.3cm]
+% Donc
+% \[
+% \mathbb{P}(\text{Somme} = 7) = \frac{6}{36} = \frac{1}{6}.
+% \]
+% \end{QA}
+
+% ==========================
+%   FIN DU DOCUMENT
+% ==========================
+
+\end{document}
