@@ -1634,7 +1634,7 @@ nb_{moyenne} = \mathbb{E}[T]=\frac{1}{p}=6.
 \end{enumerate}
 
 
-\section{Conditional Die Rolls}
+\section{Conditional Die Rolls 1}
 
 \begin{exerciseBox}[Conditional Die Rolls]
 Dan rolls a dice until he gets a 6. Given that he did not see a  5
@@ -1696,3 +1696,157 @@ Par conséquent,
 \[
 \boxed{\mathbb{E}[T\mid E]=\frac{1}{p}=3.}
 \]
+
+\section{Conditional Die Rolls 2}
+
+
+\begin{exerciseBox}[Conditional Die Rolls 2]
+Dan lance un dé équilibré à six faces jusqu’à l’apparition du premier $6$.
+Sachant qu’il a observé au moins un $5$ avant l’apparition du premier $6$,
+déterminer l’espérance du nombre total de lancers effectués.
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+On modélise l’expérience probabiliste de la manière suivante.
+
+Soit $(X_n)_{n\geq 1}$ une suite de variables aléatoires indépendantes et identiquement distribuées,
+où $X_n$ représente le résultat du $n$-ième lancer, avec
+\[
+\mathbb{P}(X_n = k) = \frac{1}{6}, \quad k=1,\dots,6.
+\]
+
+On définit la variable aléatoire
+\[
+N = \inf\{n \geq 1 \mid X_n = 6\},
+\]
+qui représente le nombre total de lancers nécessaires pour obtenir le premier $6$.
+
+On conditionne par l’événement
+\[
+A = \{\text{au moins un } 5 \text{ apparaît avant le premier } 6\}.
+\]
+
+\medskip
+
+\textbf{Étape 1 : temps d’apparition du premier $5$ ou $6$.}
+
+Soit
+\[
+T = \inf\{n \geq 1 \mid X_n \in \{5,6\}\}.
+\]
+À chaque lancer,
+\[
+\mathbb{P}(X_n \in \{5,6\}) = \frac{2}{6} = \frac{1}{3}.
+\]
+Ainsi, $T$ suit une loi géométrique de paramètre $\frac{1}{3}$, et
+\[
+\mathbb{E}[T] = \frac{1}{1/3} = 3.
+\]
+
+Sous l’événement $A$, le premier élément de $\{5,6\}$ observé est nécessairement un $5$.
+
+\medskip
+
+\textbf{Étape 2 : temps d’attente du premier $6$ après un $5$.}
+
+Après l’apparition du premier $5$, le processus recommence indépendamment.
+Soit $M$ le nombre de lancers nécessaires pour obtenir un $6$ à partir de ce moment-là.
+Alors $M$ suit une loi géométrique de paramètre $\frac{1}{6}$, et
+\[
+\mathbb{E}[M] = \frac{1}{1/6} = 6.
+\]
+
+\medskip
+
+\textbf{Étape 3 : calcul de l’espérance conditionnelle.}
+
+Sous l’événement $A$, le nombre total de lancers s’écrit
+\[
+N = T + M.
+\]
+Par linéarité de l’espérance,
+\[
+\mathbb{E}[N \mid A] = \mathbb{E}[T] + \mathbb{E}[M] = 3 + 6 = 9.
+\]
+
+\medskip
+
+\[
+\boxed{\mathbb{E}[N \mid \text{au moins un } 5 \text{ avant le premier } 6] = 9}
+\]
+
+\section{Conditional Die Rolls 3}
+
+\begin{exerciseBox}[Conditional Die Rolls 3]
+Dan lance un dé équilibré à six faces jusqu’à obtenir un $6$.
+Sachant qu’il n’a observé que des nombres pairs pendant toute l’expérience,
+quel est le nombre moyen  de lancers effectués ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+On modélise les lancers par une suite $(X_n)_{n\ge 1}$ de variables aléatoires i.i.d. uniformes sur
+$\{1,2,3,4,5,6\}$, c’est-à-dire
+\[
+\mathbb{P}(X_n=k)=\frac{1}{6},\qquad k\in\{1,2,3,4,5,6\}.
+\]
+On note
+\[
+N=\inf\{n\ge 1:\; X_n=6\}
+\]
+le nombre total de lancers jusqu’au premier $6$.
+
+On conditionne par l’événement
+\[
+E=\{\text{tous les résultats observés (jusqu’à l’arrêt inclus) sont pairs}\}.
+\]
+Sur $E$, tous les lancers avant l’arrêt doivent appartenir à $\{2,4\}$, et le dernier lancer vaut $6$.
+Ainsi, pour tout $n\ge 1$,
+\[
+\{N=n\}\cap E=\{X_1\in\{2,4\},\dots,X_{n-1}\in\{2,4\},\,X_n=6\}.
+\]
+Par indépendance,
+\[
+\mathbb{P}(N=n,\;E)=\left(\frac{2}{6}\right)^{n-1}\frac{1}{6}
+=\left(\frac{1}{3}\right)^{n-1}\frac{1}{6}.
+\]
+
+\medskip
+\textbf{Calcul de $\mathbb{P}(E)$.}
+On somme sur $n\ge 1$ :
+\[
+\mathbb{P}(E)=\sum_{n=1}^{\infty}\mathbb{P}(N=n,\;E)
+=\sum_{n=1}^{\infty}\left(\frac{1}{3}\right)^{n-1}\frac{1}{6}
+=\frac{1}{6}\sum_{n=1}^{\infty}\left(\frac{1}{3}\right)^{n-1}.
+\]
+Or
+\[
+\sum_{n=1}^{\infty}\left(\frac{1}{3}\right)^{n-1}
+=\frac{1}{1-\frac{1}{3}}=\frac{3}{2},
+\]
+donc
+\[
+\mathbb{P}(E)=\frac{1}{6}\cdot\frac{3}{2}=\frac{1}{4}.
+\]
+
+\medskip
+\textbf{Loi conditionnelle de $N$ sachant $E$.}
+Pour $n\ge 1$,
+\[
+\mathbb{P}(N=n\mid E)
+=\frac{\mathbb{P}(N=n,\;E)}{\mathbb{P}(E)}
+=\frac{\left(\frac{1}{3}\right)^{n-1}\frac{1}{6}}{\frac{1}{4}}
+= \left(\frac{1}{3}\right)^{n-1}\frac23.
+\]
+
+donc 
+\[
+N \mid E \sim \mathcal{G}\!\left(\frac{2}{3}\right)
+\]
+
+\[
+\boxed{\mathbb{E}[N\mid \text{uniquement des nombres pairs}] = \frac{3}{2}.}
+\]
+
+

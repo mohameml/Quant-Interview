@@ -35,63 +35,65 @@
 \contentsline {section}{\numberline {2.19}Highest Roll EV}{32}{section.2.19}%
 \contentsline {section}{\numberline {2.20}Ten Floor Building}{33}{section.2.20}%
 \contentsline {section}{\numberline {2.21}Temps d'attente (loi géométrique)}{34}{section.2.21}%
-\contentsline {section}{\numberline {2.22}Conditional Die Rolls}{34}{section.2.22}%
-\contentsline {chapter}{\numberline {3}Calcul Stochastique}{37}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Temps d'arrêt}{37}{section.3.1}%
-\contentsline {paragraph}{Preuve que $\tau < \infty $ p.s.}{38}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Loi de l'intégrale du mouvement brownien}{39}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Espérance conditionnelle d'un mouvement brownien}{40}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Espérance conditionnelle d'une intégrale stochastique}{41}{section.3.4}%
-\contentsline {section}{\numberline {3.5}MBG}{43}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Processus d'Ornstein-Uhlenbeck}{44}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Probabilité de sortie à gauche d’un intervalle – O.U.}{45}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Hitting time of brownian motion}{46}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Density of the Hitting Time of Brownian Motion}{48}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Reflection Principle for Brownian Motion}{50}{section.3.10}%
-\contentsline {section}{\numberline {3.11}Mouvement Brownien et temps d'arrêt}{52}{section.3.11}%
-\contentsline {part}{II\hspace {1em}Quant Finance}{53}{part.2}%
-\contentsline {chapter}{\numberline {1}Option pricing}{55}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Prix du Call européen dans le modèle de Black-Scholes}{55}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Option Chooser}{58}{section.1.2}%
-\contentsline {paragraph}{Question :}{58}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Option d'échange avec devise}{59}{section.1.3}%
-\contentsline {paragraph}{Changement de numéraire $Z$.}{59}{Item.19}%
-\contentsline {paragraph}{Changement de numéraire $XY$.}{60}{Item.19}%
-\contentsline {section}{\numberline {1.4}Butterfly call}{61}{section.1.4}%
-\contentsline {paragraph}{Convexité de $C(K,t)$ par rapport à $K$.}{61}{section.1.4}%
-\contentsline {paragraph}{Vérification numérique.}{62}{section.1.4}%
-\contentsline {paragraph}{3) Stratégie d'arbitrage.}{62}{section.1.4}%
-\contentsline {paragraph}{Représentation graphique.}{62}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Put Spread}{63}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Parité call--put}{64}{section.1.6}%
-\contentsline {paragraph}{Remarque :}{65}{section.1.6}%
-\contentsline {section}{\numberline {1.7}contrat forward}{65}{section.1.7}%
-\contentsline {section}{\numberline {1.8}Digtial Option : Dual Delta - Breeden-Litzenberger (1978)}{67}{section.1.8}%
-\contentsline {section}{\numberline {1.9}Call européen avec sous-jacent gaussien}{70}{section.1.9}%
-\contentsline {section}{\numberline {1.10}Call option at-the-money}{71}{section.1.10}%
-\contentsline {section}{\numberline {1.11}FX Forward}{72}{section.1.11}%
-\contentsline {section}{\numberline {1.12}option digitale multi-actifs}{74}{section.1.12}%
-\contentsline {paragraph}{Calcul de la variance de $\sigma _1 W_1(T)-\sigma _2 W_2(T)$.}{75}{section.1.12}%
-\contentsline {section}{\numberline {1.13}Option Margrabe}{76}{section.1.13}%
-\contentsline {section}{\numberline {1.14}Valeur intrinsèque et exercice anticipé d'un call américain}{79}{section.1.14}%
-\contentsline {part}{III\hspace {1em}Algo}{81}{part.3}%
-\contentsline {part}{IV\hspace {1em}Brain Teasers}{85}{part.4}%
-\contentsline {chapter}{\numberline {1}Brain Teasers}{87}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Carré magique $3\times 3$}{87}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Le problème des 5 pirates}{89}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Tigres et mouton}{90}{section.1.3}%
-\contentsline {paragraph}{Cas de base.}{90}{section.1.3}%
-\contentsline {paragraph}{Hérédité.}{90}{section.1.3}%
-\contentsline {paragraph}{Conclusion.}{90}{section.1.3}%
-\contentsline {section}{\numberline {1.4}River crossing}{91}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Problème d’anniversaire}{92}{section.1.5}%
-\contentsline {paragraph}{Données filtrées par le premier énoncé.}{92}{section.1.5}%
-\contentsline {paragraph}{Après ton annonce, C sait maintenant.}{92}{section.1.5}%
-\contentsline {paragraph}{Tu sais maintenant toi aussi.}{93}{section.1.5}%
-\contentsline {paragraph}{Réponse.}{93}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Jeu de cartes}{93}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Deux cordes}{94}{section.1.7}%
-\contentsline {section}{\numberline {1.8}Jeu en 2D}{94}{section.1.8}%
-\contentsline {section}{\numberline {1.9}Say 50}{95}{section.1.9}%
-\contentsline {paragraph}{Justification formelle.}{96}{Item.23}%
-\contentsline {section}{\numberline {1.10}100 Ampoules}{96}{section.1.10}%
+\contentsline {section}{\numberline {2.22}Conditional Die Rolls 1}{34}{section.2.22}%
+\contentsline {section}{\numberline {2.23}Conditional Die Rolls 2}{35}{section.2.23}%
+\contentsline {section}{\numberline {2.24}Conditional Die Rolls 3}{36}{section.2.24}%
+\contentsline {chapter}{\numberline {3}Calcul Stochastique}{39}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Temps d'arrêt}{39}{section.3.1}%
+\contentsline {paragraph}{Preuve que $\tau < \infty $ p.s.}{40}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Loi de l'intégrale du mouvement brownien}{41}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Espérance conditionnelle d'un mouvement brownien}{42}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Espérance conditionnelle d'une intégrale stochastique}{43}{section.3.4}%
+\contentsline {section}{\numberline {3.5}MBG}{45}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Processus d'Ornstein-Uhlenbeck}{46}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Probabilité de sortie à gauche d’un intervalle – O.U.}{47}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Hitting time of brownian motion}{48}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Density of the Hitting Time of Brownian Motion}{50}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Reflection Principle for Brownian Motion}{52}{section.3.10}%
+\contentsline {section}{\numberline {3.11}Mouvement Brownien et temps d'arrêt}{54}{section.3.11}%
+\contentsline {part}{II\hspace {1em}Quant Finance}{55}{part.2}%
+\contentsline {chapter}{\numberline {1}Option pricing}{57}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Prix du Call européen dans le modèle de Black-Scholes}{57}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Option Chooser}{60}{section.1.2}%
+\contentsline {paragraph}{Question :}{60}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Option d'échange avec devise}{61}{section.1.3}%
+\contentsline {paragraph}{Changement de numéraire $Z$.}{61}{Item.19}%
+\contentsline {paragraph}{Changement de numéraire $XY$.}{62}{Item.19}%
+\contentsline {section}{\numberline {1.4}Butterfly call}{63}{section.1.4}%
+\contentsline {paragraph}{Convexité de $C(K,t)$ par rapport à $K$.}{63}{section.1.4}%
+\contentsline {paragraph}{Vérification numérique.}{64}{section.1.4}%
+\contentsline {paragraph}{3) Stratégie d'arbitrage.}{64}{section.1.4}%
+\contentsline {paragraph}{Représentation graphique.}{64}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Put Spread}{65}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Parité call--put}{66}{section.1.6}%
+\contentsline {paragraph}{Remarque :}{67}{section.1.6}%
+\contentsline {section}{\numberline {1.7}contrat forward}{67}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Digtial Option : Dual Delta - Breeden-Litzenberger (1978)}{69}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Call européen avec sous-jacent gaussien}{72}{section.1.9}%
+\contentsline {section}{\numberline {1.10}Call option at-the-money}{73}{section.1.10}%
+\contentsline {section}{\numberline {1.11}FX Forward}{74}{section.1.11}%
+\contentsline {section}{\numberline {1.12}option digitale multi-actifs}{76}{section.1.12}%
+\contentsline {paragraph}{Calcul de la variance de $\sigma _1 W_1(T)-\sigma _2 W_2(T)$.}{77}{section.1.12}%
+\contentsline {section}{\numberline {1.13}Option Margrabe}{78}{section.1.13}%
+\contentsline {section}{\numberline {1.14}Valeur intrinsèque et exercice anticipé d'un call américain}{81}{section.1.14}%
+\contentsline {part}{III\hspace {1em}Algo}{83}{part.3}%
+\contentsline {part}{IV\hspace {1em}Brain Teasers}{87}{part.4}%
+\contentsline {chapter}{\numberline {1}Brain Teasers}{89}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Carré magique $3\times 3$}{89}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Le problème des 5 pirates}{91}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Tigres et mouton}{92}{section.1.3}%
+\contentsline {paragraph}{Cas de base.}{92}{section.1.3}%
+\contentsline {paragraph}{Hérédité.}{92}{section.1.3}%
+\contentsline {paragraph}{Conclusion.}{92}{section.1.3}%
+\contentsline {section}{\numberline {1.4}River crossing}{93}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Problème d’anniversaire}{94}{section.1.5}%
+\contentsline {paragraph}{Données filtrées par le premier énoncé.}{94}{section.1.5}%
+\contentsline {paragraph}{Après ton annonce, C sait maintenant.}{94}{section.1.5}%
+\contentsline {paragraph}{Tu sais maintenant toi aussi.}{95}{section.1.5}%
+\contentsline {paragraph}{Réponse.}{95}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Jeu de cartes}{95}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Deux cordes}{96}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Jeu en 2D}{96}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Say 50}{97}{section.1.9}%
+\contentsline {paragraph}{Justification formelle.}{98}{Item.23}%
+\contentsline {section}{\numberline {1.10}100 Ampoules}{98}{section.1.10}%

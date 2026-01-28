@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  27 JAN 2026 17:30
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  28 JAN 2026 13:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1024,38 +1024,43 @@ Overfull \hbox (4.19371pt too wide) detected at line 1390
 \U/msb/m/n/10.95 P\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 X[] [] \OMS/cmsy/m/n/10.95 j \OML/cmm/m/it/10.95 B\OT1/cmr/m/n/10.95 ) = []\OML/cmm/m/it/10.95 ;  \U/msb/m/n/10.95 P\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 X[] [] \OMS/cmsy/m/n/10.95 j \OML/cmm/m/it/10.95 X[] []; B\OT1/cmr/m/n/10.95 ) = []\OML/cmm/m/it/10.95 ;  \U/msb/m/n/10.95 P\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 X[] [] \OMS/cmsy/m/n/10.95 j \OML/cmm/m/it/10.95 X[]; X[] []; B\OT1/cmr/m/n/10.95 ) = []\OML/cmm/m/it/10.95 :
  []
 
-[31] [32] [33] [34]) (./01_math/03_chapter_calcul_stochastique/main.tex [35] [36
+[31] [32] [33] [34] [35]
+Overfull \hbox (26.5379pt too wide) in paragraph at lines 1789--1791
+[]\TU/LatinModernRoman(0)/m/sc/10.95 On modélise les lancers par une suite $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 X[]\OT1/cmr/m/n/10.95 )[]$ \TU/LatinModernRoman(0)/m/sc/10.95 de variables aléatoires i.i.d. uniformes sur $\OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 1\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 2\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 3\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 4\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 5\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 6\OMS/cmsy/m/n/10.95 g$\TU/LatinModernRoman(0)/m/sc/10.95 ,
+ []
+
+[36]) (./01_math/03_chapter_calcul_stochastique/main.tex [37] [38
 
 ]
 Chapitre 3.
-[37] [38] [39] [40] [41] [42] [43] [44]
+[39] [40] [41] [42] [43] [44] [45] [46]
 Underfull \hbox (badness 10000) in paragraph at lines 622--623
 
  []
 
-[45] [46] [47] [48]
+[47] [48] [49] [50]
 File: 01_math/03_chapter_calcul_stochastique/levy_dis.png Graphic file (type bmp)
 <01_math/03_chapter_calcul_stochastique/levy_dis.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49]
+ [51]
 File: 01_math/03_chapter_calcul_stochastique/reflexion_bm.png Graphic file (type bmp)
 <01_math/03_chapter_calcul_stochastique/reflexion_bm.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[50]
+[52]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [51]) [52] [53
+ [53]) [54] [55
 
-] [54] (./02_finance/01_chapter_option_pricing/main.tex
+] [56] (./02_finance/01_chapter_option_pricing/main.tex
 Chapitre 1.
-[55
+[57
 
-] [56]
+] [58]
 Overfull \hbox (28.73978pt too wide) detected at line 129
 []
  []
@@ -1063,25 +1068,25 @@ Overfull \hbox (28.73978pt too wide) detected at line 129
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [57] [58] [59] [60] [61] [62] [63] [64]
+ [59] [60] [61] [62] [63] [64] [65] [66]
 Overfull \hbox (32.60255pt too wide) detected at line 841
 \OML/cmm/m/it/10.95 A \OT1/cmr/m/n/10.95 := []  \OML/cmm/m/it/10.95 B \OT1/cmr/m/n/10.95 := []
  []
 
-[65]
+[67]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [66] [67] [68] [69]
+ [68] [69] [70] [71]
 Underfull \vbox (badness 2368) has occurred while \output is active []
 
- [70] [71] [72]
+ [72] [73] [74]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [73] [74] [75] [76] [77] [78] [79]) [80] [81
+ [75] [76] [77] [78] [79] [80] [81]) [82] [83
 
-] [82] (./03_Algo/main.tex) [83] [84
+] [84] (./03_Algo/main.tex) [85] [86
 
-] [85] [86] (./04_brain_teasers/main.tex
+] [87] [88] (./04_brain_teasers/main.tex
 Chapitre 1.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1095,18 +1100,18 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 3.
 
-[87
+[89
 
-] [88] [89]
+] [90] [91]
 Underfull \vbox (badness 1558) has occurred while \output is active []
 
- [90]
+ [92]
 File: exo_river.png Graphic file (type bmp)
 <exo_river.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [91] [92] [93] [94] [95]) [96] (./main.aux)
+ [93] [94] [95] [96] [97]) [98] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1115,12 +1120,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 40721 strings out of 476191
- 973111 string characters out of 5812072
+ 40725 strings out of 476191
+ 973155 string characters out of 5812072
  1847627 words of memory out of 5000000
- 60789 multiletter control sequences out of 15000+600000
+ 60793 multiletter control sequences out of 15000+600000
  486704 words of font info for 126 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,15n,104p,797b,2058s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (96 pages).
+Output written on main.pdf (98 pages).
