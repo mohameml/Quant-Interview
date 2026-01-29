@@ -1850,3 +1850,560 @@ N \mid E \sim \mathcal{G}\!\left(\frac{2}{3}\right)
 \]
 
 
+\section{Dice Game 1}
+
+\begin{exerciseBox}[Dice Game 1]
+Two players take turns rolling two six-sided dice. 
+Player A goes first, followed by player B. 
+If player A rolls a sum of 6, they win. 
+If player B rolls a sum of 7, they win. 
+If neither rolls their desired value, 
+the game continues until someone wins. \\
+
+\textbf{Question :} What is the probability that player A wins ?
+\end{exerciseBox}
+
+\subsection*{Solution}
+
+At each round, there are three mutually exclusive cases:
+
+\begin{itemize}
+  \item \textbf{Case 1:} Player $A$ wins with probability
+  \[
+    p_A=\frac{5}{36}.
+  \]
+  \item \textbf{Case 2:} Player $B$ wins if $A$ does not win, with probability
+  \[
+    (1-p_A)\,p_B
+    \qquad\text{where}\qquad
+    p_B=\frac{6}{36}.
+  \]
+  \item \textbf{Case 3:} Neither $A$ nor $B$ wins, with probability
+  \[
+    (1-p_A)(1-p_B).
+  \]
+\end{itemize}
+
+Indeed, the total probability is
+\begin{align*}
+p_A + (1-p_A)p_B + (1-p_A)(1-p_B)
+&= p_A + p_B - p_Ap_B + 1 - p_B - p_A + p_Ap_B \\
+&= 1.
+\end{align*}
+Hence, the experiment restarts independently at each new round with the same probabilities.
+
+\medskip
+Now compute the probability that $A$ wins \emph{at round $n$}:
+\begin{itemize}
+  \item In the first $n-1$ rounds, there is no winner, which has probability
+  \[
+    \bigl((1-p_A)(1-p_B)\bigr)^{n-1}.
+  \]
+  \item At round $n$, $A$ wins with probability $p_A$.
+\end{itemize}
+Therefore,
+\[
+\mathbb{P}(A\text{ wins at round }n)
+=
+\bigl((1-p_A)(1-p_B)\bigr)^{n-1}p_A.
+\]
+
+Since the events ``$A$ wins at round $n$'' are disjoint for different $n$,
+\[
+A\text{ wins}
+=
+\bigcup_{n=1}^{\infty}\{A\text{ wins at round }n\},
+\]
+and thus
+\begin{align*}
+\mathbb{P}(A\text{ wins})
+&= \sum_{n=1}^{\infty} \bigl((1-p_A)(1-p_B)\bigr)^{n-1}p_A \\
+&= p_A \sum_{n=0}^{\infty} \bigl((1-p_A)(1-p_B)\bigr)^{n} \\
+&= \frac{p_A}{1-(1-p_A)(1-p_B)}.
+\end{align*}
+
+With $p_A=\frac{5}{36}$ and $p_B=\frac{6}{36}$,
+\[
+(1-p_A)(1-p_B)=\frac{31}{36}\cdot\frac{30}{36}=\frac{155}{216},
+\]
+so
+\[
+\mathbb{P}(A\text{ wins})
+=
+\frac{\frac{5}{36}}{1-\frac{155}{216}}
+=
+\frac{\frac{5}{36}}{\frac{61}{216}}
+=
+\frac{30}{61}
+\approx 0.492.
+\]
+
+so :
+
+\[
+\boxed{
+\mathbb{P}(A \text{wins}) = \frac{30}{61} = \approx 0.492
+}
+\]
+
+
+
+\section{Ship Destroyer}
+
+
+
+
+\begin{exerciseBox}[Ship Destroyer] 
+Sixteen ships occupy the cells of a $4 \times 4$ grid. Four bombs are dropped independently and uniformly at random, each landing in one of the $16$ cells (with repetition allowed).
+When a bomb lands in a cell, it destroys all ships located in the same row and the same column as that cell.
+
+  
+Compute the probability that, after the four bombs have fallen, every ship on the grid has been destroyed ?
+\end{exerciseBox}  
+
+\subsection*{Solution :}
+
+Each bomb can land in any of the $16$ cells, independently of the others. Since the bombs are ordered, the total number of possible outcomes is
+\[
+|\Omega| = 16^4.
+\]
+
+\subsection*{Characterization of the Event}
+
+A ship located in row $i$ is destroyed if at least one bomb lands in row $i$.  
+Similarly, a ship located in column $j$ is destroyed if at least one bomb lands in column $j$.
+
+Thus, all ships are destroyed if and only if at least one of the following events occurs:
+\begin{itemize}
+    \item $E_R$: the four bombs land in four distinct rows;
+    \item $E_C$: the four bombs land in four distinct columns.
+\end{itemize}
+
+Hence, the desired event is $E_R \cup E_C$.
+
+\subsection*{Counting $|E_R|$}
+
+To count $|E_R|$, we require the four bombs to occupy four different rows, while columns may repeat.
+
+Since the bombs are ordered, there are $4!$ ways to assign the four distinct rows to the four bombs.  
+For each bomb, there are $4$ possible columns.
+
+Therefore,
+\[
+|E_R| = 4! \times 4^4.
+\]
+
+By symmetry,
+\[
+|E_C| = 4! \times 4^4.
+\]
+
+\subsection*{Counting $|E_R \cap E_C|$}
+
+The event $E_R \cap E_C$ corresponds to the four bombs landing in four distinct rows \emph{and} four distinct columns.
+
+In this case:
+\begin{itemize}
+    \item the rows can be assigned in $4!$ ways,
+    \item the columns can be assigned independently in $4!$ ways.
+\end{itemize}
+
+Thus,
+\[
+|E_R \cap E_C| = 4! \times 4!.
+\]
+
+\subsection*{Final Probability}
+
+By the inclusion--exclusion principle,
+\[
+|E_R \cup E_C|
+= |E_R| + |E_C| - |E_R \cap E_C|
+= 2 \cdot 4! \cdot 4^4 - (4!)^2.
+\]
+
+Therefore, the required probability is
+\[
+\boxed{
+\mathbb{P}(\text{all ships destroyed})
+= \frac{2 \cdot 4! \cdot 4^4 - (4!)^2}{16^4}
+= \frac{11,712}{16^4}
+\approx 0.1787
+}.
+\]
+
+
+\section{Odd Values Before Even Values}
+
+
+\begin{exerciseBox}[Odd Values Before Even Values]
+
+A fair six-sided die is rolled repeatedly. We are interested in the probability that all odd values $\{1,3,5\}$ appear at least once \emph{before} any even value $\{2,4,6\}$ appears.
+  
+\end{exerciseBox}
+
+
+\subsection*{Solution :}
+
+Consider the order in which the \emph{six distinct faces} $\{1,2,3,4,5,6\}$ appear for the
+first time. Since the die is fair, by symmetry the order of first appearances is uniformly
+distributed over all permutations of $\{1,2,3,4,5,6\}$. Hence there are $6!$ equally likely
+orders.
+
+The event ``all odd values appear before any even value'' occurs if and only if the first
+three positions in this order are occupied by the three odd numbers $\{1,3,5\}$ (in any order),
+and the last three positions are occupied by the three even numbers $\{2,4,6\}$ (in any order).
+
+Therefore the number of favorable permutations is
+\[
+3!\times 3!.
+\]
+Thus,
+\[
+\mathbb{P}(\text{all odds appear before any even})
+= \frac{3!\,3!}{6!}
+= \frac{36}{720}
+= \boxed{\frac{1}{20}}.
+\]
+
+
+
+
+\section{Baby and the Couch (Markov Chain \& Stationary Distribution)}
+
+
+\begin{exerciseBox}[Baby and the Couch]
+A baby is learning to walk with the assistance of its living room couch. The baby starts at the couch and at each time step makes a decision:
+\begin{itemize}
+  \item take a step forward with probability $0.2$,
+  \item stay in place with probability $0.5$,
+  \item take a step back (towards the couch) with probability $0.3$.
+\end{itemize}
+The baby can never go behind the couch. Therefore, when the baby is at the couch, it moves forward with probability $0.2$ and stays at the couch with probability $0.8$.
+
+If you observe the baby for an extremely long time, what proportion of the time is the baby at the couch?
+\end{exerciseBox}
+
+
+\subsection*{Soltuin :}
+
+
+\subsection*{Markov chain reminder}
+
+Let $(X_n)_{n\ge 0}$ be a \emph{Markov chain} on a countable state space $S$ with transition matrix
+$P=(p_{ij})_{i,j\in S}$ where
+\[
+p_{ij}=\mathbb{P}(X_{n+1}=j\mid X_n=i).
+\]
+A probability vector $\pi=(\pi_i)_{i\in S}$ is called a \emph{stationary (equilibrium) distribution} if
+\[
+\pi = \pi P
+\qquad\text{and}\qquad
+\sum_{i\in S}\pi_i=1,\;\pi_i\ge 0.
+\]
+When the chain is irreducible and positive recurrent (which will be the case here), the stationary
+distribution is unique and satisfies the long-run interpretation
+\[
+\pi_i = \lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1}\mathbf{1}_{\{X_n=i\}},
+\]
+i.e.\ $\pi_i$ represents the \emph{proportion of time spent in state $i$ as time goes to infinity}.
+
+
+
+\subsection*{a. Mod\'elisation : espace d'\'etats et propri\'et\'e de Markov}
+
+On note $X_n$ la distance (en nombre de pas) entre le b\'eb\'e et le canap\'e au temps $n$.
+L'espace d'\'etats est donc
+\[
+S=\{0,1,2,\dots\},
+\]
+o\`u $0$ signifie ``au canap\'e''.
+
+Le processus $(X_n)_{n\ge 0}$ est une \emph{cha\^{\i}ne de Markov} car la loi de $X_{n+1}$ ne d\'epend de l'historique qu'\`a travers l'\'etat courant $X_n$ :
+\[
+\mathbb{P}(X_{n+1}=j\mid X_n=i, X_{n-1},\dots,X_0)=\mathbb{P}(X_{n+1}=j\mid X_n=i)=p_{ij}.
+\]
+
+\subsection*{b. Matrice de transition $P$}
+
+Pour $i\ge 1$ :
+\[
+p_{i,i+1}=0.2,\qquad p_{i,i}=0.5,\qquad p_{i,i-1}=0.3,
+\]
+et tous les autres $p_{i,j}=0$.
+
+Au bord $i=0$ (canap\'e) :
+\[
+p_{0,1}=0.2,\qquad p_{0,0}=0.8,
+\]
+et $p_{0,j}=0$ sinon.
+
+Ainsi, la matrice de transition $P=(p_{ij})_{i,j\ge 0}$ est tridiagonale, avec une condition de bord en $0$.
+
+
+\[
+P =
+\begin{pmatrix}
+0.8 & 0.2 & 0   & 0   & 0   & \cdots \\
+0.3 & 0.5 & 0.2 & 0   & 0   & \cdots \\
+0   & 0.3 & 0.5 & 0.2 & 0   & \cdots \\
+0   & 0   & 0.3 & 0.5 & 0.2 & \cdots \\
+0   & 0   & 0   & 0.3 & 0.5 & \ddots \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \ddots
+\end{pmatrix}
+\]
+
+\subsection*{c. Distribution d'\'equilibre (stationnaire)}
+
+La proportion de temps pass\'ee \`a long terme dans chaque \'etat est donn\'ee par la \emph{distribution d'\'equilibre} (ou stationnaire) $\pi=(\pi_i)_{i\ge 0}$ lorsqu'elle existe.
+Elle est caract\'eris\'ee par l'\'equation d'\'equilibre
+\[
+\pi = \pi P,
+\]
+c'est-\`a-dire, pour tout $i\ge 0$,
+\[
+\pi_i=\sum_{j\ge 0}\pi_j p_{j,i},
+\]
+avec les contraintes $\pi_i\ge 0$ et $\sum_{i\ge 0}\pi_i=1$.
+
+Dans ce probl\`eme, la quantit\'e demand\'ee est donc
+\[
+\text{proportion du temps au canap\'e}=\pi_0.
+\]
+
+\subsection*{d. \'Equations d'\'equilibre et r\'ecurrence}
+
+\paragraph{\'Equation en $i=0$.}
+Les seules transitions qui m\`enent \`a $0$ sont : $0\to 0$ et $1\to 0$. Donc
+\[
+\pi_0=\pi_0\,p_{0,0}+\pi_1\,p_{1,0}
+=\pi_0\cdot 0.8+\pi_1\cdot 0.3,
+\]
+d'o\`u
+\[
+0.2\,\pi_0=0.3\,\pi_1
+\qquad\Longrightarrow\qquad
+\pi_1=\frac{2}{3}\pi_0.
+\]
+
+\paragraph{\'Equation en $i\ge 1$.}
+Pour un $i\ge 1$, on peut arriver \`a $i$ depuis $i-1$ (pas en avant), depuis $i$ (rester), ou depuis $i+1$ (pas en arri\`ere). Ainsi
+\[
+\pi_i=\pi_{i-1}p_{i-1,i}+\pi_i p_{i,i}+\pi_{i+1}p_{i+1,i}
+=0.2\,\pi_{i-1}+0.5\,\pi_i+0.3\,\pi_{i+1}.
+\]
+On r\'earrange :
+\[
+0.5\,\pi_i=0.2\,\pi_{i-1}+0.3\,\pi_{i+1}
+\qquad\Longleftrightarrow\qquad
+0.3\,\pi_{i+1}=0.5\,\pi_i-0.2\,\pi_{i-1}.
+\]
+
+\subsection*{e. R\'esolution : forme g\'en\'erale de $\pi_i$}
+
+On cherche une solution de la forme $\pi_i = C r^i$ (pour $i\ge 0$). En injectant dans
+\[
+\pi_i=0.2\,\pi_{i-1}+0.5\,\pi_i+0.3\,\pi_{i+1}\quad (i\ge 1),
+\]
+on obtient (apr\`es division par $Cr^{i-1}$) :
+\[
+r = 0.2 + 0.5 r + 0.3 r^2,
+\]
+soit
+\[
+0.3r^2 - 0.5r + 0.2 = 0.
+\]
+Le discriminant vaut $\Delta = 0.25-0.24=0.01$, donc
+\[
+r=\frac{0.5\pm 0.1}{0.6}\in\left\{1,\;\frac{2}{3}\right\}.
+\]
+La racine $r=1$ conduirait \`a une suite constante non sommable sur $\{0,1,2,\dots\}$, donc elle est impossible pour une distribution de probabilit\'e.
+On retient donc
+\[
+\pi_i = C\left(\frac{2}{3}\right)^i.
+\]
+De plus, l'\'equation en $0$ impose bien $\pi_1=\frac{2}{3}\pi_0$, ce qui est coh\'erent avec cette forme.
+Ainsi,
+\[
+\pi_i=\pi_0\left(\frac{2}{3}\right)^i,\qquad i\ge 0.
+\]
+
+\subsection*{6) Normalisation et calcul de $\pi_0$}
+
+On utilise $\sum_{i=0}^\infty \pi_i=1$ :
+\[
+1=\sum_{i=0}^{\infty}\pi_0\left(\frac{2}{3}\right)^i
+=\pi_0\sum_{i=0}^\infty \left(\frac{2}{3}\right)^i
+=\pi_0\cdot \frac{1}{1-\frac{2}{3}}
+=\pi_0\cdot 3,
+\]
+d'o\`u
+\[
+\pi_0=\frac{1}{3}.
+\]
+
+\subsection*{Conclusion}
+
+La proportion du temps (sur un horizon tr\`es long) pendant laquelle le b\'eb\'e est au canap\'e vaut
+\[
+\boxed{\pi_0=\frac{1}{3}}.
+\]
+
+
+
+\section{Stars and Bars}
+
+
+
+\begin{exerciseBox}[Stars and Bars]
+Un trader r\'epartit un capital total de $N$ unit\'es (indistinguables) entre $K$ strat\'egies distinctes. 
+Chaque strat\'egie peut recevoir z\'ero ou plusieurs unit\'es.
+
+\begin{enumerate}
+  \item \textbf{Q1 :}Combien d'allocations diff\'erentes sont possibles ?
+  \item \textbf{Q2 :} Combien d'allocations sont possibles si chaque strat\'egie doit recevoir au moins une unit\'e ?
+\end{enumerate}
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+\subsubsection*{Rappel : principe de \emph{Stars and Bars}}
+
+Le principe des \emph{\'etoiles et barres} (\emph{Stars and Bars}) permet de compter le nombre de solutions entri\`eres \`a une \'equation du type
+\[
+x_1 + x_2 + \cdots + x_K = N,
+\qquad x_i \ge 0.
+\]
+On interpr\`ete $N$ comme $N$ objets indistinguables (\emph{\'etoiles}) et on utilise $K-1$ s\'eparateurs (\emph{barres}) pour former $K$ paquets, chacun correspondant \`a une variable $x_i$.
+Le nombre de solutions est alors
+\[
+\boxed{\binom{N+K-1}{K-1}}.
+\]
+De m\^eme, si l'on impose $x_i\ge 1$, on pose $y_i=x_i-1$ (donc $y_i\ge 0$) et on r\'eduit \`a
+\[
+y_1+\cdots+y_K = N-K,
+\]
+ce qui donne
+\[
+\boxed{\binom{N-1}{K-1}} \quad \text{(pour } N\ge K\text{)}.
+\]
+
+\subsubsection*{1. Allocation sans contrainte minimale}
+
+Notons
+\[
+x_i = \text{nombre d'unit\'es allou\'ees \`a la strat\'egie } i,\quad i=1,\dots,K.
+\]
+Les contraintes sont
+\[
+x_1+\cdots+x_K = N,\qquad x_i\ge 0.
+\]
+Par Stars and Bars,
+\[
+\boxed{\#\text{allocations} = \binom{N+K-1}{K-1}}.
+\]
+
+\subsubsection*{2. Variante : au moins une unit\'e par strat\'egie}
+
+On impose $x_i\ge 1$. Posons $y_i=x_i-1$, alors $y_i\ge 0$ et
+\[
+y_1+\cdots+y_K = N-K.
+\]
+Par Stars and Bars,
+\[
+\boxed{\#\text{allocations} = \binom{(N-K)+K-1}{K-1}=\binom{N-1}{K-1}},
+\]
+valable pour $N\ge K$ (sinon, il n'existe aucune allocation).
+
+
+\section{Multiple of Six}
+
+\begin{exerciseBox}[Multiple of Six]
+You roll a fair six-sided and sum the outcomes until you reach a multiple of 6. What is the expected number of times you expect to roll the die.
+\end{exerciseBox}
+
+
+\subsection*{Solution :}
+
+
+\subsection*{Idea: First Step Analysis}
+
+The key idea is to analyze the process according to the \emph{first roll}.  
+This method is known as \emph{First Step Analysis} and relies on the \emph{law of total expectation}.
+
+\subsection*{Reminder: Law of Total Expectation}
+
+Let $T$ be a random variable and $A$ an event with $\mathbb{P}(A)>0$ and $\mathbb{P}(A^c)>0$. Then:
+\[
+\boxed{
+\mathbb{E}[T]
+=
+\mathbb{E}(T \mid X_1 \in A)\,\mathbb{P}(X_1 \in A)
++
+\mathbb{E}(T \mid X_1 \notin A)\,\mathbb{P}(X_1 \notin A)
+}
+\]
+In words: the expectation of $T$ is the weighted average of the conditional expectations given the outcome of the first step.
+
+\subsection*{Application to the problem}
+
+Let
+\[
+x = \mathbb{E}[T]
+\]
+denote the expected number of rolls needed to reach a multiple of $6$, starting from a sum equal to $0$.
+
+We condition on the value of the first roll $X_1$.
+
+\paragraph{Case 1: $X_1 = 6$ (event $A$).}
+This happens with probability $\mathbb{P}(X_1=6)=\frac{1}{6}$.  
+The sum immediately becomes $6$, which is a multiple of $6$, so the process stops after exactly one roll:
+\[
+\mathbb{E}(T \mid X_1=6)=1.
+\]
+
+\paragraph{Case 2: $X_1 \in \{1,2,3,4,5\}$ (event $A^c$).}
+This happens with probability $\frac{5}{6}$.  
+After the first roll, the sum is not a multiple of $6$. One roll has been used, and from that point onward the problem is identical to the original one.
+Hence:
+\[
+\mathbb{E}(T \mid X_1 \in \{1,\dots,5\}) = 1 + x.
+\]
+
+\subsection*{Equation for $x$}
+
+Applying the law of total expectation:
+\[
+x
+=
+\frac{1}{6}\cdot 1
++
+\frac{5}{6}\cdot (1+x).
+\]
+
+Solving:
+\[
+x = \frac{1}{6} + \frac{5}{6} + \frac{5}{6}x
+\quad\Longrightarrow\quad
+x - \frac{5}{6}x = 1
+\quad\Longrightarrow\quad
+\frac{1}{6}x = 1.
+\]
+
+Thus:
+\[
+\boxed{x = 6}.
+\]
+
+\subsection*{Conclusion}
+
+The expected number of rolls needed for the running sum to reach a multiple of $6$ is
+\[
+\boxed{\mathbb{E}[T]=6}.
+\]
+
+
+
+

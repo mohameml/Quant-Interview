@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  28 JAN 2026 13:21
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  29 JAN 2026 20:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1029,38 +1029,43 @@ Overfull \hbox (26.5379pt too wide) in paragraph at lines 1789--1791
 []\TU/LatinModernRoman(0)/m/sc/10.95 On modélise les lancers par une suite $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 X[]\OT1/cmr/m/n/10.95 )[]$ \TU/LatinModernRoman(0)/m/sc/10.95 de variables aléatoires i.i.d. uniformes sur $\OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 1\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 2\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 3\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 4\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 5\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 6\OMS/cmsy/m/n/10.95 g$\TU/LatinModernRoman(0)/m/sc/10.95 ,
  []
 
-[36]) (./01_math/03_chapter_calcul_stochastique/main.tex [37] [38
+[36]
+Underfull \hbox (badness 10000) in paragraph at lines 1856--1862
 
-]
+ []
+
+[37] [38] [39] [40] [41] [42] [43] [44] [45]) (./01_math/03_chapter_calcul_stochastique/main.tex [46]
 Chapitre 3.
-[39] [40] [41] [42] [43] [44] [45] [46]
+[47
+
+] [48] [49] [50] [51] [52] [53] [54]
 Underfull \hbox (badness 10000) in paragraph at lines 622--623
 
  []
 
-[47] [48] [49] [50]
+[55] [56] [57] [58]
 File: 01_math/03_chapter_calcul_stochastique/levy_dis.png Graphic file (type bmp)
 <01_math/03_chapter_calcul_stochastique/levy_dis.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [51]
+ [59]
 File: 01_math/03_chapter_calcul_stochastique/reflexion_bm.png Graphic file (type bmp)
 <01_math/03_chapter_calcul_stochastique/reflexion_bm.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[52]
+[60]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [53]) [54] [55
+ [61]) [62] [63
 
-] [56] (./02_finance/01_chapter_option_pricing/main.tex
+] [64] (./02_finance/01_chapter_option_pricing/main.tex
 Chapitre 1.
-[57
+[65
 
-] [58]
+] [66]
 Overfull \hbox (28.73978pt too wide) detected at line 129
 []
  []
@@ -1068,25 +1073,25 @@ Overfull \hbox (28.73978pt too wide) detected at line 129
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59] [60] [61] [62] [63] [64] [65] [66]
+ [67] [68] [69] [70] [71] [72] [73] [74]
 Overfull \hbox (32.60255pt too wide) detected at line 841
 \OML/cmm/m/it/10.95 A \OT1/cmr/m/n/10.95 := []  \OML/cmm/m/it/10.95 B \OT1/cmr/m/n/10.95 := []
  []
 
-[67]
+[75]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [68] [69] [70] [71]
+ [76] [77] [78] [79]
 Underfull \vbox (badness 2368) has occurred while \output is active []
 
- [72] [73] [74]
+ [80] [81] [82]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [75] [76] [77] [78] [79] [80] [81]) [82] [83
+ [83] [84] [85] [86] [87] [88] [89]) [90] [91
 
-] [84] (./03_Algo/main.tex) [85] [86
+] [92] (./03_Algo/main.tex) [93] [94
 
-] [87] [88] (./04_brain_teasers/main.tex
+] [95] [96] (./04_brain_teasers/main.tex
 Chapitre 1.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1100,18 +1105,18 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 3.
 
-[89
+[97
 
-] [90] [91]
+] [98] [99]
 Underfull \vbox (badness 1558) has occurred while \output is active []
 
- [92]
+ [100]
 File: exo_river.png Graphic file (type bmp)
 <exo_river.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [93] [94] [95] [96] [97]) [98] (./main.aux)
+ [101] [102] [103] [104] [105]) [106] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1120,12 +1125,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 40725 strings out of 476191
- 973155 string characters out of 5812072
- 1847627 words of memory out of 5000000
- 60793 multiletter control sequences out of 15000+600000
- 486704 words of font info for 126 fonts, out of 8000000 for 9000
+ 40739 strings out of 476191
+ 973400 string characters out of 5812072
+ 1847630 words of memory out of 5000000
+ 60806 multiletter control sequences out of 15000+600000
+ 486712 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,15n,104p,797b,2058s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (98 pages).
+Output written on main.pdf (106 pages).
