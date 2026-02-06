@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.10.5)  29 JAN 2026 12:55
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.2)  6 FEB 2026 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/home/mohameml/Desktop/github/QuantInterview/Quant-Interview/questions-response/main
-(/home/mohameml/Desktop/github/QuantInterview/Quant-Interview/questions-response/main.tex
+**/home/mohameml/Desktop/learning/QuantInterview/Quant-Interview/questions-response/main
+(/home/mohameml/Desktop/learning/QuantInterview/Quant-Interview/questions-response/main.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -45,9 +45,9 @@ Package: babel 2022/01/26 3.70 The Babel package
  (/usr/share/texlive/texmf-dist/tex/generic/babel-french/french.ldf
 Language: french 2021/07/20 v3.5m French support from the babel system
 Package babel Info: Hyphen rules for 'acadian' set to \l@french
-(babel)             (\language6). Reported on input line 91.
+(babel)             (\language14). Reported on input line 91.
 Package babel Info: Hyphen rules for 'canadien' set to \l@french
-(babel)             (\language6). Reported on input line 92.
+(babel)             (\language14). Reported on input line 92.
 \FB@nonchar=\count191
 Package french.ldf Info: No need for active punctuation characters
 (french.ldf)             with this version of XeTeX!
@@ -700,11 +700,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  25607 strings out of 476191
- 501070 string characters out of 5812072
- 820919 words of memory out of 5000000
+ 501076 string characters out of 5812073
+ 820924 words of memory out of 5000000
  45929 multiletter control sequences out of 15000+600000
  514845 words of font info for 57 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 99i,5n,104p,533b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,5n,104p,535b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on main.pdf (5 pages).

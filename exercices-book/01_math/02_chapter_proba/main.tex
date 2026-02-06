@@ -2405,5 +2405,370 @@ The expected number of rolls needed for the running sum to reach a multiple of $
 \]
 
 
+\section{Temps Moyen pour Deux Piles Consécutives}
+
+\begin{exerciseBox}[Temps Moyen pour Deux Piles Consécutives]
+On lance une pièce équilibrée (probabilité $\frac{1}{2}$ pour Pile et $\frac{1}{2}$ pour Face) de manière répétée et indépendante. 
+
+\textbf{Question :} Quel est le nombre moyen de lancers nécessaires pour obtenir deux \textit{Piles} consécutives ?
+\end{exerciseBox}
 
 
+
+\subsection*{Solution :}
+
+
+\subsection*{Rappel :Temps Moyen d'Absorption}
+
+\textbf{État Absorbant :}
+Un état $i$ est dit \textit{absorbant} si $P_{ii} = 1$, c'est-à-dire qu'une fois atteint, on ne peut plus le quitter.
+
+\textbf{Temps Moyen d'Absorption :}
+Soit une chaîne de Markov avec un ensemble d'états transitoires $T$ et d'états absorbants $A$. Pour $i \in T$, soit $\tau_i$ le temps moyen d'absorption partant de l'état $i$. Alors $\tau_i$ satisfait le système d'équations :
+\[
+\tau_i = 1 + \sum_{j \in T} P_{ij} \tau_j
+\]
+avec la condition aux bords : $\tau_i = 0$ pour $i \in A$.
+
+Cette proposition découle de la formule de l'espérance totale en conditionnant sur le premier pas de la chaîne.
+
+
+\subsection*{Modélisation par Chaîne de Markov}
+
+Définissons les états suivants :
+\begin{itemize}
+    \item \textbf{État 0} : État initial ou dernier lancer était Face (F)
+    \item \textbf{État 1} : Le dernier lancer était Pile (P), mais pas deux Piles consécutives
+    \item \textbf{État 2} : Deux Piles consécutives obtenues (état \textit{absorbant})
+\end{itemize}
+
+\subsection*{Matrice de Transition}
+
+La matrice de transition est :
+\[
+P = \begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} & 0 \\
+\frac{1}{2} & 0 & \frac{1}{2} \\
+0 & 0 & 1
+\end{pmatrix}
+\]
+
+où $P_{ij} = \mathbb{P}(\text{aller de l'état } i \text{ à l'état } j)$.
+
+\begin{center}
+\begin{tikzpicture}[->, >=stealth, node distance=4cm, thick]
+  \node[state] (0) {0};
+  \node[state] (1) [right of=0] {1};
+  \node[state,accepting] (2) [right of=1] {2};
+  
+  \path (0) edge [loop above] node {$\frac{1}{2}$ (F)} (0)
+            edge node {$\frac{1}{2}$ (P)} (1)
+        (1) edge [bend left] node {$\frac{1}{2}$ (F)} (0)
+            edge node {$\frac{1}{2}$ (P)} (2)
+        (2) edge [loop above] node {$1$} (2);
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Système d'Équations}
+
+Soit $E_i$ le nombre moyen de lancers pour atteindre l'état 2 (absorbant) en partant de l'état $i$.
+
+D'après la proposition sur les temps d'absorption :
+
+\textbf{Pour l'état 0 :}
+\[
+E_0 = 1 + \frac{1}{2} E_0 + \frac{1}{2} E_1
+\]
+
+\textbf{Pour l'état 1 :}
+\[
+E_1 = 1 + \frac{1}{2} E_0 + \frac{1}{2} \cdot 0
+\]
+
+La deuxième équation donne :
+\[
+E_1 = 1 + \frac{1}{2} E_0
+\]
+
+
+Substituons $E_1$ dans la première équation :
+\begin{align*}
+E_0 &= 1 + \frac{1}{2} E_0 + \frac{1}{2}\left(1 + \frac{1}{2} E_0\right) \\
+E_0 &= 1 + \frac{1}{2} E_0 + \frac{1}{2} + \frac{1}{4} E_0 \\
+E_0 &= \frac{3}{2} + \frac{3}{4} E_0 \\
+E_0 - \frac{3}{4} E_0 &= \frac{3}{2} \\
+\frac{1}{4} E_0 &= \frac{3}{2} \\
+E_0 &= 6
+\end{align*}
+
+Et donc :
+\[
+E_1 = 1 + \frac{1}{2} \cdot 6 = 1 + 3 = 4
+\]
+
+
+
+\begin{center}
+\boxed{
+\text{Le nombre moyen de lancers pour obtenir deux Piles consécutives est } \mathbf{6}.
+}
+\end{center}
+
+\subsection*{Interprétation}
+
+Ce résultat peut sembler contre-intuitif : bien que la probabilité d'obtenir PP en deux lancers soit $\frac{1}{4}$, le temps moyen est 6 et non 4. Cela s'explique par le fait que lorsqu'on obtient une Face après un Pile (séquence PF), on doit recommencer complètement, ce qui allonge le temps moyen.
+
+\subsection*{Généralisation}
+
+Pour $k$ Piles consécutives avec une pièce équilibrée, le temps moyen est :
+\[
+E = 2^{k+1} - 2
+\]
+
+Pour $k=2$ : $E = 2^3 - 2 = 8 - 2 = 6$ \quad \text{OK}
+
+
+\section{Variance de l'abscisse d'un point aléatoire sur le cercle}
+
+\begin{exerciseBox}[Point aléatoire sur le cercle unitaire]
+On choisit uniformément au hasard un point sur le cercle unitaire. Soit $X$ son abscisse. Calculer $\text{Var}(X)$.
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\textbf{Paramétrisation :}
+
+Un point aléatoire uniformément distribué sur le cercle unitaire peut être paramétré par un angle $\Theta \sim \mathcal{U}([0, 2\pi])$. Les coordonnées du point sont alors :
+\[
+(X, Y) = (\cos(\Theta), \sin(\Theta))
+\]
+
+où $\Theta$ suit une loi uniforme sur $[0, 2\pi]$.
+
+\textbf{Calcul de $\mathbb{E}[X]$ :}
+
+\begin{align*}
+\mathbb{E}[X] &= \mathbb{E}[\cos(\Theta)] \\
+&= \int_0^{2\pi} \cos(\theta) \cdot \frac{1}{2\pi} \, d\theta \\
+&= \frac{1}{2\pi} \left[ \sin(\theta) \right]_0^{2\pi} \\
+&= \frac{1}{2\pi} \left( \sin(2\pi) - \sin(0) \right) \\
+&= 0
+\end{align*}
+
+\textbf{Calcul de $\mathbb{E}[X^2]$ :}
+
+\begin{align*}
+\mathbb{E}[X^2] &= \mathbb{E}[\cos^2(\Theta)] \\
+&= \int_0^{2\pi} \cos^2(\theta) \cdot \frac{1}{2\pi} \, d\theta
+\end{align*}
+
+Utilisons l'identité trigonométrique : $\cos^2(\theta) = \frac{1 + \cos(2\theta)}{2}$
+
+\begin{align*}
+\mathbb{E}[X^2] &= \frac{1}{2\pi} \int_0^{2\pi} \frac{1 + \cos(2\theta)}{2} \, d\theta \\
+&= \frac{1}{4\pi} \int_0^{2\pi} \left( 1 + \cos(2\theta) \right) \, d\theta \\
+&= \frac{1}{4\pi} \left[ \theta + \frac{\sin(2\theta)}{2} \right]_0^{2\pi} \\
+&= \frac{1}{4\pi} \left( 2\pi + \frac{\sin(4\pi)}{2} - 0 - \frac{\sin(0)}{2} \right) \\
+&= \frac{1}{4\pi} \cdot 2\pi \\
+&= \frac{1}{2}
+\end{align*}
+
+\textbf{Calcul de la variance :}
+
+\[
+\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{1}{2} - 0^2 = \boxed{\frac{1}{2}}
+\]
+
+\textbf{Remarque :} Par symétrie du cercle, on a également $\text{Var}(Y) = \frac{1}{2}$ pour l'ordonnée.
+
+
+\section{Probabilité conditionnelle avec deux pièces}
+
+\begin{exerciseBox}[Deux pièces dans un sac]
+Vous avez un sac contenant deux pièces. La première donne Pile avec probabilité $p_1$ et la seconde donne Pile avec probabilité $p_2$. Vous choisissez une pièce au hasard, la lancez et obtenez Pile. Quelle est la probabilité d'obtenir Pile au prochain lancer ?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+\textbf{Rappel - Formule de Bayes :}
+
+Pour des événements $A$ et $B$ avec $\mathbb{P}(B) > 0$ :
+\[
+\mathbb{P}(A \mid B) = \frac{\mathbb{P}(B \mid A) \mathbb{P}(A)}{\mathbb{P}(B)}
+\]
+
+\textbf{Notations :}
+
+\begin{itemize}
+    \item $C_1$ : événement "on a choisi la pièce 1"
+    \item $C_2$ : événement "on a choisi la pièce 2"
+    \item $H_1$ : événement "le premier lancer donne Pile"
+    \item $H_2$ : événement "le second lancer donne Pile"
+\end{itemize}
+
+\textbf{Étape 1 : Probabilité d'avoir choisi chaque pièce sachant $H_1$}
+
+Par la formule de Bayes :
+\begin{align*}
+\mathbb{P}(C_1 \mid H_1) &= \frac{\mathbb{P}(H_1 \mid C_1) \mathbb{P}(C_1)}{\mathbb{P}(H_1)} \\
+&= \frac{p_1 \cdot \frac{1}{2}}{\mathbb{P}(H_1)}
+\end{align*}
+
+Calculons $\mathbb{P}(H_1)$ par la formule des probabilités totales :
+\begin{align*}
+\mathbb{P}(H_1) &= \mathbb{P}(H_1 \mid C_1) \mathbb{P}(C_1) + \mathbb{P}(H_1 \mid C_2) \mathbb{P}(C_2) \\
+&= p_1 \cdot \frac{1}{2} + p_2 \cdot \frac{1}{2} \\
+&= \frac{p_1 + p_2}{2}
+\end{align*}
+
+Donc :
+\[
+\mathbb{P}(C_1 \mid H_1) = \frac{p_1/2}{(p_1 + p_2)/2} = \frac{p_1}{p_1 + p_2}
+\]
+
+De même :
+\[
+\mathbb{P}(C_2 \mid H_1) = \frac{p_2}{p_1 + p_2}
+\]
+
+\textbf{Étape 2 : Probabilité de Pile au second lancer}
+
+En conditionnant sur la pièce choisie :
+\begin{align*}
+\mathbb{P}(H_2 \mid H_1) &= \mathbb{P}(H_2 \mid H_1, C_1) \mathbb{P}(C_1 \mid H_1) + \mathbb{P}(H_2 \mid H_1, C_2) \mathbb{P}(C_2 \mid H_1)
+\end{align*}
+
+Les lancers sont indépendants conditionnellement à la pièce choisie, donc :
+\[
+\mathbb{P}(H_2 \mid H_1, C_i) = \mathbb{P}(H_2 \mid C_i) = p_i
+\]
+
+Par conséquent :
+\begin{align*}
+\mathbb{P}(H_2 \mid H_1) &= p_1 \cdot \frac{p_1}{p_1 + p_2} + p_2 \cdot \frac{p_2}{p_1 + p_2} \\
+&= \frac{p_1^2 + p_2^2}{p_1 + p_2}
+\end{align*}
+
+\textbf{Réponse finale :}
+\[
+\boxed{\mathbb{P}(H_2 \mid H_1) = \frac{p_1^2 + p_2^2}{p_1 + p_2}}
+\]
+
+\textbf{Vérification - Cas particuliers :}
+
+\begin{itemize}
+    \item Si $p_1 = p_2 = p$ : $\mathbb{P}(H_2 \mid H_1) = \frac{p^2 + p^2}{p + p} = \frac{2p^2}{2p} = p$ \quad \text{OK}
+    \item Si $p_1 = 1, p_2 = 0$ : $\mathbb{P}(H_2 \mid H_1) = \frac{1 + 0}{1 + 0} = 1$ \quad \text{OK (on sait qu'on a la pièce 1)}
+\end{itemize}
+
+\textbf{Interprétation :} Le fait d'observer Pile au premier lancer nous donne de l'information sur quelle pièce nous avons probablement choisie. La pièce avec le plus grand $p_i$ devient plus probable, ce qui augmente la probabilité d'obtenir Pile au prochain lancer.
+
+
+
+\section{Marche aléatoire sur un cube}
+
+\begin{exerciseBox}[Temps moyen pour atteindre le sommet opposé]
+En partant d'un sommet d'un cube, et en se déplaçant aléatoirement d'un sommet à un sommet adjacent (avec probabilité uniforme), quel est le nombre moyen de déplacements nécessaires pour atteindre le sommet opposé au point de départ ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\textbf{Rappel - Chaîne de Markov et temps d'absorption :}
+
+Pour une chaîne de Markov avec états transitoires $T$ et état absorbant $A$, le temps moyen d'absorption $\tau_i$ depuis l'état $i \in T$ satisfait :
+\[
+\tau_i = 1 + \sum_{j \in T} P_{ij} \tau_j
+\]
+
+
+
+
+
+\textbf{Modélisation par symétrie :}
+
+Le cube possède 8 sommets. Par symétrie, on peut classifier les sommets selon leur distance au sommet cible (le sommet opposé) :
+
+\begin{itemize}
+    \item \textbf{Type 0} : Le sommet de départ (distance 3 du sommet cible)
+    \item \textbf{Type 1} : Les 3 sommets adjacents au départ (distance 2 du cible)
+    \item \textbf{Type 2} : Les 3 sommets à distance 2 du départ (distance 1 du cible)
+    \item \textbf{Type 3} : Le sommet opposé/cible (distance 0 - état absorbant)
+\end{itemize}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./images/cub_markov.png}
+    \caption{Modelisation }
+    \label{fig:my_image}
+\end{figure}
+
+
+% \textbf{Transitions :}
+
+% Depuis le sommet de départ (Type 0) :
+% \begin{itemize}
+%     \item 3 arêtes mènent vers des sommets de Type 1
+%     \item Probabilité : $\mathbb{P}(0 \to 1) = 1$
+% \end{itemize}
+
+% Depuis un sommet de Type 1 :
+% \begin{itemize}
+%     \item 1 arête retourne au sommet de départ (Type 0)
+%     \item 2 arêtes mènent vers des sommets de Type 2
+%     \item Probabilités : $\mathbb{P}(1 \to 0) = \frac{1}{3}$, $\mathbb{P}(1 \to 2) = \frac{2}{3}$
+% \end{itemize}
+
+% Depuis un sommet de Type 2 :
+% \begin{itemize}
+%     \item 2 arêtes retournent vers des sommets de Type 1
+%     \item 1 arête mène au sommet cible (Type 3)
+%     \item Probabilités : $\mathbb{P}(2 \to 1) = \frac{2}{3}$, $\mathbb{P}(2 \to 3) = \frac{1}{3}$
+% \end{itemize}
+
+\textbf{Système d'équations :}
+
+Soit $E_i$ le nombre moyen de déplacements pour atteindre le sommet cible depuis un sommet de Type $i$.
+
+\textbf{Pour Type 0 :}
+\[
+E_0 = 1 + 1 \cdot E_1 = 1 + E_1
+\]
+
+\textbf{Pour Type 1 :}
+\[
+E_1 = 1 + \frac{1}{3} E_0 + \frac{2}{3} E_2
+\]
+
+\textbf{Pour Type 2 :}
+\[
+E_2 = 1 + \frac{2}{3} E_1 + \frac{1}{3} \cdot 0 = 1 + \frac{2}{3} E_1
+\]
+
+\textbf{Résolution :}
+
+De la troisième équation :
+\[
+E_2 = 1 + \frac{2}{3} E_1
+\]
+
+Substituons dans la deuxième équation :
+\begin{align*}
+E_1 &= 1 + \frac{1}{3} E_0 + \frac{2}{3} \left( 1 + \frac{2}{3} E_1 \right) \\
+E_1 &= 1 + \frac{1}{3} E_0 + \frac{2}{3} + \frac{4}{9} E_1 \\
+E_1 - \frac{4}{9} E_1 &= \frac{5}{3} + \frac{1}{3} E_0 \\
+\frac{5}{9} E_1 &= \frac{5}{3} + \frac{1}{3} E_0 \\
+E_1 &= 3 + \frac{3}{5} E_0
+\end{align*}
+
+De la première équation : $E_0 = 1 + E_1$, donc :
+\begin{align*}
+E_0 &= 1 + 3 + \frac{3}{5} E_0 \\
+E_0 - \frac{3}{5} E_0 &= 4 \\
+\frac{2}{5} E_0 &= 4 \\
+E_0 &= 10
+\end{align*}
+
+Le nombre moyen de déplacements pour atteindre le sommet opposé est de \textbf{10 déplacements}.
