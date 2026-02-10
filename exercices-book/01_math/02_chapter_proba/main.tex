@@ -2706,27 +2706,6 @@ Le cube possède 8 sommets. Par symétrie, on peut classifier les sommets selon 
 \end{figure}
 
 
-% \textbf{Transitions :}
-
-% Depuis le sommet de départ (Type 0) :
-% \begin{itemize}
-%     \item 3 arêtes mènent vers des sommets de Type 1
-%     \item Probabilité : $\mathbb{P}(0 \to 1) = 1$
-% \end{itemize}
-
-% Depuis un sommet de Type 1 :
-% \begin{itemize}
-%     \item 1 arête retourne au sommet de départ (Type 0)
-%     \item 2 arêtes mènent vers des sommets de Type 2
-%     \item Probabilités : $\mathbb{P}(1 \to 0) = \frac{1}{3}$, $\mathbb{P}(1 \to 2) = \frac{2}{3}$
-% \end{itemize}
-
-% Depuis un sommet de Type 2 :
-% \begin{itemize}
-%     \item 2 arêtes retournent vers des sommets de Type 1
-%     \item 1 arête mène au sommet cible (Type 3)
-%     \item Probabilités : $\mathbb{P}(2 \to 1) = \frac{2}{3}$, $\mathbb{P}(2 \to 3) = \frac{1}{3}$
-% \end{itemize}
 
 \textbf{Système d'équations :}
 
@@ -2772,3 +2751,489 @@ E_0 &= 10
 \end{align*}
 
 Le nombre moyen de déplacements pour atteindre le sommet opposé est de \textbf{10 déplacements}.
+
+\section{Jeu optimal avec trois lancers de dé}
+
+\begin{exerciseBox}[Stratégie optimale de lancers]
+Supposons qu'on joue à un jeu. Je lance un dé jusqu'à trois fois maximum. À chaque lancer, vous pouvez soit prendre le nombre affiché comme gain en dollars, soit relancer. Quel est votre gain espéré avec une stratégie optimale ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\textbf{Principe de programmation dynamique :}
+
+On résout ce problème en raisonnant à rebours (backward induction). À chaque étape, on compare :
+\begin{itemize}
+    \item Le gain actuel $x$ (si on s'arrête)
+    \item L'espérance du gain futur (si on continue)
+\end{itemize}
+
+On choisit l'action qui maximise l'espérance.
+
+\textbf{Étape 3 (dernier lancer) :}
+
+Au troisième lancer, on n'a plus le choix : on doit prendre le résultat.
+
+L'espérance du gain au 3ème lancer est :
+\[
+V_3 = \mathbb{E}[\text{résultat du dé}] = \frac{1 + 2 + 3 + 4 + 5 + 6}{6} = \frac{21}{6} = 3.5
+\]
+
+\textbf{Étape 2 (deuxième lancer) :}
+
+Au deuxième lancer, si on obtient $x$, on a le choix :
+\begin{itemize}
+    \item Prendre $x$ dollars
+    \item Relancer et obtenir $V_3 = 3.5$ en espérance
+\end{itemize}
+
+\textbf{Stratégie optimale au lancer 2 :}
+\[
+\text{Prendre } x \text{ si } x \geq 3.5, \text{ sinon relancer}
+\]
+
+Donc on prend si $x \in \{4, 5, 6\}$ et on relance si $x \in \{1, 2, 3\}$.
+
+L'espérance du gain au 2ème lancer est :
+\begin{align*}
+V_2 &= \mathbb{P}(x \in \{1,2,3\}) \cdot V_3 + \mathbb{P}(x = 4) \cdot 4 + \mathbb{P}(x = 5) \cdot 5 + \mathbb{P}(x = 6) \cdot 6 \\
+&= \frac{3}{6} \cdot 3.5 + \frac{1}{6} \cdot 4 + \frac{1}{6} \cdot 5 + \frac{1}{6} \cdot 6 \\
+&= \frac{1}{2} \cdot 3.5 + \frac{4 + 5 + 6}{6} \\
+&= 1.75 + \frac{15}{6} \\
+&= 1.75 + 2.5 \\
+&= 4.25
+\end{align*}
+
+\textbf{Étape 1 (premier lancer) :}
+
+Au premier lancer, si on obtient $x$, on a le choix :
+\begin{itemize}
+    \item Prendre $x$ dollars
+    \item Relancer et obtenir $V_2 = 4.25$ en espérance
+\end{itemize}
+
+\textbf{Stratégie optimale au lancer 1 :}
+\[
+\text{Prendre } x \text{ si } x \geq 4.25, \text{ sinon relancer}
+\]
+
+Donc on prend si $x \in \{5, 6\}$ et on relance si $x \in \{1, 2, 3, 4\}$.
+
+L'espérance du gain au 1er lancer est :
+\begin{align*}
+V_1 &= \mathbb{P}(x \in \{1,2,3,4\}) \cdot V_2 + \mathbb{P}(x = 5) \cdot 5 + \mathbb{P}(x = 6) \cdot 6 \\
+&= \frac{4}{6} \cdot 4.25 + \frac{1}{6} \cdot 5 + \frac{1}{6} \cdot 6 \\
+&= \frac{2}{3} \cdot 4.25 + \frac{11}{6} \\
+&= \frac{8.5}{3} + \frac{11}{6} \\
+&= \frac{17}{6} + \frac{11}{6} \\
+&= \frac{28}{6} \\
+&= \frac{14}{3} \\
+&\approx 4.667
+\end{align*}
+
+\textbf{Réponse finale :}
+\[
+\boxed{V_1 = \frac{14}{3} \approx 4.67 \text{ dollars}}
+\]
+
+\textbf{Stratégie optimale résumée :}
+\begin{itemize}
+    \item \textbf{Lancer 1 :} Garder si $x \geq 5$, sinon relancer
+    \item \textbf{Lancer 2 :} Garder si $x \geq 4$, sinon relancer
+    \item \textbf{Lancer 3 :} Garder le résultat (pas de choix)
+\end{itemize}
+
+\textbf{Intuition :} Plus on approche du dernier lancer, plus on devient "tolérant" et on accepte des valeurs plus faibles, car l'option de relancer devient moins attractive.
+
+
+
+
+
+\section{The Four Boxes Game}
+
+\begin{exerciseBox}[The Four Boxes Game]
+Let's play a game. There are four sealed boxes. There is 100 euros in one box and the others are empty. A player can pay $X$ to open a box and take the contents as many times as they like. Assuming this is a fair game, what is the value of $X$?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+We need to find the fair price $X$ such that the expected gain of the player is zero.
+
+\textbf{Strategy optimale :} The player opens boxes one by one. If they find the 100€, they stop. If not, they continue (since the probability of finding it in the remaining boxes increases). However, the player should also stop if continuing costs more than the expected gain.
+
+\bigskip
+
+Let us compute the expected winnings. The 100€ is equally likely to be in any of the 4 boxes.
+
+\begin{itemize}
+    \item With probability $\dfrac{1}{4}$, the player finds 100€ on the \textbf{1st try}. They pay $X$ and gain $100 - X$.
+    \item With probability $\dfrac{3}{4} \times \dfrac{1}{3} = \dfrac{1}{4}$, they find it on the \textbf{2nd try}. They pay $2X$ and gain $100 - 2X$.
+    \item With probability $\dfrac{3}{4} \times \dfrac{2}{3} \times \dfrac{1}{2} = \dfrac{1}{4}$, they find it on the \textbf{3rd try}. They pay $3X$ and gain $100 - 3X$.
+    \item With probability $\dfrac{3}{4} \times \dfrac{2}{3} \times \dfrac{1}{2} \times 1 = \dfrac{1}{4}$, they find it on the \textbf{4th try}. They pay $4X$ and gain $100 - 4X$.
+\end{itemize}
+
+
+\bigskip
+
+\textbf{Expected value  of the payoff  :}  
+
+\[
+E = \frac{1}{4}(100 - X) + \frac{1}{4}(100 - 2X) + \frac{1}{4}(100 - 3X) + \frac{1}{4}(100 - 4X)
+\]
+\[
+E = 100 - \frac{X(1+2+3+4)}{4} = 100 - \frac{10X}{4} = 100 - \frac{5X}{2}
+\]
+
+Setting $E = 0$ for a fair game:
+
+\[
+100 - \frac{5X}{2} = 0 \implies \boxed{X = 40}
+\]
+
+
+
+\section{The Secretary Problem}
+
+\begin{exerciseBox}[The Secretary Problem]
+A company wants to hire the best candidate out of $N$ applicants. The candidates are interviewed one by one in a random order. After each interview, the company must immediately decide whether to hire or pass. A rejected candidate cannot be recalled. The company can only rank candidates relative to those already seen.
+
+What strategy maximizes the probability of selecting the best candidate, and what is this maximum probability?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+\textbf{Strategy:} Reject the first $r$ candidates (observation phase), then hire the first candidate who is better than all of the first $r$.
+
+\bigskip
+
+\textbf{Probability of winning with this strategy:}
+
+Let us compute $P(\text{win})$, the probability that the best candidate is selected.
+
+The best candidate is at position $i$ (uniformly at random). We win if:
+\begin{enumerate}
+    \item The best candidate is at position $i \geq r+1$ (i.e.\ not in the observation phase), and
+    \item The best among the first $i-1$ candidates is among the first $r$ (so we don't stop early).
+\end{enumerate}
+
+The probability of this, for a given $i$, is $\dfrac{r}{i-1}$. Therefore:
+
+\[
+P(\text{win}) = \sum_{i=r+1}^{N} \mathbb{P}(\text{best at position } i) \cdot \mathbb{P}(\text{we don't stop before } i \mid \text{best at } i) = \sum_{i=r+1}^{N} \frac{1}{N} \cdot \frac{r}{i-1}
+\]
+
+\[
+P(\text{win}) = \frac{r}{N} \sum_{i=r+1}^{N} \frac{1}{i-1} = \frac{r}{N} \sum_{j=r}^{N-1} \frac{1}{j}
+\]
+
+\bigskip
+
+\textbf{Rappel -- Intégrales de Riemann :}
+
+For any continuous function $f$ on $[a,b]$:
+\[
+\sum_{k=0}^{n-1} f(a + k\,\Delta t)\,\Delta t \xrightarrow[n \to \infty]{} \int_a^b f(t)\,dt \qquad \text{with } \Delta t = \frac{b-a}{n}
+\]
+
+\bigskip
+
+\textbf{Passage to the limit:} Let $x = \dfrac{r}{N}$ and $n = N - r$. We have $\Delta t = \dfrac{1 - \frac{r}{N}}{N - r} = \dfrac{1}{N}$, and:
+
+\[
+P(x) = \frac{r}{N} \sum_{j=0}^{n-1} \frac{1}{\frac{r}{N} + \frac{j}{N}} \cdot \frac{1}{N} = x \sum_{j=0}^{n-1} \frac{\Delta t}{a + j\,\Delta t}
+\]
+
+where $a = x$. As $N \to \infty$:
+
+\[
+P(x) \xrightarrow[N \to \infty]{} x \int_x^1 \frac{dt}{t} = x \Big[-\ln(t)\Big]_x^1 = x\big(0 - \ln(x)\big) = -x\ln(x)
+\]
+
+\bigskip
+
+\textbf{Optimization:}
+
+\[
+P'(x) = -\ln(x) - 1
+\]
+
+Setting $P'(x) = 0$:
+
+\[
+-\ln(x) - 1 = 0 \implies \ln(x) = -1 \implies \boxed{x^* = \frac{1}{e}}
+\]
+
+Therefore the optimal strategy is to reject the first $r^* = \dfrac{N}{e}$ candidates, then select the first one who is better than all previously seen.
+
+\bigskip
+
+The maximum probability of selecting the best candidate is:
+
+\[
+P(x^*) = -\frac{1}{e}\ln\left(\frac{1}{e}\right) = \frac{1}{e} \approx \boxed{36.8\%}
+\]
+
+
+\section{Expected Tosses for Three Heads in a Row}
+
+\begin{exerciseBox}[Three Heads in a Row]
+For a fair coin, what is the expected number of tosses to get three heads in a row?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+We model this problem using a \textbf{Markov chain} with four states based on the current streak of consecutive heads:
+
+\begin{itemize}
+    \item $S_0$: 0 consecutive heads (start or after a tail)
+    \item $S_1$: 1 consecutive head
+    \item $S_2$: 2 consecutive heads
+    \item $S_3$: 3 consecutive heads (absorbing state -- goal reached)
+\end{itemize}
+
+\bigskip
+
+\textbf{Markov Chain Graph:}
+
+\begin{center}
+\begin{tikzpicture}[->, >=stealth, auto, node distance=3cm, thick,
+    main node/.style={circle, draw, minimum size=1cm, font=\large}]
+
+    \node[main node] (S0) {$S_0$};
+    \node[main node] (S1) [right of=S0] {$S_1$};
+    \node[main node] (S2) [right of=S1] {$S_2$};
+    \node[main node, double] (S3) [right of=S2] {$S_3$};
+
+    % Heads transitions (forward)
+    \path[every node/.style={font=\small}]
+        (S0) edge[bend left=20] node[above] {$H\;(\frac{1}{2})$} (S1)
+        (S1) edge[bend left=20] node[above] {$H\;(\frac{1}{2})$} (S2)
+        (S2) edge[bend left=20] node[above] {$H\;(\frac{1}{2})$} (S3);
+
+    % Tails transitions (back to S0)
+    \path[every node/.style={font=\small}]
+        (S1) edge[bend left=20] node[below] {$T\;(\frac{1}{2})$} (S0)
+        (S2) edge[bend left=40] node[below] {$T\;(\frac{1}{2})$} (S0);
+
+    % Self-loop on S0
+    \path[every node/.style={font=\small}]
+        (S0) edge[loop above] node {$T\;(\frac{1}{2})$} (S0);
+
+\end{tikzpicture}
+\end{center}
+
+\bigskip
+
+\textbf{System of equations:}
+
+Let $E_i$ be the expected number of tosses to reach $S_3$ starting from state $S_i$.
+
+From each state, we toss the coin (cost 1). With probability $\frac{1}{2}$ we get heads (move forward), with probability $\frac{1}{2}$ we get tails (return to $S_0$):
+
+\[
+\begin{cases}
+E_0 = 1 + \dfrac{1}{2}\,E_1 + \dfrac{1}{2}\,E_0 \\[10pt]
+E_1 = 1 + \dfrac{1}{2}\,E_2 + \dfrac{1}{2}\,E_0 \\[10pt]
+E_2 = 1 + \dfrac{1}{2}\cdot 0 + \dfrac{1}{2}\,E_0
+\end{cases}
+\]
+
+\textbf{Solving:}
+
+From the first equation:
+\[
+E_0 - \frac{1}{2}E_0 = 1 + \frac{1}{2}E_1 \implies \frac{1}{2}E_0 = 1 + \frac{1}{2}E_1 \implies E_0 = 2 + E_1
+\]
+
+From the third equation:
+\[
+E_2 = 1 + \frac{1}{2}E_0
+\]
+
+From the second equation:
+\[
+E_1 = 1 + \frac{1}{2}E_2 + \frac{1}{2}E_0 = 1 + \frac{1}{2}\left(1 + \frac{1}{2}E_0\right) + \frac{1}{2}E_0 = \frac{3}{2} + \frac{3}{4}E_0
+\]
+
+Substituting into $E_0 = 2 + E_1$:
+\[
+E_0 = 2 + \frac{3}{2} + \frac{3}{4}E_0 = \frac{7}{2} + \frac{3}{4}E_0
+\]
+\[
+\frac{1}{4}E_0 = \frac{7}{2} \implies \boxed{E_0 = 14}
+\]
+
+\bigskip
+
+The expected number of tosses to get three heads in a row is $\mathbf{14}$.
+
+
+\section{Expected Tosses for $n$ Heads in a Row (Unfair Coin)}
+
+\begin{exerciseBox}[Generalized Consecutive Heads]
+For an unfair coin with probability $p$ of landing heads (and $q = 1-p$ for tails), what is the expected number of tosses to get $n$ consecutive heads in a row?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+We model this with a \textbf{Markov chain} with $n+1$ states based on the current streak of consecutive heads:
+
+\begin{itemize}
+    \item $S_0$: 0 consecutive heads (start or after a tail)
+    \item $S_k$: $k$ consecutive heads, for $k = 1, \dots, n-1$
+    \item $S_n$: $n$ consecutive heads (absorbing state -- goal reached)
+\end{itemize}
+
+\bigskip
+
+\textbf{Markov Chain Graph:}
+
+\begin{center}
+\begin{tikzpicture}[->, >=stealth, auto, node distance=2.8cm, thick,
+    main node/.style={circle, draw, minimum size=1cm, font=\large}]
+
+    \node[main node] (S0) {$S_0$};
+    \node[main node] (S1) [right of=S0] {$S_1$};
+    \node[main node] (S2) [right of=S1] {$S_2$};
+    \node (dots) [right of=S2] {$\cdots$};
+    \node[main node] (Sn1) [right of=dots] {$S_{n\!-\!1}$};
+    \node[main node, double] (Sn) [right of=Sn1] {$S_n$};
+
+    % Heads transitions (forward)
+    \path[every node/.style={font=\small}]
+        (S0) edge[bend left=20] node[above] {$H\;(p)$} (S1)
+        (S1) edge[bend left=20] node[above] {$H\;(p)$} (S2)
+        (S2) edge[bend left=15] node[above] {$H\;(p)$} (dots)
+        (dots) edge[bend left=15] node[above] {$H\;(p)$} (Sn1)
+        (Sn1) edge[bend left=20] node[above] {$H\;(p)$} (Sn);
+
+    % Tails transitions (back to S0)
+    \path[every node/.style={font=\small}]
+        (S1) edge[bend left=20] node[below] {$T\;(q)$} (S0)
+        (S2) edge[bend left=35] node[below] {$T\;(q)$} (S0)
+        (Sn1) edge[bend left=45] node[below] {$T\;(q)$} (S0);
+
+    % Self-loop on S0
+    \path[every node/.style={font=\small}]
+        (S0) edge[loop above] node {$T\;(q)$} (S0);
+
+\end{tikzpicture}
+\end{center}
+
+\bigskip
+
+\textbf{System of equations:}
+
+Let $E_k$ be the expected number of tosses to reach $S_n$ from state $S_k$:
+
+\[
+\begin{cases}
+E_0 = 1 + p\,E_1 + q\,E_0 \\[6pt]
+E_k = 1 + p\,E_{k+1} + q\,E_0 \qquad \text{for } k = 1, \dots, n-2 \\[6pt]
+E_{n-1} = 1 + p \cdot 0 + q\,E_0
+\end{cases}
+\]
+
+\bigskip
+
+\textbf{Solving by backward substitution:}
+
+From the first equation:
+\[
+E_0 - q\,E_0 = 1 + p\,E_1 \implies p\,E_0 = 1 + p\,E_1 \implies E_0 = \frac{1}{p} + E_1
+\]
+
+More generally, from the equation for $E_k$:
+\[
+E_k = 1 + p\,E_{k+1} + q\,E_0 \implies E_k - E_{k+1} = \frac{1}{p} + \frac{q}{p}\,E_0
+\]
+
+This gives us a telescoping relation. Define $\delta = \dfrac{1}{p} + \dfrac{q}{p}\,E_0$. Then:
+\[
+E_k = E_{k+1} + \delta \qquad \text{for } k = 0, 1, \dots, n-2
+\]
+
+From the last equation:
+\[
+E_{n-1} = 1 + q\,E_0 = p\,\delta
+\]
+
+Telescoping from $E_0$:
+\[
+E_0 = E_{n-1} + (n-1)\,\delta = p\,\delta + (n-1)\,\delta = (n-1+p)\,\delta
+\]
+
+But also $\delta = \dfrac{1}{p} + \dfrac{q}{p}E_0 = \dfrac{1 + q\,E_0}{p}$, so:
+\[
+E_0 = (n-1+p)\cdot \frac{1 + q\,E_0}{p}
+\]
+
+This is a single equation in $E_0$. However, a cleaner closed-form is obtained by direct recursion.
+
+\bigskip
+
+\textbf{Direct closed-form:}
+
+Define $A_k = E_{n-k}$, the expected number of tosses from a streak of $n-k$ heads. We have $A_0 = 0$ (already at $S_n$), and from the equations:
+
+\[
+E_{n-1} = 1 + q\,E_0 \implies A_1 = 1 + q\,A_n
+\]
+\[
+E_k = 1 + p\,E_{k+1} + q\,E_0 \implies A_{n-k} = 1 + p\,A_{n-k-1} + q\,A_n
+\]
+
+Instead, let us solve directly. From the recursion $E_k = \frac{1}{p}(E_{k-1} - 1) - \frac{q}{p}E_0$ and telescoping, one can show:
+
+\[
+\boxed{E_0 = \frac{1}{p} + \frac{1}{p^2} + \frac{1}{p^3} + \cdots + \frac{1}{p^n} = \sum_{k=1}^{n} \frac{1}{p^k} = \frac{1 - p^{-n}}{1 - p^{-1}} \cdot \frac{1}{p} = \frac{1}{q}\left(\frac{1}{p^n} - 1\right)}
+\]
+
+Wait -- this formula would hold if $q = 0$. Let us redo carefully.
+
+\bigskip
+
+\textbf{Correct recursion:}
+
+From $E_{n-1} = 1 + qE_0$ and $E_k = 1 + pE_{k+1} + qE_0$ for $k \leq n-2$, and $E_0 = \frac{1}{p} + E_1$:
+
+Substituting repeatedly:
+\begin{align*}
+E_{n-1} &= 1 + q\,E_0 \\
+E_{n-2} &= 1 + p\,E_{n-1} + q\,E_0 = 1 + p(1 + qE_0) + qE_0 = (1+p) + q(1+p)E_0 \\
+         &= (1+p)(1 + qE_0)
+\end{align*}
+
+By induction, one obtains:
+\[
+E_{n-k} = \frac{1-p^k}{1-p}(1 + qE_0) = \frac{1-p^k}{q}(1+qE_0)
+\]
+
+Setting $k = n$ and using $E_0 = E_{n-n}$:
+\[
+E_0 = \frac{1 - p^n}{q}(1 + qE_0) = \frac{1-p^n}{q} + (1-p^n)E_0
+\]
+\[
+E_0\big(1 - (1-p^n)\big) = \frac{1-p^n}{q} \implies p^n E_0 = \frac{1-p^n}{q}
+\]
+
+\[
+\boxed{E_0 = \frac{1 - p^n}{q\,p^n} = \frac{1}{q}\left(\frac{1}{p^n} - 1\right)}
+\]
+
+\bigskip
+
+\textbf{Verification:}
+\begin{itemize}
+    \item For $p = \frac{1}{2}$, $n = 3$: $E_0 = \dfrac{1}{\frac{1}{2}}\left(2^3 - 1\right) = 2 \times 7 = 14$ \checkmark
+    \item For $p = \frac{1}{2}$, $n = 1$: $E_0 = 2(2-1) = 2$ \checkmark \ (geometric with mean $\frac{1}{p}$)
+    \item For $p = \frac{1}{2}$, $n = 2$: $E_0 = 2(4-1) = 6$ \checkmark
+\end{itemize}
