@@ -3700,3 +3700,169 @@ Finalement :
 \[
 \boxed{P(\triangle) = \frac{1}{4}}
 \]
+
+
+
+\section{Le Paradoxe des Anniversaires}
+
+\begin{exerciseBox}[Birthday Problem]
+Dans une pièce, il y a $n$ personnes. On suppose que les anniversaires sont répartis uniformément sur les 365 jours de l'année (on ignore les années bissextiles), et que les anniversaires sont indépendants.
+
+Quel est le nombre minimum de personnes $n$ pour que la probabilité qu'au moins deux personnes partagent le même anniversaire dépasse 50\%?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+\textbf{Passage au complémentaire :}
+
+Notons $A$ l'événement « au moins deux personnes partagent le même anniversaire » et $J_i$ l'anniversaire de la personne $i$. On a :
+
+\[
+P(A) = 1 - P(\bar{A}) = 1 - P\!\left(\forall\, i \neq j,\; J_i \neq J_j\right)
+\]
+
+\bigskip
+
+\textbf{Calcul de $P(\bar{A})$ :}
+
+Notons $A_k$ l'événement « la $k$-ième personne a un anniversaire différent de toutes les précédentes ». Alors :
+
+\[
+P(\bar{A}) = P\!\left(\bigcap_{k=2}^{n} A_k\right)
+\]
+
+Par la formule des probabilités composées (chaîne) :
+
+\[
+P\!\left(\bigcap_{k=2}^{n} A_k\right) = \prod_{k=2}^{n} P\!\left(A_k \mid A_2 \cap A_3 \cap \cdots \cap A_{k-1}\right)
+\]
+
+Sachant que les $k-1$ premières personnes ont toutes des anniversaires distincts, la $k$-ième personne doit éviter $k-1$ jours parmi 365 :
+
+\[
+P\!\left(A_k \mid A_2 \cap \cdots \cap A_{k-1}\right) = \frac{365 - (k-1)}{365}
+\]
+
+D'où :
+
+\[
+P(\bar{A}) = \prod_{k=2}^{n} \frac{365 - (k-1)}{365} = \prod_{k=0}^{n-1} \left(1 - \frac{k}{365}\right)
+\]
+
+\bigskip
+
+\textbf{Approximation :}
+
+On utilise $\ln(1 - x) \approx -x$ pour $x$ petit :
+
+\[
+\ln P(\bar{A}) = \sum_{k=0}^{n-1} \ln\!\left(1 - \frac{k}{365}\right) \approx -\sum_{k=0}^{n-1} \frac{k}{365} = -\frac{n(n-1)}{2 \times 365}
+\]
+
+Donc :
+\[
+P(\bar{A}) \approx e^{-\frac{n(n-1)}{730}}
+\]
+
+On cherche $n$ tel que $P(A) > \frac{1}{2}$, soit $P(\bar{A}) < \frac{1}{2}$ :
+
+\[
+e^{-\frac{n(n-1)}{730}} < \frac{1}{2} \implies \frac{n(n-1)}{730} > \ln 2 \implies n(n-1) > 730 \ln 2 \approx 505.97
+\]
+
+En approximant $n(n-1) \approx n^2$ :
+\[
+n > \sqrt{730 \ln 2} \approx 22.49
+\]
+
+Donc $n \geq 23$.
+
+% \bigskip
+
+% \textbf{Vérification par calcul exact :}
+
+% \[
+% P(\bar{A})\big|_{n=22} = \prod_{k=0}^{21}\left(1 - \frac{k}{365}\right) \approx 0.5243 \implies P(A)\big|_{n=22} \approx 0.4757 < 0.5
+% \]
+
+% \[
+% P(\bar{A})\big|_{n=23} = \prod_{k=0}^{22}\left(1 - \frac{k}{365}\right) \approx 0.4927 \implies P(A)\big|_{n=23} \approx 0.5073 > 0.5
+% \]
+
+\bigskip
+
+\[
+\boxed{n = 23}
+\]
+
+Il suffit de 23 personnes pour que la probabilité qu'au moins deux partagent le même anniversaire dépasse 50\%. Ce résultat, souvent contre-intuitif, est connu sous le nom de \textbf{paradoxe des anniversaires}.
+
+
+
+\section{Voir Toutes les Faces d'un Dé}
+
+\begin{exerciseBox}[Toutes les Faces du Dé]
+On lance un dé équilibré à 6 faces, encore et encore, jusqu'à avoir obtenu chaque face au moins une fois.
+
+En moyenne, combien de lancers faut-il pour voir les 6 faces?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+C'est une application directe du \textbf{problème du collectionneur de coupons} avec $N = 6$.
+
+\bigskip
+
+\textbf{Découpage en phases :}
+
+Soit $T_i$ le nombre de lancers nécessaires pour obtenir la $i$-ième nouvelle face, sachant qu'on possède déjà $i-1$ faces distinctes.
+
+À chaque lancer, la probabilité d'obtenir une face nouvelle est :
+\[
+p_i = \frac{6 - (i-1)}{6} = \frac{7 - i}{6}
+\]
+
+Chaque lancer étant indépendant, $T_i$ compte le nombre d'essais jusqu'au premier succès, donc :
+\[
+T_i \sim \mathrm{Geom}(p_i) \qquad \text{avec} \quad \mathbb{E}[T_i] = \frac{1}{p_i} = \frac{6}{7-i}
+\]
+
+\bigskip
+
+\textbf{Détail de chaque phase :}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|c|c|c}
+Phase $i$ & Faces déjà vues & $p_i$ & $\mathbb{E}[T_i]$ \\
+\hline
+1 & 0 & $\frac{6}{6} = 1$ & $1$ \\
+2 & 1 & $\frac{5}{6}$ & $\frac{6}{5}$ \\
+3 & 2 & $\frac{4}{6}$ & $\frac{6}{4}$ \\
+4 & 3 & $\frac{3}{6}$ & $\frac{6}{3}$ \\
+5 & 4 & $\frac{2}{6}$ & $\frac{6}{2}$ \\
+6 & 5 & $\frac{1}{6}$ & $\frac{6}{1}$ \\
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Nombre total de lancers :}
+
+Le nombre total est $T = T_1 + T_2 + \cdots + T_6$. Les $T_i$ étant indépendantes, par linéarité de l'espérance :
+
+\[
+\mathbb{E}[T] = \sum_{i=1}^{6} \mathbb{E}[T_i] = \sum_{i=1}^{6} \frac{6}{7-i} = 6\sum_{k=1}^{6} \frac{1}{k} = 6\left(1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6}\right)
+\]
+
+\[
+\mathbb{E}[T] = 6 \times \frac{49}{20} = \frac{294}{20} = \frac{147}{10}
+\]
+
+\[
+\boxed{\mathbb{E}[T] = 14.7 \text{ lancers}}
+\]
