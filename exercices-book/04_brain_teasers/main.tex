@@ -605,3 +605,246 @@ Le processus continue ainsi : le $n$-ième individu actionne chaque $n$-ième in
 \boxed{\,\text{Au final, } 10 \text{ lampes restent allumées.}\,}
 \]
 
+\section{100 Prisonniers et une Ampoule}
+
+\begin{exerciseBox}[100 Prisoners and a Lightbulb]
+Il y a 100 prisonniers dans une prison. Chaque jour, le gardien choisit un prisonnier au hasard (uniformément, avec remise) et l'envoie dans une pièce spéciale contenant une ampoule, initialement éteinte. Le prisonnier peut allumer, éteindre, ou ne pas toucher l'ampoule.
+
+Les prisonniers peuvent se concerter avant le début du jeu, mais ne peuvent plus communiquer ensuite. Leur seul moyen d'information est l'état de l'ampoule.
+
+À tout moment, un prisonnier peut déclarer : « Nous sommes tous passés dans la pièce. » Si c'est vrai, ils sont tous libérés. Si c'est faux, ils sont tous exécutés.
+
+\textbf{Q1 :} Quelle stratégie garantit leur libération avec certitude?
+
+\textbf{Q2 :} Quel est le temps moyen de cette stratégie?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution -- Q1 : La stratégie}
+
+\textbf{Rôles :} Avant le début du jeu, les prisonniers désignent un unique \textbf{compteur} (le prisonnier $C$). Les 99 autres sont des \textbf{prisonniers ordinaires}.
+
+\bigskip
+
+\textbf{Règles :}
+
+\begin{itemize}
+    \item \textbf{Prisonnier ordinaire :} La \underline{première fois} qu'il entre dans la pièce et trouve l'ampoule \textbf{éteinte}, il l'\textbf{allume}. Dans tous les autres cas (ampoule déjà allumée, ou il a déjà allumé une fois), il \textbf{ne touche à rien}.
+
+    \item \textbf{Compteur $C$ :} Chaque fois qu'il entre et trouve l'ampoule \textbf{allumée}, il l'\textbf{éteint} et incrémente son compteur interne de $+1$. Quand son compteur atteint \textbf{99}, il déclare : « Nous sommes tous passés. »
+\end{itemize}
+
+\bigskip
+
+\textbf{Pourquoi ça marche :}
+
+\begin{itemize}
+    \item Chaque prisonnier ordinaire allume l'ampoule \textbf{exactement une fois} dans sa vie. Il envoie ainsi un « signal » unique.
+    \item Seul le compteur $C$ éteint l'ampoule. Chaque extinction correspond à un signal reçu.
+    \item Quand $C$ a éteint 99 fois, il a reçu un signal de chacun des 99 autres prisonniers. Donc tous sont passés.
+    \item Aucun signal n'est perdu (seul $C$ éteint) et aucun signal n'est compté deux fois (chaque ordinaire n'allume qu'une seule fois).
+\end{itemize}
+
+La stratégie garantit la libération \textbf{avec certitude} (probabilité 1), sans aucun risque d'erreur.
+
+\bigskip
+
+\subsection*{Solution -- Q2 : Temps moyen}
+
+On décompose le processus en $99$ \textbf{phases}. La phase $k$ ($k = 1, \dots, 99$) correspond à la transmission du $k$-ième signal : un nouveau prisonnier ordinaire allume, puis le compteur éteint.
+
+
+\bigskip
+
+\subsubsection*{Méthode 1 : Décomposition en lois géométriques}
+
+Chaque phase $k$ se décompose en deux étapes indépendantes :
+\[
+T_k = T_k^A + T_k^B
+\]
+
+\begin{itemize}
+    \item $T_k^A$ : nombre de jours (ampoule éteinte) jusqu'à ce qu'un \textbf{nouveau} prisonnier ordinaire passe et allume. À chaque jour, la probabilité de succès est $\frac{100-k}{100}$, donc :
+    \[
+    T_k^A \sim \mathrm{Geom}\!\left(\frac{100-k}{100}\right) \qquad \implies \qquad \mathbb{E}[T_k^A] = \frac{100}{100-k}
+    \]
+
+    \item $T_k^B$ : nombre de jours (ampoule allumée) jusqu'à ce que le \textbf{compteur} $C$ passe et éteigne. À chaque jour, la probabilité de succès est $\frac{1}{100}$, donc :
+    \[
+    T_k^B \sim \mathrm{Geom}\!\left(\frac{1}{100}\right) \qquad \implies \qquad \mathbb{E}[T_k^B] = 100
+    \]
+\end{itemize}
+
+Le temps total est $T = T_1 + T_2 + \cdots + T_{99}$. Par linéarité de l'espérance :
+
+\[
+\mathbb{E}[T] = \sum_{k=1}^{99} \mathbb{E}[T_k] = \sum_{k=1}^{99} \left(\mathbb{E}[T_k^A] + \mathbb{E}[T_k^B]\right) = \sum_{k=1}^{99} \frac{100}{100-k} + \sum_{k=1}^{99} 100
+\]
+
+\[
+\mathbb{E}[T] = 100\sum_{k=1}^{99} \frac{1}{100-k} + 9900 = 100\sum_{j=1}^{99}\frac{1}{j} + 9900 = 100\,H_{99} + 9900
+\]
+
+\bigskip
+
+\subsubsection*{Méthode 2 : Chaîne de Markov}
+
+
+
+\bigskip
+
+\textbf{Diagramme de Markov d'une phase $k$ :}
+
+Durant la phase $k$, il reste $100 - k$ prisonniers ordinaires non-signalés. L'ampoule est éteinte au début de chaque phase. On a trois états :
+
+\begin{center}
+\begin{tikzpicture}[->, >=stealth, auto, node distance=4.5cm, thick,
+    main node/.style={circle, draw, minimum size=1.8cm, font=\normalsize, align=center}]
+
+    \node[main node] (OFF) {Ampoule\\éteinte};
+    \node[main node] (ON) [right of=OFF] {Ampoule\\allumée};
+    \node[main node, double] (FIN) [right of=ON] {Signal\\reçu};
+
+    % Forward transitions
+    \path[every node/.style={font=\small}]
+        (OFF) edge[bend left=20] node[above] {$\frac{100-k}{100}$} (ON)
+        (ON) edge[bend left=20] node[above] {$\frac{1}{100}$} (FIN);
+
+    % Self-loops
+    \path[every node/.style={font=\small}]
+        (OFF) edge[loop above] node {$\frac{k}{100}$} (OFF)
+        (ON) edge[loop above] node {$\frac{99}{100}$} (ON);
+
+    % Back transition
+    % (no back transition: once ON, stays ON until C passes)
+
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{État « éteinte » :} Avec probabilité $\frac{100-k}{100}$, un ordinaire non-signalé passe et allume $\to$ état « allumée ». Avec probabilité $\frac{k}{100}$, c'est le compteur ou un ordinaire déjà signalé $\to$ reste « éteinte ».
+    \item \textbf{État « allumée » :} Avec probabilité $\frac{1}{100}$, le compteur passe et éteint $\to$ signal reçu (fin de phase). Avec probabilité $\frac{99}{100}$, quelqu'un d'autre passe $\to$ reste « allumée ».
+\end{itemize}
+
+On résout directement avec les équations de la chaîne de Markov. Notons $E_k^{\text{off}}$ le temps moyen pour compléter la phase $k$ depuis l'état « éteinte » et $E_k^{\text{on}}$ depuis l'état « allumée ».
+
+\[
+\begin{cases}
+E_k^{\text{off}} = 1 + \dfrac{100-k}{100}\,E_k^{\text{on}} + \dfrac{k}{100}\,E_k^{\text{off}} \\[12pt]
+E_k^{\text{on}} = 1 + \dfrac{1}{100}\cdot 0 + \dfrac{99}{100}\,E_k^{\text{on}}
+\end{cases}
+\]
+
+De la deuxième équation :
+\[
+\frac{1}{100}E_k^{\text{on}} = 1 \implies E_k^{\text{on}} = 100
+\]
+
+De la première :
+\[
+\frac{100-k}{100}E_k^{\text{off}} = 1 + \frac{100-k}{100}\times 100 = 1 + (100-k)
+\]
+\[
+E_k^{\text{off}} = \frac{100(101-k)}{100-k} = \frac{100}{100-k} + 100
+\]
+
+On retrouve bien $E_k^{\text{off}} = \mathbb{E}[T_k^A] + \mathbb{E}[T_k^B]$. Le temps total :
+
+\[
+\mathbb{E}[T] = \sum_{k=1}^{99} E_k^{\text{off}} = 100\,H_{99} + 9900
+\]
+
+\bigskip
+
+\subsubsection*{Résultat numérique}
+
+$H_{99} = \displaystyle\sum_{j=1}^{99}\frac{1}{j} \approx \ln(99) + \gamma \approx 4.595 + 0.577 \approx 5.172$
+
+\[
+\mathbb{E}[T] \approx 100 \times 5.172 + 9900 \approx 517 + 9900
+\]
+
+\[
+\boxed{\mathbb{E}[T] \approx 10\,417 \text{ jours} \approx 28.5 \text{ ans}}
+\]
+
+\section{Le Paradoxe des Deux Enveloppes}
+
+\begin{exerciseBox}[Le Paradoxe des Deux Enveloppes]
+On te présente deux enveloppes fermées. On te dit que l'une contient le double de l'autre en argent, mais tu ne sais pas laquelle est laquelle.
+
+Tu choisis une enveloppe au hasard et tu l'ouvres. Tu trouves 100\euro.
+
+On te propose d'échanger ton enveloppe contre l'autre (sans l'ouvrir). Dois-tu échanger?
+\end{exerciseBox}
+
+
+
+\subsection*{Solution :}
+
+\textbf{Le raisonnement naïf (paradoxal) :}
+
+Tu vois 100\euro. L'autre enveloppe contient soit 200\euro\ soit 50\euro, chacun avec probabilité $\frac{1}{2}$. Donc :
+\[
+\mathbb{E}[\text{autre}] = \frac{1}{2}\times 200 + \frac{1}{2}\times 50 = 125 > 100
+\]
+
+Ce raisonnement semble montrer qu'il faut \textit{toujours} échanger, quel que soit le montant observé. C'est le \textbf{paradoxe} : si on échange, on peut refaire le même raisonnement avec la nouvelle enveloppe et échanger à nouveau indéfiniment !
+
+\bigskip
+
+\textbf{Résolution rigoureuse :}
+
+\bigskip
+
+Soit $(\Omega, \mathcal{F}, P)$ un espace probabilisé. La personne qui remplit les enveloppes choisit un montant $X > 0$ selon une distribution quelconque. Elle place $X$ dans une enveloppe et $2X$ dans l'autre.
+
+Soit $C$ la variable aléatoire indiquant quelle enveloppe tu choisis :
+\begin{itemize}
+    \item $C = 1$ : tu choisis l'enveloppe contenant $X$ (la petite)
+    \item $C = 2$ : tu choisis l'enveloppe contenant $2X$ (la grande)
+\end{itemize}
+
+Par hypothèse, $P(C=1) = P(C=2) = \frac{1}{2}$, indépendamment de $X$.
+
+\bigskip
+
+\textbf{Étape 1 : Ce que tu observes.}
+
+Tu ouvres ton enveloppe et tu vois un montant $M$ :
+\[
+M = \begin{cases} X & \text{si } C = 1 \\ 2X & \text{si } C = 2 \end{cases}
+\]
+
+L'autre enveloppe contient :
+\[
+M' = \begin{cases} 2X & \text{si } C = 1 \\ X & \text{si } C = 2 \end{cases}
+\]
+
+\bigskip
+
+\textbf{Étape 2 : Espérance du gain de l'échange.}
+
+Calculons $\mathbb{E}[M' - M]$ par la formule des probabilités totales :
+
+\begin{align*}
+\mathbb{E}[M' - M] &= \mathbb{E}[M' - M \mid C = 1]\cdot P(C=1) + \mathbb{E}[M' - M \mid C = 2]\cdot P(C=2) \\[8pt]
+&= \mathbb{E}[2X - X]\cdot\frac{1}{2} + \mathbb{E}[X - 2X]\cdot\frac{1}{2} \\[8pt]
+&= \frac{\mathbb{E}[X]}{2} - \frac{\mathbb{E}[X]}{2}
+\end{align*}
+
+\[
+\boxed{\mathbb{E}[M' - M] = 0}
+\]
+
+
+
+
+\textbf{Conclusion :}
+
+\[
+\boxed{\text{L'échange n'apporte aucun avantage en moyenne : } \mathbb{E}[M' - M] = 0.}
+\]
+
+Le paradoxe vient d'un conditionnement incorrect qui suppose à tort que les deux scénarios ($C=1$ et $C=2$) restent équiprobables après observation du montant.

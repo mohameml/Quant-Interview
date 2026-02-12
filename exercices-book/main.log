@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.2)  12 FEB 2026 12:04
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.2)  12 FEB 2026 20:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1162,7 +1162,7 @@ File: exo_river.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [123] [124] [125] [126] [127]) [128] (./main.aux)
+ [123] [124] [125] [126] [127] [128] [129] [130] [131]) [132] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1171,12 +1171,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 41494 strings out of 476191
- 997490 string characters out of 5812073
- 1878858 words of memory out of 5000000
- 61545 multiletter control sequences out of 15000+600000
+ 41521 strings out of 476191
+ 997856 string characters out of 5812073
+ 1879858 words of memory out of 5000000
+ 61572 multiletter control sequences out of 15000+600000
  486712 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,15n,104p,799b,2058s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (128 pages).
+Output written on main.pdf (132 pages).

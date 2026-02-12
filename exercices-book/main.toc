@@ -121,3 +121,5 @@
 \contentsline {section}{\numberline {1.9}Say 50}{127}{section.1.9}%
 \contentsline {paragraph}{Justification formelle.}{128}{Item.27}%
 \contentsline {section}{\numberline {1.10}100 Ampoules}{128}{section.1.10}%
+\contentsline {section}{\numberline {1.11}100 Prisonniers et une Ampoule}{129}{section.1.11}%
+\contentsline {section}{\numberline {1.12}Le Paradoxe des Deux Enveloppes}{131}{section.1.12}%
