@@ -1937,3 +1937,124 @@ C_t^{A} = C_t
 \text{l'exercice optimal a lieu à }T.
 \]
 
+\section{Pricing d'un call dans un modèle binomial}
+
+\begin{exerciseBox}[Call européen dans un modèle à deux états]
+
+Un stock vaut 100 aujourd’hui. Demain il vaudra 120 avec proba 1/2 ou 80 avec proba 1/2.
+
+On considère un call européen strike 100.
+
+Quel est son prix aujourd’hui ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+
+
+On considère un modèle binomial à un pas :
+
+\[
+S_0 = 100,\qquad S_T\in\{120,\ 80\}.
+\]
+
+On note
+\[
+u=\frac{120}{100}=1.2,\qquad d=\frac{80}{100}=0.8.
+\]
+
+On suppose qu'il existe un actif sans risque tel que, entre $0$ et $T$,
+\[
+B_0=1,\qquad B_T=1+r \quad (r>-1).
+\]
+
+
+on cherche à calculer le prix $C_0$ du call européen de strike $K=100$:
+\[
+C_0=\frac{1}{1+r}\Big(q(S_u-K)^+ + (1-q)(S_d-K)^+\Big),
+\]
+où $S_u=120$ et $S_d=80$.
+
+\subsubsection*{1) Calcule de la probabilité risque-neutre $q$}
+
+Sous une mesure risque-neutre $\mathbb{Q}$, le prix actualisé du sous-jacent est une martingale, donc :
+\[
+S_0 = \frac{1}{1+r}\,\mathbb{E}^{\mathbb{Q}}[S_T].
+\]
+
+Or, dans le modèle binomial :
+\[
+S_T=
+\begin{cases}
+S_0u & \text{avec probabilité } q,\\
+S_0d & \text{avec probabilité } 1-q.
+\end{cases}
+\]
+Donc :
+\[
+\mathbb{E}^{\mathbb{Q}}[S_T]=qS_0u+(1-q)S_0d=S_0\big(qu+(1-q)d\big).
+\]
+
+En remplaçant dans la condition de martingale :
+\[
+S_0=\frac{1}{1+r}S_0\big(qu+(1-q)d\big).
+\]
+Comme $S_0>0$, on simplifie :
+\[
+1=\frac{1}{1+r}\big(qu+(1-q)d\big)
+\quad\Longleftrightarrow\quad
+1+r=qu+(1-q)d.
+\]
+
+On développe :
+\[
+1+r=qu+d-qd=d+q(u-d).
+\]
+Donc :
+\[
+q(u-d)= (1+r)-d
+\quad\Longrightarrow\quad
+\boxed{q=\frac{(1+r)-d}{u-d}}.
+\]
+
+\paragraph{Condition d'absence d'arbitrage}
+On doit avoir $0<q<1$, ce qui équivaut à :
+\[
+d<1+r<u.
+\]
+Ici :
+\[
+0.8 < 1+r < 1.2.
+\]
+
+\subsubsection*{2) Prix du call}
+
+Le payoff du call à maturité est :
+\[
+C_T=(S_T-K)^+.
+\]
+Ici, avec $K=100$ :
+\[
+(S_u-K)^+=(120-100)^+=20,\qquad (S_d-K)^+=(80-100)^+=0.
+\]
+
+Le pricing risque-neutre donne :
+\[
+C_0=\frac{1}{1+r}\Big(q\cdot 20 + (1-q)\cdot 0\Big)
+=\frac{20q}{1+r}.
+\]
+
+En remplaçant $q$ :
+\[
+\boxed{
+C_0=\frac{20}{1+r}\cdot \frac{(1+r)-d}{u-d}
+}.
+\]
+
+Avec $u=1.2$ , $d=0.8$ et $r=0$ :
+\[
+\boxed{
+C_0=10.
+}
+\]
+

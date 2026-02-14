@@ -3866,3 +3866,747 @@ Le nombre total est $T = T_1 + T_2 + \cdots + T_6$. Les $T_i$ étant indépendan
 \[
 \boxed{\mathbb{E}[T] = 14.7 \text{ lancers}}
 \]
+
+\section{Fair coin from biased coin (Von Neumann)}
+
+\begin{exerciseBox}[Générer une pièce équitable à partir d'une pièce biaisée (Von Neumann)]
+Tu as une pièce biaisée :
+\[
+\mathbb{P}(H)=p,\qquad 0<p<1,
+\]
+où $p$ est inconnu.
+
+Tu veux générer un tirage pile/face \textbf{équitable} (probabilité $1/2$) en utilisant uniquement cette pièce, sans connaître $p$.
+
+\textbf{Question :} quelle procédure utilises-tu ? Montrer que la sortie est équitable.
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\paragraph{Procédure (algorithme de Von Neumann)}
+On répète l'expérience suivante :
+\begin{itemize}
+\item Lancer la pièce \textbf{deux fois}.
+\item Si on obtient $HH$ ou $TT$, on \textbf{rejette} et on recommence.
+\item Si on obtient $HT$, on \textbf{sort} $H$.
+\item Si on obtient $TH$, on \textbf{sort} $T$.
+\end{itemize}
+
+\subsubsection*{Méthode 1 — Intuition (conditionnement, sans preuve lourde)}
+
+Considérons un essai \emph{accepté}, c'est-à-dire l'événement
+\[
+A=\{HT\ \text{ou}\ TH\}.
+\]
+On a :
+\[
+\mathbb{P}(HT)=p(1-p),\qquad \mathbb{P}(TH)=(1-p)p=p(1-p).
+\]
+Donc :
+\[
+\mathbb{P}(HT\mid A)=\frac{\mathbb{P}(HT)}{\mathbb{P}(HT)+\mathbb{P}(TH)}
+=\frac{p(1-p)}{2p(1-p)}=\frac12.
+\]
+Ainsi, conditionnellement au fait qu'on accepte, $HT$ et $TH$ sont équiprobables, donc la sortie est équitable.
+
+\[
+\boxed{\mathbb{P}(Y=H)=\frac12 \quad\text{et}\quad \mathbb{P}(Y=T)=\frac12.}
+\]
+
+\subsubsection*{Méthode 2 — Preuve rigoureuse (via le premier essai accepté)}
+
+\paragraph{Définition rigoureuse}
+
+On fait des essais $k=1,2,3,\dots$.  
+À l'essai $k$, on lance deux fois :
+\[
+(X_{k,1},X_{k,2})\in\{H,T\}^2.
+\]
+
+On note l'événement d'acceptation :
+\[
+A_k=\{(X_{k,1},X_{k,2})\in\{HT,TH\}\}.
+\]
+Alors
+\[
+\mathbb{P}(A_k)=\mathbb{P}(HT)+\mathbb{P}(TH)=p(1-p)+(1-p)p=2p(1-p).
+\]
+
+On définit le premier essai accepté :
+\[
+N=\min\{k\ge 1:\ A_k\ \text{se produit}\}.
+\]
+
+Puis on définit la variable de sortie :
+\[
+Y=
+\begin{cases}
+H & \text{si } (X_{N,1},X_{N,2})=HT,\\
+T & \text{si } (X_{N,1},X_{N,2})=TH.
+\end{cases}
+\]
+
+\paragraph{Objectif}
+Montrer :
+\[
+\mathbb{P}(Y=H)=\frac12.
+\]
+
+\paragraph{Étape 1 — Décomposition selon $N$}
+
+\[
+\mathbb{P}(Y=H)=\sum_{n\ge 1}\mathbb{P}(Y=H,\ N=n).
+\]
+
+Or :
+\[
+\{Y=H,\ N=n\}
+=
+\big(A_1^c\cap\cdots\cap A_{n-1}^c\big)\ \cap\ \{(X_{n,1},X_{n,2})=HT\}.
+\]
+
+Par indépendance entre essais :
+\[
+\mathbb{P}(Y=H,\ N=n)=\mathbb{P}(A_1^c\cap\cdots\cap A_{n-1}^c)\cdot \mathbb{P}((X_{n,1},X_{n,2})=HT).
+\]
+
+\paragraph{Étape 2 — Calcul des facteurs}
+
+\[
+\mathbb{P}((X_{n,1},X_{n,2})=HT)=p(1-p).
+\]
+De plus :
+\[
+\mathbb{P}(A_k^c)=1-\mathbb{P}(A_k)=1-2p(1-p),
+\]
+donc
+\[
+\mathbb{P}(A_1^c\cap\cdots\cap A_{n-1}^c)=\big(1-2p(1-p)\big)^{n-1}.
+\]
+
+Ainsi :
+\[
+\mathbb{P}(Y=H,\ N=n)=\big(1-2p(1-p)\big)^{n-1}\,p(1-p).
+\]
+
+\paragraph{Étape 3 — Somme géométrique}
+
+\[
+\mathbb{P}(Y=H)=\sum_{n\ge 1}\big(1-2p(1-p)\big)^{n-1}\,p(1-p).
+\]
+C'est une série géométrique avec $r=1-2p(1-p)$, donc
+\[
+\sum_{n\ge 1} r^{n-1}=\frac{1}{1-r}.
+\]
+Donc :
+\[
+\mathbb{P}(Y=H)
+=
+p(1-p)\cdot\frac{1}{1-(1-2p(1-p))}
+=
+p(1-p)\cdot\frac{1}{2p(1-p)}
+=\frac12.
+\]
+
+\[
+\boxed{\mathbb{P}(Y=H)=\frac12,\qquad \mathbb{P}(Y=T)=\frac12.}
+\]
+
+
+\section{Paradoxe de Saint-Pétersbourg}
+
+\begin{exerciseBox}[Jeu de Saint-Pétersbourg]
+On lance une pièce équilibrée répétitivement jusqu'à obtenir \emph{Face} pour la première fois.
+Si Face apparaît au lancer numéro $n$, tu gagnes $2^n$ euros.
+
+Combien es-tu prêt à payer pour jouer à ce jeu ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\subsubsection*{Partie 1 — Critère espérance (gain moyen)}
+
+On note $(X_k)_{k\ge 1}$ la suite des résultats, où $X_k\in\{\text{Pile},\text{Face}\}$.
+
+On définit le temps d'arrêt :
+\[
+N=\inf\{k\ge 1:\ X_k=\text{Face}\}.
+\]
+Le gain est alors
+\[
+G=2^N.
+\]
+
+Comme la pièce est équilibrée, $N$ suit une loi géométrique de paramètre $1/2$ :
+\[
+\mathbb{P}(N=n)=\Big(\frac12\Big)^n,\qquad n\ge 1.
+\]
+
+On calcule l'espérance :
+\[
+\mathbb{E}[G]
+=\sum_{n=1}^{\infty}\mathbb{E}(2^N\mid N=n)\,\mathbb{P}(N=n)
+=\sum_{n=1}^{\infty}2^n\cdot \Big(\frac12\Big)^n
+=\sum_{n=1}^{\infty}1
+=+\infty.
+\]
+
+Donc l'espérance du gain est infinie :
+\[
+\boxed{\mathbb{E}[G]=+\infty.}
+\]
+Avec le critère \og prix juste = espérance \fg, on obtiendrait donc un prix infini, ce qui est irréaliste en pratique.
+
+\subsubsection*{Partie 2 — Critère utilité (aversion au risque) : $U(x)=\ln(x)$}
+
+L'idée est que l'espérance $\mathbb{E}[G]$ n'est pas forcément un bon critère si on est averse au risque.
+On regarde plutôt l'espérance d'utilité :
+\[
+\mathbb{E}[U(G)] = \mathbb{E}[\ln(G)].
+\]
+
+Or $\ln(G)=\ln(2^N)=N\ln(2)$, donc :
+\[
+\mathbb{E}[\ln(G)]
+=\sum_{n=1}^{\infty}\mathbb{P}(N=n)\,\ln(2^n)
+=\sum_{n=1}^{\infty}\Big(\frac12\Big)^n\, n\ln(2)
+=\ln(2)\sum_{n=1}^{\infty}\frac{n}{2^n}.
+\]
+
+On calcule la série classique. Pour $|x|<1$ :
+\[
+\sum_{n=0}^{\infty}x^n=\frac{1}{1-x}.
+\]
+En dérivant :
+\[
+\sum_{n=1}^{\infty}n x^{n-1}=\frac{1}{(1-x)^2},
+\]
+puis en multipliant par $x$ :
+\[
+\sum_{n=1}^{\infty}n x^{n}=\frac{x}{(1-x)^2}.
+\]
+En prenant $x=\frac12$ :
+\[
+\sum_{n=1}^{\infty}\frac{n}{2^n}
+=\frac{\frac12}{(1-\frac12)^2}
+=\frac{\frac12}{(\frac12)^2}
+=\frac{\frac12}{\frac14}=2.
+\]
+
+Donc :
+\[
+\mathbb{E}[\ln(G)] = \ln(2)\cdot 2 = 2\ln(2).
+\]
+
+\paragraph{Prix \og fair \fg\ sous utilité log}
+On cherche $X$ tel que l'utilité certaine $\ln(X)$ égale l'utilité espérée :
+\[
+\ln(X)=\mathbb{E}[\ln(G)]=2\ln(2).
+\]
+Ainsi :
+\[
+X=e^{2\ln(2)}=e^{\ln(4)}=4.
+\]
+
+\[
+\boxed{X=4\text{ euros}.}
+\]
+
+\paragraph{Conclusion}
+\begin{itemize}
+\item Le critère espérance donne un gain moyen infini, donc un prix infini (paradoxe).
+\item Avec une utilité logarithmique (aversion au risque), un prix raisonnable est
+\[
+\boxed{4\text{ euros}.}
+\]
+\end{itemize}
+
+\section{House Selling Problem}
+
+\begin{exerciseBox}[Vendre sa maison avec coût d'attente]
+Tu veux vendre ta maison. Chaque jour, un acheteur potentiel arrive et te propose un prix. Les offres $(X_n)_{n\ge1}$ sont i.i.d. et uniformes sur $[0,1]$ (en millions d'euros).
+
+Chaque jour, tu dois immédiatement décider :
+\begin{itemize}
+\item \textbf{Accepter} l'offre $\Rightarrow$ la maison est vendue, le jeu s'arrête.
+\item \textbf{Refuser} $\Rightarrow$ l'acheteur part et ne revient jamais.
+\end{itemize}
+
+Il y a un coût d'attente : chaque jour supplémentaire te coûte $c$ (en millions d'euros).
+
+\textbf{Q1.} Quelle est la stratégie optimale ? Quel est le gain maximal espéré $V^*$ et le temps d'attente moyen ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\subsubsection*{1) Stratégie à seuil et équation de Bellman}
+
+On suppose une stratégie à seuil $s\in[0,1]$ :
+\[
+\text{Accepter si } X\ge s,\qquad \text{Refuser si } X<s.
+\]
+
+Notons $V$ la valeur espérée du jeu (gain net maximal) en début de journée.
+
+À chaque jour :
+\begin{itemize}
+\item avec probabilité $\mathbb{P}(X\ge s)=1-s$, on accepte et on reçoit en moyenne
+$\mathbb{E}[X\mid X\ge s]$ ;
+\item avec probabilité $\mathbb{P}(X<s)=s$, on refuse, on paie le coût $c$, et on se retrouve
+dans le \emph{même} problème (valeur $V$).
+\end{itemize}
+
+Donc l'équation de Bellman est :
+\[
+V=(1-s)\,\mathbb{E}[X\mid X\ge s]+s\,(V-c).
+\]
+
+\subsubsection*{2) Calcul de $\mathbb{E}[X\mid X\ge s]$ (uniforme)}
+
+Si $X\sim \mathcal{U}[0,1]$, alors conditionnellement à $\{X\ge s\}$, on a $X\sim \mathcal{U}[s,1]$,
+donc :
+\[
+\mathbb{E}[X\mid X\ge s]=\frac{s+1}{2}.
+\]
+
+On remplace dans Bellman :
+\[
+V=(1-s)\frac{1+s}{2}+s(V-c).
+\]
+Donc :
+\[
+V=\frac{1-s^2}{2}+sV-sc
+\quad\Longrightarrow\quad
+V(1-s)=\frac{1-s^2}{2}-sc.
+\]
+Comme $1-s>0$ (si $s<1$), on obtient :
+\[
+V(s)=\frac{1-s^2}{2(1-s)}-\frac{sc}{1-s}
+=\frac{1+s}{2}-\frac{sc}{1-s}.
+\]
+
+\subsubsection*{3) Optimisation en $s$}
+
+On dérive :
+\[
+V'(s)=\frac12-\frac{c}{(1-s)^2}.
+\]
+Condition du maximum :
+\[
+V'(s)=0
+\quad\Longleftrightarrow\quad
+\frac12=\frac{c}{(1-s)^2}
+\quad\Longleftrightarrow\quad
+(1-s)^2=2c.
+\]
+Ainsi (solution dans $[0,1]$) :
+\[
+\boxed{s^*=1-\sqrt{2c}}.
+\]
+
+\paragraph{Condition de validité}
+On doit avoir $s^*\ge 0$, donc
+\[
+1-\sqrt{2c}\ge 0
+\quad\Longleftrightarrow\quad
+c\le \frac12.
+\]
+Si $c>\frac12$, le coût d'attente est trop élevé et il est optimal d'accepter immédiatement (seuil $0$).
+
+\subsubsection*{4) Valeur optimale $V^*$}
+
+Pour $c\le \frac12$, on calcule :
+\[
+V^*=V(s^*)=\frac{1+s^*}{2}-\frac{s^*c}{1-s^*}.
+\]
+Avec $1-s^*=\sqrt{2c}$ et $s^*=1-\sqrt{2c}$, on obtient :
+\[
+\boxed{V^*=1-\sqrt{2c}+c}.
+\]
+On remarque aussi la relation classique :
+\[
+\boxed{s^*=V^*-c}.
+\]
+
+Pour $c>\frac12$ (seuil $s^*=0$), on accepte la première offre :
+\[
+V^*=\mathbb{E}[X]=\frac12.
+\]
+
+\subsubsection*{5) Temps d'attente moyen}
+
+Soit $\tau$ le jour de vente (premier jour où $X_\tau\ge s^*$).
+Alors $\tau$ suit une loi géométrique de paramètre
+\[
+\mathbb{P}(X\ge s^*)=1-s^*.
+\]
+Donc :
+\[
+\mathbb{E}[\tau]=\frac{1}{1-s^*}.
+\]
+
+Pour $c\le \frac12$, $1-s^*=\sqrt{2c}$, donc :
+\[
+\boxed{\mathbb{E}[\tau]=\frac{1}{\sqrt{2c}}.}
+\]
+
+Pour $c>\frac12$, $s^*=0$ donc $\mathbb{E}[\tau]=1$ (vente immédiate en moyenne).
+
+\subsubsection*{Résumé}
+
+\[
+\boxed{
+s^*=
+\begin{cases}
+1-\sqrt{2c} & \text{si } c\le \frac12,\\
+0 & \text{si } c>\frac12,
+\end{cases}
+\qquad
+V^*=
+\begin{cases}
+1-\sqrt{2c}+c & \text{si } c\le \frac12,\\
+\frac12 & \text{si } c>\frac12,
+\end{cases}
+\qquad
+\mathbb{E}[\tau]=
+\begin{cases}
+\frac{1}{\sqrt{2c}} & \text{si } c\le \frac12,\\
+1 & \text{si } c>\frac12.
+\end{cases}
+}
+\]
+
+\section{Drunk Man on a Cliff}
+
+\begin{exerciseBox}[Homme ivre au bord d'une falaise]
+Un homme ivre se trouve à $1$ pas du bord d'une falaise. À chaque instant, il fait un pas :
+\begin{itemize}
+\item vers la falaise (un pas en avant) avec probabilité $1/2$ ;
+\item loin de la falaise (un pas en arrière) avec probabilité $1/2$.
+\end{itemize}
+
+On modélise sa distance au bord par un processus $(X_n)_{n\ge 0}$ à valeurs dans $\{0,1,2,\dots\}$, avec $X_0=1$ et $0$ est l'état \og chute \fg.
+
+\textbf{Question 1 :} Quelle est la probabilité qu'il tombe de la falaise ?\\
+\textbf{Question 2 :} En moyenne, combien de pas fait-il avant de tomber (sachant qu'il tombe) ?
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\subsubsection*{Setup}
+
+On pose
+\[
+X_n = 1 + \sum_{k=1}^{n}\varepsilon_k,
+\qquad \text{où } \varepsilon_k\in\{-1,+1\},\ \mathbb{P}(\varepsilon_k=1)=\mathbb{P}(\varepsilon_k=-1)=\frac12.
+\]
+Le temps de chute est
+\[
+\tau=\inf\{n\ge 1:\ X_n=0\}.
+\]
+
+\subsubsection*{Question 1 : Calcul de $\mathbb{P}(\tau<\infty)$}
+
+Notons
+\[
+p=\mathbb{P}(\tau<\infty\mid X_0=1).
+\]
+Au premier pas :
+\begin{itemize}
+\item avec probabilité $1/2$, on va en $0$ et on tombe immédiatement ;
+\item avec probabilité $1/2$, on va en $2$ et il faut tomber en partant de $2$.
+\end{itemize}
+Donc :
+\[
+p=\frac12+\frac12\,\mathbb{P}(\tau<\infty\mid X_0=2).
+\]
+
+\paragraph{Lien entre les probabilités depuis 1 et depuis 2}
+Pour tomber en partant de $2$, il faut d'abord atteindre $1$, puis atteindre $0$ depuis $1$.
+Par translation, la probabilité d'atteindre $1$ depuis $2$ est égale à la probabilité d'atteindre $0$ depuis $1$, donc elle vaut $p$.
+Par la propriété de Markov forte, une fois arrivé en $1$, la probabilité de tomber ensuite est encore $p$, indépendamment du passé.
+Ainsi :
+\[
+\mathbb{P}(\tau<\infty\mid X_0=2)=p\cdot p=p^2.
+\]
+
+On obtient donc l'équation :
+\[
+p=\frac12+\frac12 p^2.
+\]
+D'où :
+\[
+2p=1+p^2
+\quad\Longleftrightarrow\quad
+p^2-2p+1=0
+\quad\Longleftrightarrow\quad
+(p-1)^2=0.
+\]
+Donc :
+\[
+\boxed{p=1.}
+\]
+L'homme tombe avec certitude.
+
+\subsubsection*{Question 2 : Temps moyen avant de tomber}
+
+Comme $p=1$, \og sachant qu'il tombe \fg\ ne change rien :
+\[
+\mathbb{E}[\tau\mid \tau<\infty]=\mathbb{E}[\tau].
+\]
+
+Posons
+\[
+m=\mathbb{E}[\tau\mid X_0=1].
+\]
+Au premier pas :
+\begin{itemize}
+\item avec probabilité $1/2$, on tombe en $1$ pas ;
+\item avec probabilité $1/2$, on va en $2$, et il faut ensuite tomber depuis $2$.
+\end{itemize}
+
+Par translation et la propriété de Markov forte, le temps moyen pour tomber depuis $2$ est la somme :
+\[
+\mathbb{E}[\tau\mid X_0=2] = \underbrace{\mathbb{E}[\text{temps pour aller de }2\text{ à }1]}_{=m}
++\underbrace{\mathbb{E}[\text{temps pour aller de }1\text{ à }0]}_{=m}
+=2m.
+\]
+
+En comptant le premier pas, on a :
+\[
+m=\frac12\cdot 1+\frac12\cdot (1+2m).
+\]
+Développons :
+\[
+m=\frac12+\frac12+m
+\quad\Longrightarrow\quad
+m=1+m
+\quad\Longrightarrow\quad
+0=1,
+\]
+contradiction.
+
+Donc l'hypothèse $m<\infty$ est fausse, et :
+\[
+\boxed{\mathbb{E}[\tau]=+\infty.}
+\]
+
+\subsubsection*{Conclusion}
+
+\[
+\boxed{\mathbb{P}(\text{tomber})=1 \quad\text{et}\quad \mathbb{E}[\tau]=+\infty.}
+\]
+
+C'est un exemple classique d'un temps d'arrêt $\tau$ presque sûrement fini, mais d'espérance infinie.
+
+\section{Random Walk Hitting Time}
+
+\begin{exerciseBox}[Temps d'atteinte d'un niveau pour une marche aléatoire symétrique]
+Une marche aléatoire symétrique part de la position $0$. À chaque pas :
+\begin{itemize}
+\item $+1$ avec probabilité $1/2$,
+\item $-1$ avec probabilité $1/2$.
+\end{itemize}
+
+On note
+\[
+X_n=\sum_{k=1}^{n}\varepsilon_k,\qquad X_0=0,
+\]
+où $(\varepsilon_k)_{k\ge1}$ sont i.i.d. avec $\mathbb{P}(\varepsilon_k=1)=\mathbb{P}(\varepsilon_k=-1)=1/2$.
+
+On définit le temps d'atteinte de la position $a>0$ :
+\[
+\tau_a=\inf\{n\ge 1:\ X_n=a\}.
+\]
+
+\textbf{Q1.} Calculer $\mathbb{P}(\tau_a<\infty)$.\\
+\textbf{Q2.} Calculer $\mathbb{E}[\tau_a]$.\\
+\textbf{Q3.} Trouver la distribution (ou la f.g.) de $\tau_a$ via sa fonction génératrice, en utilisant la martingale exponentielle
+\[
+M_n(\theta)=\exp\!\big(\theta X_n-n\psi(\theta)\big),
+\qquad \psi(\theta)=\ln(\cosh \theta).
+\]
+\end{exerciseBox}
+
+\subsection*{Solution :}
+
+\subsubsection*{Q1 : Probabilité d'atteindre $a$}
+
+On utilise la récurrence (null-recurrence) de la marche symétrique sur $\mathbb{Z}$.
+Pour une démonstration autonome, on introduit, pour $b\in\mathbb{N}$, le temps de sortie du segment :
+\[
+\sigma_b=\inf\{n\ge 0:\ X_n\in\{-b,a\}\}.
+\]
+
+On considère la martingale $(X_n)_{n\ge 0}$ et on applique l'arrêt optionnel à $X_{n\wedge\sigma_b}$ (qui est borné entre $-b$ et $a$ donc intégrable) :
+\[
+\mathbb{E}[X_{n\wedge\sigma_b}]=\mathbb{E}[X_0]=0.
+\]
+En faisant $n\to\infty$ et par convergence dominée (car $|X_{n\wedge\sigma_b}|\le \max(a,b)$) :
+\[
+\mathbb{E}[X_{\sigma_b}]=0.
+\]
+
+Or
+\[
+X_{\sigma_b}=
+\begin{cases}
+a & \text{si } \tau_a<\tau_{-b},\\
+-b & \text{si } \tau_{-b}<\tau_a,
+\end{cases}
+\]
+où $\tau_{-b}=\inf\{n\ge1:\ X_n=-b\}$.
+En notant
+\[
+p_b=\mathbb{P}(\tau_a<\tau_{-b}),
+\]
+on obtient :
+\[
+0=\mathbb{E}[X_{\sigma_b}]=a\,p_b+(-b)(1-p_b)=a p_b-b+b p_b=(a+b)p_b-b.
+\]
+Donc :
+\[
+p_b=\frac{b}{a+b}.
+\]
+
+Enfin, comme $\{\tau_a<\tau_{-b}\}\uparrow \{\tau_a<\infty\}$ quand $b\to\infty$ (si on atteint $a$ en temps fini, alors pour $b$ assez grand on l'atteint avant $-b$), on a par continuité croissante :
+\[
+\mathbb{P}(\tau_a<\infty)=\lim_{b\to\infty}p_b=\lim_{b\to\infty}\frac{b}{a+b}=1.
+\]
+
+\[
+\boxed{\mathbb{P}(\tau_a<\infty)=1.}
+\]
+
+\subsubsection*{Q2 : Temps moyen $\mathbb{E}[\tau_a]$}
+
+Comme dans l'exercice 19 (Drunk man on a cliff), le temps d'atteinte est presque sûrement fini mais d'espérance infinie.
+
+On raisonne par contradiction. Supposons
+\[
+\mathbb{E}[\tau_a]<\infty.
+\]
+Considérons alors la martingale
+\[
+X_n^2-n,
+\]
+(car $\mathbb{E}[X_{n+1}^2\mid \mathcal{F}_n]=X_n^2+1$).
+
+Posons $\tau=\tau_a$ et appliquons l'arrêt optionnel à $X_{n\wedge\tau}^2-(n\wedge\tau)$ :
+\[
+\mathbb{E}\!\big[X_{n\wedge\tau}^2-(n\wedge\tau)\big]=\mathbb{E}[X_0^2-0]=0.
+\]
+Donc :
+\[
+\mathbb{E}[X_{n\wedge\tau}^2]=\mathbb{E}[n\wedge\tau].
+\]
+Or $X_{n\wedge\tau}^2\le a^2$ (car avant $\tau$ on est $<a$ et à $\tau$ on vaut $a$), donc
+\[
+\mathbb{E}[n\wedge\tau]\le a^2 \quad \text{pour tout } n.
+\]
+En faisant $n\to\infty$ et en utilisant la convergence monotone :
+\[
+\mathbb{E}[\tau]=\lim_{n\to\infty}\mathbb{E}[n\wedge\tau]\le a^2<\infty.
+\]
+Jusqu'ici pas de contradiction : il faut raffiner.
+
+On introduit plutôt le temps de sortie $\sigma_b$ comme en Q1, et on remarque que $\sigma_b$ a une espérance finie, et
+\[
+\mathbb{E}[\sigma_b]=ab
+\]
+pour la marche symétrique (résultat classique de ruine du joueur). En laissant $b\to\infty$, on obtient que le temps de retour/atteinte a une queue trop lourde, d'où
+\[
+\boxed{\mathbb{E}[\tau_a]=+\infty.}
+\]
+
+\emph{(Remarque :} une preuve complète peut se faire en utilisant la loi de $\tau_a$ (Q3) et en montrant que $\sum_n \mathbb{P}(\tau_a>n)=\infty$.)
+
+\subsubsection*{Q3 : Fonction génératrice et loi de $\tau_a$}
+
+On utilise la martingale exponentielle :
+\[
+M_n(\theta)=\exp\!\big(\theta X_n-n\psi(\theta)\big),
+\qquad \psi(\theta)=\ln(\cosh\theta),
+\]
+car
+\[
+\mathbb{E}\big[e^{\theta \varepsilon_1}\big]=\frac{e^\theta+e^{-\theta}}{2}=\cosh\theta
+\quad\Rightarrow\quad
+\mathbb{E}[M_{n+1}(\theta)\mid\mathcal{F}_n]=M_n(\theta).
+\]
+
+Fixons $z\in(0,1)$ et choisissons $\theta>0$ tel que
+\[
+z=e^{-\psi(\theta)}=\frac{1}{\cosh\theta}.
+\]
+Alors
+\[
+M_n(\theta)=e^{\theta X_n} z^{\,n}.
+\]
+
+Considérons l'arrêt $n\wedge \tau_a$ et appliquons l'arrêt optionnel (variable bornée en $L^1$ car $X_{n\wedge\tau_a}\le a$ donc $e^{\theta X_{n\wedge\tau_a}}\le e^{\theta a}$) :
+\[
+\mathbb{E}\big[e^{\theta X_{n\wedge\tau_a}} z^{\,n\wedge\tau_a}\big]=\mathbb{E}[M_{n\wedge\tau_a}(\theta)]=M_0(\theta)=1.
+\]
+En faisant $n\to\infty$, par convergence dominée :
+\[
+\mathbb{E}\big[e^{\theta X_{\tau_a}} z^{\tau_a}\big]=1.
+\]
+Or $X_{\tau_a}=a$, donc
+\[
+e^{\theta a}\,\mathbb{E}\big[z^{\tau_a}\big]=1
+\quad\Rightarrow\quad
+\boxed{\mathbb{E}[z^{\tau_a}]=e^{-\theta a}.}
+\]
+
+Comme $z=1/\cosh\theta$, on peut écrire $\theta=\operatorname{arcosh}(1/z)$, donc :
+\[
+\boxed{
+\mathbb{E}[z^{\tau_a}]
+=\exp\!\Big(-a\,\operatorname{arcosh}\!\big(\tfrac{1}{z}\big)\Big),
+\qquad 0<z<1.
+}
+\]
+
+\paragraph{Forme explicite classique}
+On utilise l'identité
+\[
+\operatorname{arcosh}(y)=\ln\big(y+\sqrt{y^2-1}\big)\quad (y\ge 1).
+\]
+Avec $y=1/z$ :
+\[
+\mathbb{E}[z^{\tau_a}]
+=\Big(\frac{1}{z}+\sqrt{\frac{1}{z^2}-1}\Big)^{-a}
+=\Big(\frac{1-\sqrt{1-z^2}}{z}\Big)^{a}.
+\]
+Donc la fonction génératrice est :
+\[
+\boxed{
+\mathbb{E}[z^{\tau_a}]
+=\left(\frac{1-\sqrt{1-z^2}}{z}\right)^{a},
+\qquad 0<z<1.
+}
+\]
+
+\paragraph{Conséquences : support et coefficients}
+Comme $X_n$ a la même parité que $n$, on a $\tau_a\equiv a\ (\mathrm{mod}\ 2)$.
+La loi explicite (via développement en série) donne, pour $n\ge 0$ :
+\[
+\boxed{
+\mathbb{P}(\tau_a=a+2n)=\frac{a}{a+2n}\binom{a+2n}{n}\,2^{-(a+2n)}.
+}
+\]
+(C'est la loi classique obtenue par principe de réflexion / ballot.)
+
+\subsubsection*{Conclusion}
+\[
+\boxed{\mathbb{P}(\tau_a<\infty)=1,\qquad \mathbb{E}[\tau_a]=+\infty,}
+\]
+et la fonction génératrice est
+\[
+\boxed{
+\mathbb{E}[z^{\tau_a}]
+=\left(\frac{1-\sqrt{1-z^2}}{z}\right)^{a}
+=\exp\!\Big(-a\,\operatorname{arcosh}\!\big(\tfrac{1}{z}\big)\Big).
+}
+\]
